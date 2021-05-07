@@ -187,15 +187,11 @@
                 <div
                     class="bg-white md:col-span-2 overflow-y-auto h-72 md:row-span-2 p-4 rounded shadow"
                 >
-                    <p v-for="(item, index) in [2, 2, 2, 2, 2, 2]" :key="index">
-                        rrrr
-                    </p>
-                    <p v-for="(item, index) in [2, 2, 2, 2, 2, 2]" :key="index">
-                        rrrr
-                    </p>
-                    <p v-for="(item, index) in [2, 2, 2, 2, 2, 2]" :key="index">
-                        rrrr
-                    </p>
+                    
+                    <div v-for="(region, index) in regions" :key="index" class=" grid grid-cols-9 gap-2 my-2 ">
+                        <div class=" col-span-8 border p-2 ">{{region.libelle}}</div>
+                        <div class=" border text-center py-2  ">30</div>
+                    </div>
                 </div>
 
                 <div class="bg-white rounded p-4 shadow">

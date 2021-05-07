@@ -17,7 +17,7 @@ class CreateOptionsTable extends Migration
             $table->id();
             $table->foreignId('question_id')->references('id')->on('questions');
             $table->string('libelle');
-            $table->string('value');
+            // $table->string('value');
             // $table->timestamps();
 
             $table->unique(['question_id', 'libelle']);

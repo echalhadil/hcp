@@ -16,8 +16,9 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
-            $table->string('type');
+            $table->boolean('has_option')->default(0);
             // $table->timestamps();
+
         });
     }
 
