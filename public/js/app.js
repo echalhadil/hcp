@@ -19498,6 +19498,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _chomage_data_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chomage-data.js */ "./resources/js/StatisticsCards/chomage-data.js");
 /* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -19529,7 +19531,7 @@ __webpack_require__.r(__webpack_exports__);
     changeChart: function changeChart(type) {
       var ctx = document.getElementById(this.id);
       this.chartType = type;
-      new Chart(ctx, {
+      new chart_js_auto__WEBPACK_IMPORTED_MODULE_2__.default(ctx, {
         type: type,
         data: this.ChomageData.data
       });
@@ -19621,7 +19623,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _chartConfig_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chartConfig.js */ "./resources/js/StatisticsCards/chartConfig.js");
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
 // import  Chart from 'chart.js'
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // props: ["teamdata"],
@@ -19646,7 +19650,7 @@ __webpack_require__.r(__webpack_exports__);
         var border_gradient1 = ctx.createLinearGradient(0, 0, 0, 320);
         border_gradient1.addColorStop(1, "#231843");
         border_gradient1.addColorStop(0, "#14a8d4");
-        new Chart(ctx, {
+        var mychart = new chart_js_auto__WEBPACK_IMPORTED_MODULE_1__.default(ctx, {
           type: "line",
           // data:this.teamdata,
           data: {
@@ -23333,8 +23337,17 @@ var _hoisted_42 = {
 var _hoisted_43 = {
   "class": "bg-white md:col-span-2 overflow-y-auto h-72 md:row-span-2 p-4 rounded shadow"
 };
+var _hoisted_44 = {
+  "class": " col-span-8 border p-2 "
+};
 
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": " border text-center py-2  "
+}, "30", -1
+/* HOISTED */
+);
+
+var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "bg-white rounded p-4 shadow"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("     <statistics-card-pie /> "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "capitalize text-gray-500"
@@ -23346,7 +23359,7 @@ var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "bg-white rounded p-4 shadow"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("     <statistics-card-pie /> "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
   "class": "capitalize text-gray-500"
@@ -23419,25 +23432,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* TEXT */
       ), _hoisted_35])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("     <statistics-card-pie /> "), _hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.numberofmembers.total), 1
       /* TEXT */
-      ), _hoisted_40])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("total anquite"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)([2, 2, 2, 2, 2, 2], function (item, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
-          key: index
-        }, " rrrr ");
-      }), 64
-      /* STABLE_FRAGMENT */
-      )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)([2, 2, 2, 2, 2, 2], function (item, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
-          key: index
-        }, " rrrr ");
-      }), 64
-      /* STABLE_FRAGMENT */
-      )), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)([2, 2, 2, 2, 2, 2], function (item, index) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
-          key: index
-        }, " rrrr ");
-      }), 64
-      /* STABLE_FRAGMENT */
-      ))]), _hoisted_44, _hoisted_45])])];
+      ), _hoisted_40])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("total anquite"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.regions, function (region, index) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: index,
+          "class": " grid grid-cols-9 gap-2 my-2 "
+        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(region.libelle), 1
+        /* TEXT */
+        ), _hoisted_45]);
+      }), 128
+      /* KEYED_FRAGMENT */
+      ))]), _hoisted_46, _hoisted_47])])];
     }),
     _: 1
     /* STABLE */
@@ -23509,7 +23513,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_left_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-        id: "f",
+        id: "fd",
         type: "doughnut",
         title: "le chomage"
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
@@ -28218,8 +28222,9 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // window.Chart = require('chart.js');
+// var Chart = require('chart.js');
 
-var Chart = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/chart.esm.js"); // require('chart.js')
+var Chart = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js"); // require('chart.js')
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -28317,6 +28322,27 @@ if ($defineProperty) {
 } else {
 	module.exports.apply = applyBind;
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/chart.js/auto/auto.esm.js":
+/*!************************************************!*\
+  !*** ./node_modules/chart.js/auto/auto.esm.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _dist_chart_esm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dist/chart.esm */ "./node_modules/chart.js/dist/chart.esm.js");
+
+
+_dist_chart_esm__WEBPACK_IMPORTED_MODULE_0__.Chart.register(..._dist_chart_esm__WEBPACK_IMPORTED_MODULE_0__.registerables);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_dist_chart_esm__WEBPACK_IMPORTED_MODULE_0__.Chart);
 
 
 /***/ }),

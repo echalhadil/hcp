@@ -27,7 +27,7 @@
                     <div class="px-3 py-2">
                         <p class="capitalize text-gray-500 pb-1">province</p>
                         <select
-                            v-bind="selectedprovince"
+                            v-model="selectedprovince"
                             class="w-full rounded text-sm appearance-none form-select"
                             name=""
                             id=""
@@ -45,12 +45,17 @@
 
                     <div class="px-3 pb-2">
                         <p class="capitalize text-gray-500 pb-1">commun</p>
-                        <select class="w-full" name="" id="">
+                        <select
+                            class="w-full"
+                            name=""
+                            id=""
+                            v-model="selectedcommune"
+                        >
                             <option
-                                v-for="(region, index) in regions"
+                                v-for="(commune, index) in communes"
                                 :key="index"
                             >
-                                {{ region.libelle }}
+                                {{ commune.libelle }}
                             </option>
                         </select>
                     </div>
@@ -187,10 +192,15 @@
                 <div
                     class="bg-white md:col-span-2 overflow-y-auto h-72 md:row-span-2 p-4 rounded shadow"
                 >
-                    
-                    <div v-for="(region, index) in regions" :key="index" class=" grid grid-cols-9 gap-2 my-2 ">
-                        <div class=" col-span-8 border p-2 ">{{region.libelle}}</div>
-                        <div class=" border text-center py-2  ">30</div>
+                    <div
+                        v-for="(region, index) in regions"
+                        :key="index"
+                        class="grid grid-cols-9 gap-2 my-2"
+                    >
+                        <div class="col-span-8 border p-2">
+                            {{ region.libelle }}
+                        </div>
+                        <div class="border text-center py-2">30</div>
                     </div>
                 </div>
 
@@ -232,7 +242,6 @@ import LeftLayout from "@/Layouts/LeftLayout";
 import StatisticsCardLine from "@/StatisticsCards/StatisticsCardLine";
 import StatisticsCardPie from "@/StatisticsCards/StatisticsCardPie";
 
-
 export default {
     components: {
         LeftLayout,
@@ -245,10 +254,12 @@ export default {
             todayteam: 0,
             total: 0,
             todaytotal: 0,
-            regions: [],
             selectedregion: "",
             selectedprovince: "",
+            selectedcommune: "",
+            regions: [],
             provinces: [],
+            communes: [],
             outputData: "",
             numberofmembers: [],
         };
@@ -289,7 +300,24 @@ export default {
         },
     },
     watch: {
+        selectedprovince() {
+            axios
+                .get(
+                    "/regions/" +
+                        this.selectedregion +
+                        "/provinces/" +
+                        this.selectedprovince +
+                        "/communes"
+                )
+                .then((response) => {
+                    this.communes = response.data;
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
         selectedregion() {
+            this.communes = [];
             axios
                 .get("/regions/" + this.selectedregion + "/provinces")
                 .then((response) => {

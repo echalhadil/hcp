@@ -36,5 +36,12 @@ class RegionSeeder extends Seeder
             ['id' =>    "12", 'libelle' => "Dakhla-Oued Ed-Dahab"]
         ]);
 
+
+        $p = new ProvinceSeeder();
+        $p-> run();
+
+        $c = new CommuneSeeder();
+        $c ->run();
+
     }
 }

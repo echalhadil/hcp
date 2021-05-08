@@ -63,6 +63,7 @@ Route::get('/anquiteteam',[AnquiteController::class,'AnquiteTeam']);
 Route::get('/regions',[LocationController::class,'regions']);
 
 Route::get('/regions/{region_id}/provinces',[LocationController::class,'provinces']);
+Route::get('/regions/{region_id}/provinces/{province_id}/communes',[LocationController::class,'communes']);
 
 
 

@@ -14,5 +14,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+
+
+
+        $RegionSeeder = new RegionSeeder();
+        $RegionSeeder->run();
+
+        $Questionseeder = new Questionseeder();
+        $Questionseeder->run();
     }
 }
