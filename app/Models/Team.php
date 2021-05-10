@@ -34,6 +34,7 @@ class Team extends JetstreamTeam
     protected $fillable = [
         'name',
         'personal_team',
+        'commune_id',
     ];
 
     /**
@@ -52,7 +53,6 @@ class Team extends JetstreamTeam
     public function memberships()
     {
         return $this->hasMany(Membership::class);
-    
     }
 
 
@@ -60,22 +60,27 @@ class Team extends JetstreamTeam
     {
         $members = array();
 
-        $user = Auth::user();        
+        $user = Auth::user();
 
-        $memberships =  $user->currentTeam -> memberships;
+        $memberships =  $user->currentTeam->memberships;
 
         foreach ($memberships as $membership) {
             $members[] = DB::table('users')->where('id', '=', $membership->user_id)->select(
-                            'id',
-                            'fname',
-                            'lname',
-                            'cin',
-                            'email',
-                            'tele',
-                        )->first();
+                'id',
+                'fname',
+                'lname',
+                'cin',
+                'email',
+                'tele',
+            )->first();
         }
 
         return $members;
     }
-    
+
+
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class);
+    }
 }

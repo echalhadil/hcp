@@ -21,7 +21,33 @@ class AnquiteController extends Controller
      */
     public function index()
     {
-        //
+        // $reponses = Anquite::find(1)->reponses;
+        // foreach ($reponses as $reponse) {
+        //     $reponse->option =
+        //         $reponse->option;
+
+        //     $reponse->question =
+        //         $reponse->question;
+        // }
+        // ['']
+        // return response()->json($reponses);
+
+
+
+        $t = Team::find(Auth::user()->current_team_id);
+
+        $ms = $t->memberships;
+
+        foreach ($ms as $m) {
+            $m->user = $m->user;
+
+            foreach ($m->user  as $user) {
+                $user->anquites = $user->anquites;
+            }
+        }
+
+        return $ms;
+
     }
 
     /**

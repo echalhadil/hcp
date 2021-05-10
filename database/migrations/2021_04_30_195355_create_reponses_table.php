@@ -17,7 +17,8 @@ class CreateReponsesTable extends Migration
             $table->id();
             $table->foreignId('anquite_id')->references('id')->on('anquites'); 
             $table->foreignId('question_id')->references('id')->on('questions');
-            $table->foreignId('option_id')->references('id')->on('options')->nullable(); //nullable
+            // $table->foreignId('option_id')->references('id')->on('options')->nullable(); //nullable
+            $table->foreignId('option_id')->nullable()->constrained(); //nullable
             $table->string('value')->nullable();
             $table->timestamps();
 

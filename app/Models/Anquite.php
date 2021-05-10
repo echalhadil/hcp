@@ -21,4 +21,9 @@ class Anquite extends Model
      public function getCreatedAtTimeAttribute(){
          return $this->created_at->toDateString();
      }
+
+     public function reponses()
+     {
+        return $this->hasMany(Reponse::class);
+     }
 }

@@ -12,4 +12,10 @@ class Question extends Model
 
     protected $fillable = ['libelle','has_option'];
 
+
+    public function options()
+    {
+        return $this->hasMany(Option::class);
+    }
+
 }

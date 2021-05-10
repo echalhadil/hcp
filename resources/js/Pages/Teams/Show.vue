@@ -2,8 +2,9 @@
     <left-layout>
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <create-team-modal v-if="$page.props.jetstream.canCreateTeams" />
-
+                <create-team-modal
+                    v-if="$page.props.jetstream.canCreateTeams"
+                />
                 <update-team-name-form
                     :team="team"
                     :permissions="permissions"

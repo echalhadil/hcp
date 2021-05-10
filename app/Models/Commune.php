@@ -12,5 +12,16 @@ class Commune extends Model
     protected $fillable = ['libelle','province_id'];
 
 
+    
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+
+    public function teams()
+    {
+        return $this->hasMany(Team::class);
+    }
   
 }

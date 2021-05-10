@@ -5,16 +5,40 @@
 
              <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4">
                 <div class="p-3  bg-white rounded shadow ">
-                    <chart  id="fd" type="doughnut" title="le chomage" />                
+                    <chart  id="resident" type="doughnut" title="sitiation de resident" />                
                 </div>
                 <div class="p-3 bg-white rounded shadow">     
-                    <chart  id="chomage" type="pie" title="le chomage" />
+                    <chart  id="nationalite" type="pie" title="pays de nationalite" />
                 </div>
 
                 <div class="p-3 bg-white rounded shadow">
-                    <chart id="genre" type="line" title="le genre" />
+                    <chart id="sexe" type="line" title="sexe" />
                 </div>
     
+            </div>
+
+
+             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
+                <div class="p-3  bg-white rounded shadow ">
+                    <chart  id="matrimonial" type="doughnut" title="Etat matrimonial" />                
+                </div>
+                <div class="p-3 bg-white rounded shadow">     
+                    <chart  id="etablisement" type="pie" title="etablisement" />
+                </div>
+
+                <div class="p-3 bg-white rounded shadow">
+                    <chart id="fonctionnel" type="line" title="etat fonctionnel" />
+                </div>
+    
+            </div>
+
+
+
+             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
+                <div class="p-3  bg-white rounded shadow ">
+                    <chart  id="assurance" type="doughnut" title="assurance medical" />                
+                </div>
+                
             </div>
 
 
