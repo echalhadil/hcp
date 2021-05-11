@@ -18,4 +18,7 @@ class Question extends Model
         return $this->hasMany(Option::class);
     }
 
+
+    protected $hidden = ['has_option'];
+
 }

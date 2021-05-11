@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anquite;
 use App\Models\Membership;
+use App\Models\Question;
 use App\Models\Team;
 use Carbon\Carbon;
 use DateTimeInterface;
@@ -21,32 +22,28 @@ class AnquiteController extends Controller
      */
     public function index()
     {
-        // $reponses = Anquite::find(1)->reponses;
-        // foreach ($reponses as $reponse) {
-        //     $reponse->option =
-        //         $reponse->option;
 
-        //     $reponse->question =
-        //         $reponse->question;
-        // }
-        // ['']
-        // return response()->json($reponses);
+        $anquites = Anquite::all();
+        $questions = Question::all();
 
+        foreach ($anquites as $anquite) {
+            $anquite->questions = null;
+            $anquite->questions = $questions;
+            foreach ($anquite->questions as $question) {
+                foreach ($anquite->reponses as $reponse) {
 
+                    if ($question->id == $reponse->question_id && $reponse->anquite_id == $anquite->id)
+                    {
 
-        $t = Team::find(Auth::user()->current_team_id);
+                        $question->reponse = ($reponse->option_id != null) ? $reponse->option->libelle : $reponse->value;
 
-        $ms = $t->memberships;
-
-        foreach ($ms as $m) {
-            $m->user = $m->user;
-
-            foreach ($m->user  as $user) {
-                $user->anquites = $user->anquites;
+                    }
+                }
             }
-        }
+            $questionAndAnswer[] = $anquite->questions;
+        };
+         return response()->json(['questionAndAnswer' =>$questionAndAnswer,'questions' =>$questions]);
 
-        return $ms;
 
     }
 
@@ -200,5 +197,17 @@ class AnquiteController extends Controller
 
 
         return $collection;
+    }
+
+
+
+
+
+
+
+
+    public function getValue()
+    {
+        # code...
     }
 }
