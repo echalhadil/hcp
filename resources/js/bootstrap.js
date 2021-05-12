@@ -34,3 +34,5 @@ var Chart = require('chart.js/auto');
 //     forceTLS: true
 // });
 
+// window.expo = require('tableexport');
+// import TableExport from 'tableexport';

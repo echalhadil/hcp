@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DataExport;
 use App\Models\Anquite;
 use App\Models\Membership;
 use App\Models\Question;
@@ -12,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Maatwebsite\Excel\Facades\Excel as Excel;
+
 
 class AnquiteController extends Controller
 {
@@ -22,29 +25,26 @@ class AnquiteController extends Controller
      */
     public function index()
     {
-
-        $anquites = Anquite::all();
+        $anquites = Anquite::select(
+            "id",
+            "user_id"
+        )->get();
         $questions = Question::all();
 
         foreach ($anquites as $anquite) {
-            $anquite->questions = null;
             $anquite->questions = $questions;
-            foreach ($anquite->questions as $question) {
-                foreach ($anquite->reponses as $reponse) {
+            $anquite->reponses = $anquite->reponses;
 
-                    if ($question->id == $reponse->question_id && $reponse->anquite_id == $anquite->id)
-                    {
-
-                        $question->reponse = ($reponse->option_id != null) ? $reponse->option->libelle : $reponse->value;
-
-                    }
-                }
+            foreach ($anquite->reponses as $reponse) {
+                $reponse->value = ($reponse->option != null) ? $reponse->option->libelle : $reponse->value;
             }
-            $questionAndAnswer[] = $anquite->questions;
-        };
-         return response()->json(['questionAndAnswer' =>$questionAndAnswer,'questions' =>$questions]);
+        }
 
 
+        return response()->json([
+            'anquites' => $anquites,
+            'questions' => $questions
+        ]);
     }
 
     /**
@@ -206,8 +206,12 @@ class AnquiteController extends Controller
 
 
 
-    public function getValue()
+    public function exportData(String $format)
     {
-        # code...
+        $user = Auth::user();
+
+        $name =  'anquites-' . date('d-m-Y') . '.' . $format;
+
+        return Excel::download(new DataExport, $name);
     }
 }

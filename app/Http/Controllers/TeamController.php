@@ -31,11 +31,8 @@ class TeamController extends Controller
         $name = $user->currentTeam->name . ' ' . date('d-m-Y') . '.' . $format;
 
         return Excel::download(new TeamMembers, $name);
-        // return (new TeamMembers)->download($name, \Maatwebsite\Excel\Excel::XLSX);
-        // return (new InvoicesExport)->download('invoices.pdf', \Maatwebsite\Excel\Excel::MPDF);
-        // return ($format =='csv')? (new TeamMembers)->download($name, \Maatwebsite\Excel\Excel::CSV) :
-        // (new TeamMembers)->download($name, \Maatwebsite\Excel\Excel::XLSX);
     }
+
 
 
     /**
@@ -138,8 +135,9 @@ class TeamController extends Controller
     {
 
         return response()->json(
-            ['myteam' =>Membership::where('team_id', Auth::user()->current_team_id)->count(),
-            'total' =>Membership::count()
+            [
+                'myteam' => Membership::where('team_id', Auth::user()->current_team_id)->count(),
+                'total' => Membership::count()
             ]
         );
     }

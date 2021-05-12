@@ -1,0 +1,148 @@
+<template>
+    <div class="p-5 bg-white w-full mt-12 rounded shadow">
+        <div class="flex mr-auto w-full">
+            <!--<p class="my-auto capitalize font-semibold text-gray-600 mr-3"> current Team </p>
+                    -->
+
+            <div class="flex relative ml-9 my-auto">
+                <input
+                    type="text"
+                    class="focus:border-pink-500 focus:ring-0 pr-8 placeholder-gray-400 p-1 rounded"
+                    placeholder="Search"
+                />
+                <i class="fal fa-search text-pink-500 my-auto -ml-6"></i>
+            </div>
+
+        
+
+            <div class="flex ml-auto my-auto">
+                <download-data-list />
+            </div>
+        </div>
+    </div>
+    <div class="mt-2 mb-6 bg-current rounded shadow overflow-x-auto w-full">
+        <div
+            class="w-full flex items-center justify-center bg-gray-100 font-sans overflow-x-auto"
+        >
+            <div class="w-full">
+                <div class="bg-white shadow-md rounded">
+                    <table id="table" class="min-w-max w-full table-auto" border="1">
+                        <thead id="headers">
+                            <tr
+                                class="bg-gray-200 text-gray-600 uppercase text-sm py-6 leading-normal"
+                            >
+                                <th
+                                    v-for="(question, index) in questions"
+                                    :key="index"
+                                    class="py-3 text-xs cursor-pointer select-none px-6 text-left"
+                                >
+                                    {{ question.libelle }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm font-light">
+                            <tr
+                                v-if="questionAndAnswer.length === 0"
+                                class="border-b text-lg border-gray-200"
+                            >
+                                <td
+                                    class="py-3 px-6 text-center capitalize"
+                                    colspan="4"
+                                >
+                                    aucune membre
+                                </td>
+                            </tr>
+                            <tr
+                                v-if="questionAndAnswer.length > 0"
+                                v-for="(anquite, index) in questionAndAnswer"
+                                :key="index"
+                                class="border-b w-full bg-white text-xs hover:bg-gray-50 capitalize border-gray-200"
+                                :class="{ ' bg-gray-100 ': index % 2 != 0 }"
+                            >
+                                <td
+                                    v-for="(question,
+                                    index) in anquite.questions"
+                                    :key="index"
+                                    class="py-3 px-6 text-center"
+                                >
+                                    <span
+                                        class="font-medium"
+                                        :class="{
+                                            'text-gray-400': (question.reponse == null),
+                                        }"
+                                    >
+                                        <!--      {{ reponse.value ||reponse.reponse || "NaN" }} -->
+                                        {{ question.reponse ||"NaN" }}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import DownloadDataList from "./DownloadDataList";
+
+export default {
+    components: {
+        DownloadDataList,
+    },
+    data() {
+        return {
+            questions: [],
+            questionAndAnswer: [],
+        };
+    },
+    methods: {
+        getAnquites() {
+            axios
+                .get(this.route("anquites.index"))
+                .then((response) => {
+                    // this.questionAndAnswer = response.data.questionAndAnswer;
+                    this.questionAndAnswer = response.data.anquites;
+                    this.questions = response.data.questions;
+
+                    // this.questions
+
+                    // this.questionAndAnswer
+
+                    _.forEach(this.questionAndAnswer, function (anquite) {
+                        _.forEach(anquite.questions, function (question) {
+                            question.reponse = null;
+
+                            // if(reponse.question_id == 1)
+                            question.anquite_id = anquite.id;
+                            _.forEach(anquite.reponses, function (reponse) {
+                                if (reponse.question_id == question.id) {
+                                    question.reponse = reponse.value;
+                                }
+                            });
+                            console.log(question);
+                        });
+
+                        //   _.forEach(anquite.reponses, function (reponse) {
+
+                        //     if(reponse.question_id == 1)
+                        //     console.log(reponse);
+
+                        // });
+                    });
+
+                    console.table(this.questionAndAnswer);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        },
+
+    
+    },
+    mounted() {
+        this.getAnquites();
+    },
+};
+</script>
