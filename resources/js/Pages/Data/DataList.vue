@@ -1,12 +1,7 @@
 <template>
     <div class="p-5 bg-white w-full mt-12 rounded shadow">
         <div class="flex mr-auto w-full">
-       
-            <div class="flex relative ml-9 my-auto">
-            
-            </div>
-
-        
+            <div class="flex relative ml-9 my-auto"></div>
 
             <div class="flex ml-auto my-auto">
                 <download-data-list />
@@ -19,7 +14,11 @@
         >
             <div class="w-full">
                 <div class="bg-white shadow-md rounded">
-                    <table id="table" class="min-w-max w-full table-auto" border="1">
+                    <table
+                        id="table"
+                        class="min-w-max w-full table-auto"
+                        border="1"
+                    >
                         <thead id="headers">
                             <tr
                                 class="bg-gray-200 text-gray-600 uppercase text-sm py-6 leading-normal"
@@ -61,11 +60,12 @@
                                     <span
                                         class="font-medium"
                                         :class="{
-                                            'text-gray-400': (question.reponse == null),
+                                            'text-gray-400':
+                                                question.reponse == null,
                                         }"
                                     >
                                         <!--      {{ reponse.value ||reponse.reponse || "NaN" }} -->
-                                        {{ question.reponse ||"NaN" }}
+                                        {{ question.reponse || "NaN" }}
                                     </span>
                                 </td>
                             </tr>
@@ -95,44 +95,24 @@ export default {
             axios
                 .get(this.route("anquites.index"))
                 .then((response) => {
-                    // this.questionAndAnswer = response.data.questionAndAnswer;
                     this.questionAndAnswer = response.data.anquites;
                     this.questions = response.data.questions;
-
-                    // this.questions
-
-                    // this.questionAndAnswer
-
                     _.forEach(this.questionAndAnswer, function (anquite) {
                         _.forEach(anquite.questions, function (question) {
                             question.reponse = null;
-
-                            // if(reponse.question_id == 1)
                             question.anquite_id = anquite.id;
                             _.forEach(anquite.reponses, function (reponse) {
                                 if (reponse.question_id == question.id) {
                                     question.reponse = reponse.value;
                                 }
                             });
-                            console.log(question);
                         });
-
-                        //   _.forEach(anquite.reponses, function (reponse) {
-
-                        //     if(reponse.question_id == 1)
-                        //     console.log(reponse);
-
-                        // });
                     });
-
-                    console.table(this.questionAndAnswer);
                 })
                 .catch((err) => {
                     console.log(err);
                 });
         },
-
-    
     },
     mounted() {
         this.getAnquites();

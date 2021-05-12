@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exports\DataExport;
 use App\Models\Anquite;
+use App\Models\Option;
 use App\Models\Question;
+use App\Models\Reponse;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +17,9 @@ use Maatwebsite\Excel\Facades\Excel as Excel;
 
 class AnquiteController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -201,7 +206,7 @@ class AnquiteController extends Controller
 
 
 
-
+    //function to export data
     public function exportData(String $format)
     {
         $user = Auth::user();
@@ -209,5 +214,32 @@ class AnquiteController extends Controller
         $name =  'anquites-' . date('d-m-Y') . '.' . $format;
 
         return Excel::download(new DataExport, $name);
+    }
+
+
+
+    public function situationResidentStatistics()
+    {
+        $numberofAnquites = Anquite::count(); //get number of anquites
+        $options = Option::select('id', 'libelle')->where('question_id', '4')->orderby('id')->get(); //get all availible options
+        $reponses = DB::table('reponses')
+            ->where('question_id', '4')
+            ->select('option_id', DB::raw('COUNT(*) as percent'))
+            ->groupBy('option_id')
+            ->get();
+        
+        foreach ($options as $option) {
+            $option->percent = 0;
+            foreach ($reponses as $reponse) {
+                if ($option->id == $reponse->option_id)
+                $option->percent = (int) round(($reponse->percent / $numberofAnquites) * 100);
+                // $option->percent =(float) round(($reponse->percent / $numberofAnquites) * 100, 2);
+            }
+        }
+        
+
+        // return response()->json($options);
+        return collect($options)->toJson();
+
     }
 }

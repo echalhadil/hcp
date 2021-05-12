@@ -2,13 +2,8 @@
     <left-layout>
         <div class="p-12 w-full">
             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4">
-                <div class="p-3 bg-white rounded shadow">
-                    <chart
-                        id="resident"
-                        type="doughnut"
-                        title="sitiation de resident"
-                    />
-                </div>
+                <situation-resident />
+
                 <div class="p-3 bg-white rounded shadow">
                     <chart
                         id="nationalite"
@@ -17,9 +12,7 @@
                     />
                 </div>
 
-                <div class="p-3 bg-white rounded shadow">
-                    <chart id="sexe" type="line" title="sexe" />
-                </div>
+                <sexe />
             </div>
 
             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
@@ -53,11 +46,7 @@
                 </div>
             </div>
 
-           
-
             <data-list />
-
-
         </div>
     </left-layout>
 </template>
@@ -77,6 +66,8 @@ import RightSlide from "@/Pages/Teams/RightSlide";
 // import ChomageCard from "@/StatisticsCards/ChomageCard";
 import Chart from "@/StatisticsCards/Chart";
 import DataList from "@/Pages/Data/DataList";
+import SituationResident from "@/Pages/Data/SituationResident";
+import Sexe from "@/Pages/Data/Sexe";
 
 export default {
     components: {
@@ -92,7 +83,9 @@ export default {
         // GenrePie,
         // ChomageCard,
         Chart,
-        DataList
+        DataList,
+        SituationResident,
+        Sexe,
     },
     data() {
         return {
@@ -101,11 +94,7 @@ export default {
             sorting: "asc",
         };
     },
-    methods: {
-
-    },
-    mounted() {
-       
-    },
+    methods: {},
+    mounted() {},
 };
 </script>

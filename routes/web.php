@@ -81,60 +81,11 @@ Route::resource('anquites', AnquiteController::class);
 
 
 
-Route::get('/ggg', function () {
-
-
-
-    //     DB::table('reponses')
-    //     ->join('options', 'options.id', '=', 'reponses.option_id')
-    //     ->join('questions', 'questions.id', '=', 'reponses.question_id')
-    //     ->select('reponses.anquite_id', 'reponses.question_id', 'questions.libelle as question', 'options.libelle as reponse')
-    //     ->get();
-
-    // DB::table('reponses')
-    //     ->join('questions', 'questions.id', '=', 'reponses.question_id')
-    //     ->where('reponses.value', '<>', null)
-    //     ->select('reponses.anquite_id', 'reponses.question_id', 'questions.libelle as question', 'reponses.value as reponse')
-    //     ->get();
-
-
-    // return
-        $datas =
-        collect([
-            DB::table('reponses')
-                ->join('options', 'options.id', '=', 'reponses.option_id')
-                ->join('questions', 'questions.id', '=', 'reponses.question_id')
-                ->select(
-                    'reponses.anquite_id',
-                    'reponses.question_id',
-                    'questions.libelle as question',
-                    'options.libelle as reponse'
-                )
-                ->get(),
-
-            DB::table('reponses')
-                ->join('questions', 'questions.id', '=', 'reponses.question_id')
-                ->where('reponses.value', '<>', null)
-                ->select(
-                    'reponses.anquite_id',
-                    'reponses.question_id',
-                    'questions.libelle as question',
-                    'reponses.value as reponse'
-                )
-                ->get()
-        ])->collapse()
-        // ->sortBy('question_id')
-        ->groupBy('anquite_id')
-        ->transform(
-            function ($item, $k) {
-                return $item->groupBy('question');
-            }
-        );
-
-
-    return $datas;
-});
-
-
 
 Route::get('e/{format}', [AnquiteController::class, 'exportData']);
+
+
+
+
+Route::get('/situation-resident-statistics', [AnquiteController::class, 'situationResidentStatistics'])
+    ->name('residentstatistics');
