@@ -18103,6 +18103,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _StatisticsCards_Chart__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/StatisticsCards/Chart */ "./resources/js/StatisticsCards/Chart.vue");
 /* harmony import */ var _Pages_Data_DataList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Pages/Data/DataList */ "./resources/js/Pages/Data/DataList.vue");
 /* harmony import */ var _Pages_Data_SituationResident__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Pages/Data/SituationResident */ "./resources/js/Pages/Data/SituationResident.vue");
+/* harmony import */ var _Pages_Data_Sexe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Pages/Data/Sexe */ "./resources/js/Pages/Data/Sexe.vue");
 
 
 
@@ -18112,6 +18113,7 @@ __webpack_require__.r(__webpack_exports__);
  // import StatisticsCardPie from "@/StatisticsCards/StatisticsCardPie";
 // import GenrePie from "@/StatisticsCards/GenrePie";
 // import ChomageCard from "@/StatisticsCards/ChomageCard";
+
 
 
 
@@ -18130,7 +18132,8 @@ __webpack_require__.r(__webpack_exports__);
     // ChomageCard,
     Chart: _StatisticsCards_Chart__WEBPACK_IMPORTED_MODULE_5__.default,
     DataList: _Pages_Data_DataList__WEBPACK_IMPORTED_MODULE_6__.default,
-    SituationResident: _Pages_Data_SituationResident__WEBPACK_IMPORTED_MODULE_7__.default
+    SituationResident: _Pages_Data_SituationResident__WEBPACK_IMPORTED_MODULE_7__.default,
+    Sexe: _Pages_Data_Sexe__WEBPACK_IMPORTED_MODULE_8__.default
   },
   data: function data() {
     return {
@@ -18173,15 +18176,12 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get(this.route("anquites.index")).then(function (response) {
-        // this.questionAndAnswer = response.data.questionAndAnswer;
         _this.questionAndAnswer = response.data.anquites;
-        _this.questions = response.data.questions; // this.questions
-        // this.questionAndAnswer
+        _this.questions = response.data.questions;
 
         _.forEach(_this.questionAndAnswer, function (anquite) {
           _.forEach(anquite.questions, function (question) {
-            question.reponse = null; // if(reponse.question_id == 1)
-
+            question.reponse = null;
             question.anquite_id = anquite.id;
 
             _.forEach(anquite.reponses, function (reponse) {
@@ -18189,16 +18189,8 @@ __webpack_require__.r(__webpack_exports__);
                 question.reponse = reponse.value;
               }
             });
-
-            console.log(question);
-          }); //   _.forEach(anquite.reponses, function (reponse) {
-          //     if(reponse.question_id == 1)
-          //     console.log(reponse);
-          // });
-
+          });
         });
-
-        console.table(_this.questionAndAnswer);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -18270,10 +18262,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/SituationResident.vue?vue&type=script&lang=js":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/SituationResident.vue?vue&type=script&lang=js ***!
-  \***********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Sexe.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Sexe.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -18285,7 +18277,72 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    chart: chart
+    Chart: _StatisticsCards_Chart__WEBPACK_IMPORTED_MODULE_0__.default
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/SituationResident.vue?vue&type=script&lang=js":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/SituationResident.vue?vue&type=script&lang=js ***!
+  \***********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {},
+  data: function data() {
+    return {
+      statistics: [],
+      id: "residentstatistics",
+      chartType: "pie",
+      labels: [],
+      dataset: []
+    };
+  },
+  methods: {
+    getresidentstatistics: function getresidentstatistics() {
+      var _this = this;
+
+      axios.get(this.route("residentstatistics")).then(function (response) {
+        _this.statistics = response.data;
+        _this.labels = _.toArray(_.mapValues(_this.statistics, "libelle"));
+        _this.dataset = _.toArray(_.mapValues(_this.statistics, "percent"));
+        console.log(_this.dataset);
+        console.log(_this.labels);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    initializeChart: function initializeChart() {
+      var ctx = document.getElementById(this.id);
+      new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+        type: this.chartType,
+        data: {
+          labels: _.toArray(_.mapValues(this.statistics, "libelle")),
+          datasets: [{
+            data: [400, 29, 11, 1024, 40, 1102],
+            backgroundColor: "rgba(255,255,255,0) ",
+            borderColor: "#11495d",
+            borderWidth: 2,
+            pointStyle: "rectRot",
+            pointRadius: 5,
+            pointBorderColor: "rgb(261, 24, 0)"
+          }]
+        }
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getresidentstatistics();
+    this.initializeChart();
   }
 });
 
@@ -23664,10 +23721,10 @@ var _hoisted_3 = {
   "class": "p-3 bg-white rounded shadow"
 };
 var _hoisted_4 = {
-  "class": "p-3 bg-white rounded shadow"
+  "class": "grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12"
 };
 var _hoisted_5 = {
-  "class": "grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12"
+  "class": "p-3 bg-white rounded shadow"
 };
 var _hoisted_6 = {
   "class": "p-3 bg-white rounded shadow"
@@ -23676,18 +23733,17 @@ var _hoisted_7 = {
   "class": "p-3 bg-white rounded shadow"
 };
 var _hoisted_8 = {
-  "class": "p-3 bg-white rounded shadow"
-};
-var _hoisted_9 = {
   "class": "grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12"
 };
-var _hoisted_10 = {
+var _hoisted_9 = {
   "class": "p-3 bg-white rounded shadow"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_situation_resident = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("situation-resident");
 
   var _component_chart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("chart");
+
+  var _component_sexe = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("sexe");
 
   var _component_data_list = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-list");
 
@@ -23699,23 +23755,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "nationalite",
         type: "pie",
         title: "pays de nationalite"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-        id: "sexe",
-        type: "line",
-        title: "sexe"
-      })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_sexe)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
         id: "matrimonial",
         type: "doughnut",
         title: "Etat matrimonial"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
         id: "etablisement",
         type: "pie",
         title: "etablisement"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
         id: "fonctionnel",
         type: "line",
         title: "etat fonctionnel"
-      })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
+      })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
         id: "assurance",
         type: "doughnut",
         title: "assurance medical"
@@ -23984,6 +24036,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Sexe.vue?vue&type=template&id=3001626a":
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Sexe.vue?vue&type=template&id=3001626a ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "p-3 bg-white rounded shadow"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_chart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("chart");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
+    id: "sexe",
+    type: "line",
+    title: "sexe"
+  })]);
+}
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/SituationResident.vue?vue&type=template&id=0c35a292":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/SituationResident.vue?vue&type=template&id=0c35a292 ***!
@@ -24001,13 +24081,12 @@ var _hoisted_1 = {
   "class": "p-3 bg-white rounded shadow"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_chart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("chart");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-    id: "resident",
-    type: "doughnut",
-    title: "Situation de resident"
-  })]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
+    id: $data.id,
+    "class": "w-full"
+  }, null, 8
+  /* PROPS */
+  , ["id"])]);
 }
 
 /***/ }),
@@ -64564,6 +64643,32 @@ _DownloadDataList_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.defau
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Data/Sexe.vue":
+/*!******************************************!*\
+  !*** ./resources/js/Pages/Data/Sexe.vue ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Sexe_vue_vue_type_template_id_3001626a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Sexe.vue?vue&type=template&id=3001626a */ "./resources/js/Pages/Data/Sexe.vue?vue&type=template&id=3001626a");
+/* harmony import */ var _Sexe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Sexe.vue?vue&type=script&lang=js */ "./resources/js/Pages/Data/Sexe.vue?vue&type=script&lang=js");
+
+
+
+_Sexe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _Sexe_vue_vue_type_template_id_3001626a__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_Sexe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Pages/Data/Sexe.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Sexe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Data/SituationResident.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/Pages/Data/SituationResident.vue ***!
@@ -65914,6 +66019,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Data/Sexe.vue?vue&type=script&lang=js":
+/*!******************************************************************!*\
+  !*** ./resources/js/Pages/Data/Sexe.vue?vue&type=script&lang=js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Sexe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Sexe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Sexe.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Sexe.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Data/SituationResident.vue?vue&type=script&lang=js":
 /*!*******************************************************************************!*\
   !*** ./resources/js/Pages/Data/SituationResident.vue?vue&type=script&lang=js ***!
@@ -67066,6 +67187,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Data/Sexe.vue?vue&type=template&id=3001626a":
+/*!************************************************************************!*\
+  !*** ./resources/js/Pages/Data/Sexe.vue?vue&type=template&id=3001626a ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Sexe_vue_vue_type_template_id_3001626a__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Sexe_vue_vue_type_template_id_3001626a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Sexe.vue?vue&type=template&id=3001626a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Sexe.vue?vue&type=template&id=3001626a");
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Data/SituationResident.vue?vue&type=template&id=0c35a292":
 /*!*************************************************************************************!*\
   !*** ./resources/js/Pages/Data/SituationResident.vue?vue&type=template&id=0c35a292 ***!
@@ -68101,6 +68238,8 @@ var map = {
 	"./Data/DataList.vue": "./resources/js/Pages/Data/DataList.vue",
 	"./Data/DownloadDataList": "./resources/js/Pages/Data/DownloadDataList.vue",
 	"./Data/DownloadDataList.vue": "./resources/js/Pages/Data/DownloadDataList.vue",
+	"./Data/Sexe": "./resources/js/Pages/Data/Sexe.vue",
+	"./Data/Sexe.vue": "./resources/js/Pages/Data/Sexe.vue",
 	"./Data/SituationResident": "./resources/js/Pages/Data/SituationResident.vue",
 	"./Data/SituationResident.vue": "./resources/js/Pages/Data/SituationResident.vue",
 	"./DataCollection": "./resources/js/Pages/DataCollection.vue",
