@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exports\DataExport;
 use App\Models\Anquite;
-use App\Models\Membership;
 use App\Models\Question;
 use App\Models\Team;
-use Carbon\Carbon;
-use DateTimeInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +36,6 @@ class AnquiteController extends Controller
                 $reponse->value = ($reponse->option != null) ? $reponse->option->libelle : $reponse->value;
             }
         }
-
 
         return response()->json([
             'anquites' => $anquites,

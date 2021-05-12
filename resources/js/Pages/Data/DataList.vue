@@ -1,16 +1,9 @@
 <template>
     <div class="p-5 bg-white w-full mt-12 rounded shadow">
         <div class="flex mr-auto w-full">
-            <!--<p class="my-auto capitalize font-semibold text-gray-600 mr-3"> current Team </p>
-                    -->
-
+       
             <div class="flex relative ml-9 my-auto">
-                <input
-                    type="text"
-                    class="focus:border-pink-500 focus:ring-0 pr-8 placeholder-gray-400 p-1 rounded"
-                    placeholder="Search"
-                />
-                <i class="fal fa-search text-pink-500 my-auto -ml-6"></i>
+            
             </div>
 
         
