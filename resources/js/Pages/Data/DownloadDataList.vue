@@ -53,8 +53,9 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button class="cursor-pointer" 
-            @click="show = false"
+                <jet-secondary-button
+                    class="cursor-pointer"
+                    @click="show = false"
                 >
                     annuler
                 </jet-secondary-button>
@@ -127,12 +128,15 @@ export default {
         },
 
         createXLSXTableDemo() {
-            var fileName = "data";
-            var table = document.getElementById("table");
-            var wb = xlsx.utils.table_to_book(table, { sheet: "Sheet JS" });
+            // var fileName = "data";
+            // var fileName = (Math.random() * 1e32).toString(36);
+            // var table = document.getElementById("table");
+            // var wb = xlsx.utils.table_to_book(table, { sheet: "data" });
             return xlsx.writeFile(
-                wb,
-                null || fileName + "." + this.fileformat
+                xlsx.utils.table_to_book(document.getElementById("table"), {
+                    sheet: "data",
+                }),
+                (Math.random() * 1e32).toString(36) + "." + this.fileformat
             );
         },
     },

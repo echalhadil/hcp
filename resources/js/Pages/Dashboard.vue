@@ -1,6 +1,6 @@
 <template>
     <left-layout>
-        <div class="w-full px-12 pt-12 items-stretch align-middle">
+        <div class="w-full px-5 md:px-12 pt-12 items-stretch align-middle">
             <div class="grid md:grid-cols-4 grid-cols-1 my-auto gap-4">
                
                 <my-team-location
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <div class="w-full px-12 pt-12 items-stretch align-middle">
+        <div class="w-full px-5 md:px-12 pt-12 items-stretch align-middle">
             <div
                 class="grid md:grid-cols-3 md:grid-rows-2 grid-cols-1 my-auto gap-4"
             >
@@ -126,7 +126,7 @@
             </div>
         </div>
 
-        <div class="w-full px-12 pt-12 items-stretch align-middle mb-12">
+        <div class="w-full px-5 md:px-12 pt-12 items-stretch align-middle mb-12">
             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4">
                 <!--total anquite-->
 

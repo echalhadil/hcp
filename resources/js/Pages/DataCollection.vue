@@ -1,18 +1,20 @@
 <template>
     <left-layout>
-        <div class="p-12 w-full">
-            <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4">
+        <div class=" p-5 md:p-12 w-full">
+            <div class="grid md:grid-cols-4 grid-cols-1 my-auto gap-4">
                 <situation-resident />
 
                 <sexe />
 
                 <pays-nationalite />
+                <etat-matrimonial />
+
             </div>
 
             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
                 
-                <etat-matrimonial />
 
+                <assurance-medical />
                 
                 <etablisement />
 
@@ -21,7 +23,6 @@
             </div>
 
             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
-                <assurance-medical />
             </div>
 
             <data-list />
