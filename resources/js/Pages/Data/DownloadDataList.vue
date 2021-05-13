@@ -53,7 +53,9 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button class="cursor-pointer">
+                <jet-secondary-button class="cursor-pointer" 
+            @click="show = false"
+                >
                     annuler
                 </jet-secondary-button>
 
