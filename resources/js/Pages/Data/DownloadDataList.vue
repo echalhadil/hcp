@@ -31,8 +31,6 @@
                         ></i>
                     </div>
 
-                    
-
                     <div
                         @click="selectFormat('csv')"
                         class="cursor-pointer hover:bg-gray-50 flex p-2 rounded border w-1/3"
@@ -45,7 +43,7 @@
                             class="fal text-4xl fa-file-csv"
                             aria-hidden="true"
                         ></i>
-                        <p class="my-auto ml-2  select-none">Fichier CSV</p>
+                        <p class="my-auto ml-2 select-none">Fichier CSV</p>
                         <i
                             v-if="fileformat === 'csv'"
                             class="fas fa-check-circle m-auto mr-0"
@@ -55,10 +53,7 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button
-                    class="cursor-pointer"
-                    @click="show = false"
-                >
+                <jet-secondary-button class="cursor-pointer">
                     annuler
                 </jet-secondary-button>
 
@@ -67,9 +62,9 @@
                     :class="{
                         ' opacity-20 cursor-not-allowed ': fileformat === '',
                     }"
-                    @click="exportTableToExcel('table','data')"
                     role="button"
-                    :disabled="(fileformat === '')"
+                    :disabled="fileformat === ''"
+                    @click="createXLSXTableDemo()"
                 >
                     télécharger
                 </button>
@@ -88,6 +83,7 @@ export default {
         return {
             show: false,
             fileformat: "",
+            // @click="exportTableToExcel('table', 'data')"
         };
     },
     methods: {
@@ -95,7 +91,7 @@ export default {
             this.fileformat = this.fileformat === format ? "" : format;
         },
 
-            exportTableToExcel(tableID, filename = "") {
+        exportTableToExcel(tableID, filename = "") {
             var downloadLink;
             var dataType = "application/vnd.ms-excel";
             // var dataType = "application/csv;charset=utf-8";
@@ -127,8 +123,16 @@ export default {
                 downloadLink.click();
             }
         },
-       
+
+        createXLSXTableDemo() {
+            var fileName = "data";
+            var table = document.getElementById("table");
+            var wb = xlsx.utils.table_to_book(table, { sheet: "Sheet JS" });
+            return xlsx.writeFile(
+                wb,
+                null || fileName + "." + this.fileformat
+            );
+        },
     },
 };
 </script>
-

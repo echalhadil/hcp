@@ -36,3 +36,7 @@ var Chart = require('chart.js/auto');
 
 // window.expo = require('tableexport');
 // import TableExport from 'tableexport';
+// window.shim = require('shim');
+window.xlsx = require('xlsx');
+// window.blob = require('blob');
+// window.FileSaver = require('file-saver');

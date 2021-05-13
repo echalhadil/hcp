@@ -27,6 +27,10 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
-        "tableexport": "^5.2.0"
+        "blob": "^0.1.0",
+        "file-saver": "^2.0.5",
+        "shim": "^0.6.0",
+        "tableexport": "^5.2.0",
+        "xlsx": "^0.14.5"
     }
 }

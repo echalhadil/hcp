@@ -8,9 +8,11 @@
             </div>
         </div>
     </div>
-    <div class="mt-2 mb-6 bg-current rounded shadow overflow-x-auto w-full">
+    <div
+        class="mt-2 mb-6 bg-current rounded shadow overflow-auto bg-white max-h-96 w-full"
+    >
         <div
-            class="w-full flex items-center justify-center bg-gray-100 font-sans overflow-x-auto"
+            class="w-full flex items-center justify-center bg-gray-100 font-sans"
         >
             <div class="w-full">
                 <div class="bg-white shadow-md rounded">
@@ -32,7 +34,9 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-600 text-sm font-light">
+                        <tbody
+                            class="text-gray-600 text-sm font-light overflow-y-auto"
+                        >
                             <tr
                                 v-if="questionAndAnswer.length === 0"
                                 class="border-b text-lg border-gray-200"
@@ -69,6 +73,8 @@
                                     </span>
                                 </td>
                             </tr>
+
+                            
                         </tbody>
                     </table>
                 </div>

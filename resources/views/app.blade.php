@@ -26,6 +26,12 @@
         <!-- Scripts -->
         @routes
         <script src="{{ mix('js/app.js') }}" defer></script>
+{{--         
+        <script src="https://unpkg.com/xlsx/dist/shim.min.js" defer></script>
+        <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js" defer></script>
+        <script src="https://unpkg.com/blob.js@1.0.1/Blob.js" defer></script>
+        <script src="https://unpkg.com/file-saver@1.3.3/FileSaver.js" defer></script> --}}
+        
     </head>
     <body class="font-sans antialiased">
         @inertia

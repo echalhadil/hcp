@@ -4,46 +4,24 @@
             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4">
                 <situation-resident />
 
-                <div class="p-3 bg-white rounded shadow">
-                    <chart
-                        id="nationalite"
-                        type="pie"
-                        title="pays de nationalite"
-                    />
-                </div>
-
                 <sexe />
+
+                <pays-nationalite />
             </div>
 
             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
-                <div class="p-3 bg-white rounded shadow">
-                    <chart
-                        id="matrimonial"
-                        type="doughnut"
-                        title="Etat matrimonial"
-                    />
-                </div>
-                <div class="p-3 bg-white rounded shadow">
-                    <chart id="etablisement" type="pie" title="etablisement" />
-                </div>
+                
+                <etat-matrimonial />
 
-                <div class="p-3 bg-white rounded shadow">
-                    <chart
-                        id="fonctionnel"
-                        type="line"
-                        title="etat fonctionnel"
-                    />
-                </div>
+                
+                <etablisement />
+
+                <etat-fonctionnel />
+
             </div>
 
             <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
-                <div class="p-3 bg-white rounded shadow">
-                    <chart
-                        id="assurance"
-                        type="doughnut"
-                        title="assurance medical"
-                    />
-                </div>
+                <assurance-medical />
             </div>
 
             <data-list />
@@ -68,6 +46,12 @@ import Chart from "@/StatisticsCards/Chart";
 import DataList from "@/Pages/Data/DataList";
 import SituationResident from "@/Pages/Data/SituationResident";
 import Sexe from "@/Pages/Data/Sexe";
+import PaysNationalite from "@/Pages/Data/PaysNationalite";
+import EtatMatrimonial from "@/Pages/Data/EtatMatrimonial";
+import Etablisement from "@/Pages/Data/Etablisement";
+import EtatFonctionnel from "@/Pages/Data/EtatFonctionnel";
+import AssuranceMedical from "@/Pages/Data/AssuranceMedical";
+
 
 export default {
     components: {
@@ -86,6 +70,11 @@ export default {
         DataList,
         SituationResident,
         Sexe,
+        PaysNationalite,
+        EtatMatrimonial,
+        Etablisement,
+        EtatFonctionnel,
+        AssuranceMedical
     },
     data() {
         return {

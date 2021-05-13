@@ -18104,6 +18104,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pages_Data_DataList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Pages/Data/DataList */ "./resources/js/Pages/Data/DataList.vue");
 /* harmony import */ var _Pages_Data_SituationResident__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Pages/Data/SituationResident */ "./resources/js/Pages/Data/SituationResident.vue");
 /* harmony import */ var _Pages_Data_Sexe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/Pages/Data/Sexe */ "./resources/js/Pages/Data/Sexe.vue");
+/* harmony import */ var _Pages_Data_PaysNationalite__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/Pages/Data/PaysNationalite */ "./resources/js/Pages/Data/PaysNationalite.vue");
+/* harmony import */ var _Pages_Data_EtatMatrimonial__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/Pages/Data/EtatMatrimonial */ "./resources/js/Pages/Data/EtatMatrimonial.vue");
+/* harmony import */ var _Pages_Data_Etablisement__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/Pages/Data/Etablisement */ "./resources/js/Pages/Data/Etablisement.vue");
+/* harmony import */ var _Pages_Data_EtatFonctionnel__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/Pages/Data/EtatFonctionnel */ "./resources/js/Pages/Data/EtatFonctionnel.vue");
+/* harmony import */ var _Pages_Data_AssuranceMedical__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/Pages/Data/AssuranceMedical */ "./resources/js/Pages/Data/AssuranceMedical.vue");
 
 
 
@@ -18113,6 +18118,11 @@ __webpack_require__.r(__webpack_exports__);
  // import StatisticsCardPie from "@/StatisticsCards/StatisticsCardPie";
 // import GenrePie from "@/StatisticsCards/GenrePie";
 // import ChomageCard from "@/StatisticsCards/ChomageCard";
+
+
+
+
+
 
 
 
@@ -18133,7 +18143,12 @@ __webpack_require__.r(__webpack_exports__);
     Chart: _StatisticsCards_Chart__WEBPACK_IMPORTED_MODULE_5__.default,
     DataList: _Pages_Data_DataList__WEBPACK_IMPORTED_MODULE_6__.default,
     SituationResident: _Pages_Data_SituationResident__WEBPACK_IMPORTED_MODULE_7__.default,
-    Sexe: _Pages_Data_Sexe__WEBPACK_IMPORTED_MODULE_8__.default
+    Sexe: _Pages_Data_Sexe__WEBPACK_IMPORTED_MODULE_8__.default,
+    PaysNationalite: _Pages_Data_PaysNationalite__WEBPACK_IMPORTED_MODULE_9__.default,
+    EtatMatrimonial: _Pages_Data_EtatMatrimonial__WEBPACK_IMPORTED_MODULE_10__.default,
+    Etablisement: _Pages_Data_Etablisement__WEBPACK_IMPORTED_MODULE_11__.default,
+    EtatFonctionnel: _Pages_Data_EtatFonctionnel__WEBPACK_IMPORTED_MODULE_12__.default,
+    AssuranceMedical: _Pages_Data_AssuranceMedical__WEBPACK_IMPORTED_MODULE_13__.default
   },
   data: function data() {
     return {
@@ -18144,6 +18159,85 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=script&lang=js":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {},
+  data: function data() {
+    return {
+      statistics: [],
+      id: "assurancemedical",
+      chartType: "pie"
+    };
+  },
+  methods: {
+    getresidentstatistics: function getresidentstatistics() {
+      var _this = this;
+
+      axios.get(this.route("assurancemedicalstatistics")).then(function (response) {
+        _this.statistics = response.data;
+
+        var rest = 100 - _.sum(_.toArray(_.mapValues(_this.statistics, "percent")));
+
+        _this.statistics.push({
+          libelle: "NaN",
+          percent: rest
+        });
+
+        console.log(rest);
+        var ctx = document.getElementById(_this.id);
+        new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+          type: _this.chartType,
+          data: {
+            labels: _.toArray(_.mapValues(_this.statistics, "libelle")),
+            datasets: [{
+              data: _.toArray(_.mapValues(_this.statistics, "percent")),
+              backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 12, 235)", "rgb(54, 12, 35)", "rgb(134, 12, 35)", "#F4F4F4F4"],
+              borderWidth: 2,
+              pointRadius: 5,
+              pointBorderColor: "rgb(0, 0, 0)"
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "bottom"
+              } // title: {
+              //     display: true,
+              //     text: "Etat Matrimonial",
+              //     fullSize: true,
+              //     position: "top",
+              // },
+
+            },
+            responsive: true,
+            lineTension: 1
+          }
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    } // initializeChart() {},
+
+  },
+  mounted: function mounted() {
+    this.getresidentstatistics(); // this.initializeChart();
+  }
 });
 
 /***/ }),
@@ -18223,7 +18317,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       show: false,
-      fileformat: ""
+      fileformat: "" // @click="exportTableToExcel('table', 'data')"
+
     };
   },
   methods: {
@@ -18256,7 +18351,331 @@ __webpack_require__.r(__webpack_exports__);
 
         downloadLink.click();
       }
+    },
+    createXLSXTableDemo: function createXLSXTableDemo() {
+      var fileName = "data";
+      var table = document.getElementById("table");
+      var wb = XLSX.utils.table_to_book(table, {
+        sheet: "Sheet JS"
+      });
+      return XLSX.writeFile(wb,  false || fileName + "." + this.fileformat);
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Etablisement.vue?vue&type=script&lang=js":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Etablisement.vue?vue&type=script&lang=js ***!
+  \******************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {},
+  data: function data() {
+    return {
+      statistics: [],
+      id: "etablisement",
+      chartType: "pie"
+    };
+  },
+  methods: {
+    getresidentstatistics: function getresidentstatistics() {
+      var _this = this;
+
+      axios.get(this.route("etablisementstatistics")).then(function (response) {
+        _this.statistics = response.data;
+
+        var rest = 100 - _.sum(_.toArray(_.mapValues(_this.statistics, "percent")));
+
+        _this.statistics.push({
+          libelle: 'NaN',
+          percent: rest
+        });
+
+        console.log(rest);
+        var ctx = document.getElementById(_this.id);
+        new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+          type: _this.chartType,
+          data: {
+            labels: _.toArray(_.mapValues(_this.statistics, "libelle")),
+            datasets: [{
+              data: _.toArray(_.mapValues(_this.statistics, "percent")),
+              backgroundColor: ["rgb(215, 99, 132)", "rgb(140, 212, 135)", "#F4F4F4"],
+              borderWidth: 2,
+              pointRadius: 5,
+              pointBorderColor: "rgb(0, 0, 0)"
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "bottom"
+              } // title: {
+              //     display: true,
+              //     text: "pays de nationalite",
+              //     fullSize: true,
+              //     position: "top",
+              // },
+
+            },
+            responsive: true,
+            lineTension: 1
+          }
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    } // initializeChart() {},
+
+  },
+  mounted: function mounted() {
+    this.getresidentstatistics(); // this.initializeChart();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {},
+  data: function data() {
+    return {
+      statistics: [],
+      id: "EtatFonctionnel",
+      chartType: "doughnut"
+    };
+  },
+  methods: {
+    getresidentstatistics: function getresidentstatistics() {
+      var _this = this;
+
+      axios.get(this.route("etatmatrimonialstatistics")).then(function (response) {
+        _this.statistics = response.data;
+
+        var rest = 100 - _.sum(_.toArray(_.mapValues(_this.statistics, "percent")));
+
+        _this.statistics.push({
+          libelle: "NaN",
+          percent: rest
+        });
+
+        console.log(rest);
+        var ctx = document.getElementById(_this.id);
+        new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+          type: _this.chartType,
+          data: {
+            labels: _.toArray(_.mapValues(_this.statistics, "libelle")),
+            datasets: [{
+              data: _.toArray(_.mapValues(_this.statistics, "percent")),
+              backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 12, 235)", "rgb(54, 12, 35)", "rgb(134, 12, 35)", "#F4F4F4F4"],
+              borderWidth: 2,
+              pointRadius: 5,
+              pointBorderColor: "rgb(0, 0, 0)"
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "bottom"
+              } // title: {
+              //     display: true,
+              //     text: "Etat Matrimonial",
+              //     fullSize: true,
+              //     position: "top",
+              // },
+
+            },
+            responsive: true,
+            lineTension: 1
+          }
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    } // initializeChart() {},
+
+  },
+  mounted: function mounted() {
+    this.getresidentstatistics(); // this.initializeChart();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {},
+  data: function data() {
+    return {
+      statistics: [],
+      id: "etatmatrimonial",
+      chartType: "pie"
+    };
+  },
+  methods: {
+    getresidentstatistics: function getresidentstatistics() {
+      var _this = this;
+
+      axios.get(this.route("etatmatrimonialstatistics")).then(function (response) {
+        _this.statistics = response.data;
+
+        var rest = 100 - _.sum(_.toArray(_.mapValues(_this.statistics, "percent")));
+
+        _this.statistics.push({
+          libelle: "NaN",
+          percent: rest
+        });
+
+        console.log(rest);
+        var ctx = document.getElementById(_this.id);
+        new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+          type: _this.chartType,
+          data: {
+            labels: _.toArray(_.mapValues(_this.statistics, "libelle")),
+            datasets: [{
+              data: _.toArray(_.mapValues(_this.statistics, "percent")),
+              backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 12, 235)", "rgb(54, 12, 35)", "rgb(134, 12, 35)", "#F4F4F4F4"],
+              borderWidth: 2,
+              pointRadius: 5,
+              pointBorderColor: "rgb(0, 0, 0)"
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "bottom"
+              } // title: {
+              //     display: true,
+              //     text: "Etat Matrimonial",
+              //     fullSize: true,
+              //     position: "top",
+              // },
+
+            },
+            responsive: true,
+            lineTension: 1
+          }
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    } // initializeChart() {},
+
+  },
+  mounted: function mounted() {
+    this.getresidentstatistics(); // this.initializeChart();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/PaysNationalite.vue?vue&type=script&lang=js":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/PaysNationalite.vue?vue&type=script&lang=js ***!
+  \*********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {},
+  data: function data() {
+    return {
+      statistics: [],
+      id: "paynationalite",
+      chartType: "pie"
+    };
+  },
+  methods: {
+    getresidentstatistics: function getresidentstatistics() {
+      var _this = this;
+
+      axios.get(this.route("nationalitestatistics")).then(function (response) {
+        _this.statistics = response.data;
+
+        var rest = 100 - _.sum(_.toArray(_.mapValues(_this.statistics, "percent")));
+
+        _this.statistics.push({
+          libelle: 'NaN',
+          percent: rest
+        });
+
+        console.log(rest);
+        var ctx = document.getElementById(_this.id);
+        new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+          type: _this.chartType,
+          data: {
+            labels: _.toArray(_.mapValues(_this.statistics, "libelle")),
+            datasets: [{
+              data: _.toArray(_.mapValues(_this.statistics, "percent")),
+              backgroundColor: ["rgb(55, 99, 132)", "rgb(174, 162, 235)", "#F4F4F4"],
+              borderWidth: 2,
+              pointRadius: 5,
+              pointBorderColor: "rgb(0, 0, 0)"
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "bottom"
+              } // title: {
+              //     display: true,
+              //     text: "pays de nationalite",
+              //     fullSize: true,
+              //     position: "top",
+              // },
+
+            },
+            responsive: true,
+            lineTension: 1
+          }
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    } // initializeChart() {},
+
+  },
+  mounted: function mounted() {
+    this.getresidentstatistics(); // this.initializeChart();
   }
 });
 
@@ -18273,11 +18692,69 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _StatisticsCards_Chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/StatisticsCards/Chart */ "./resources/js/StatisticsCards/Chart.vue");
+/* harmony import */ var chart_js_auto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! chart.js/auto */ "./node_modules/chart.js/auto/auto.esm.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    Chart: _StatisticsCards_Chart__WEBPACK_IMPORTED_MODULE_0__.default
+  components: {},
+  data: function data() {
+    return {
+      statistics: [],
+      id: "sexe",
+      chartType: "doughnut"
+    };
+  },
+  methods: {
+    getresidentstatistics: function getresidentstatistics() {
+      var _this = this;
+
+      axios.get(this.route("sexestatistics")).then(function (response) {
+        _this.statistics = response.data;
+
+        var rest = 100 - _.sum(_.toArray(_.mapValues(_this.statistics, "percent")));
+
+        _this.statistics.push({
+          libelle: "NaN",
+          percent: rest
+        });
+
+        console.log(rest);
+        var ctx = document.getElementById(_this.id);
+        new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+          type: _this.chartType,
+          data: {
+            labels: _.toArray(_.mapValues(_this.statistics, "libelle")),
+            datasets: [{
+              data: _.toArray(_.mapValues(_this.statistics, "percent")),
+              backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)", "#F4F4F4"],
+              borderWidth: 2,
+              pointRadius: 5,
+              pointBorderColor: "rgb(0, 0, 0)"
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "bottom"
+              } // title: {
+              //     display: true,
+              //     text: "Sexe",
+              //     fullSize: true,
+              //     position: "top",
+              // },
+
+            },
+            responsive: true,
+            lineTension: 1
+          }
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    } // initializeChart() {},
+
+  },
+  mounted: function mounted() {
+    this.getresidentstatistics(); // this.initializeChart();
   }
 });
 
@@ -18302,9 +18779,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       statistics: [],
       id: "residentstatistics",
-      chartType: "pie",
-      labels: [],
-      dataset: []
+      chartType: "pie"
     };
   },
   methods: {
@@ -18313,36 +18788,54 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.route("residentstatistics")).then(function (response) {
         _this.statistics = response.data;
-        _this.labels = _.toArray(_.mapValues(_this.statistics, "libelle"));
-        _this.dataset = _.toArray(_.mapValues(_this.statistics, "percent"));
-        console.log(_this.dataset);
-        console.log(_this.labels);
+
+        var rest = 100 - _.sum(_.toArray(_.mapValues(_this.statistics, "percent")));
+
+        _this.statistics.push({
+          libelle: "NaN",
+          percent: rest
+        });
+
+        var ctx = document.getElementById(_this.id);
+        new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
+          type: _this.chartType,
+          data: {
+            labels: _.toArray(_.mapValues(_this.statistics, "libelle")),
+            datasets: [{
+              data: _.toArray(_.mapValues(_this.statistics, "percent")),
+              backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(55, 99, 132)", "rgb(54, 12, 235)", "rgb(54, 12, 35)", "rgb(134, 12, 35)", "#F4F4F4F4"],
+              borderWidth: 2,
+              pointRadius: 5,
+              pointBorderColor: "rgb(0, 0, 0)"
+            }]
+          },
+          options: {
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: {
+                  usePointStyle: true
+                }
+              } // title: {
+              //     display: true,
+              //     text: "Situation de résidence",
+              //     fullSize: true,
+              //     position: "top",
+              // },
+
+            },
+            responsive: true,
+            lineTension: 1
+          }
+        });
       })["catch"](function (err) {
         console.log(err);
       });
-    },
-    initializeChart: function initializeChart() {
-      var ctx = document.getElementById(this.id);
-      new chart_js_auto__WEBPACK_IMPORTED_MODULE_0__.default(ctx, {
-        type: this.chartType,
-        data: {
-          labels: _.toArray(_.mapValues(this.statistics, "libelle")),
-          datasets: [{
-            data: [400, 29, 11, 1024, 40, 1102],
-            backgroundColor: "rgba(255,255,255,0) ",
-            borderColor: "#11495d",
-            borderWidth: 2,
-            pointStyle: "rectRot",
-            pointRadius: 5,
-            pointBorderColor: "rgb(261, 24, 0)"
-          }]
-        }
-      });
-    }
+    } // initializeChart() {},
+
   },
   mounted: function mounted() {
-    this.getresidentstatistics();
-    this.initializeChart();
+    this.getresidentstatistics(); // this.initializeChart();
   }
 });
 
@@ -23718,32 +24211,25 @@ var _hoisted_2 = {
   "class": "grid md:grid-cols-3 grid-cols-1 my-auto gap-4"
 };
 var _hoisted_3 = {
-  "class": "p-3 bg-white rounded shadow"
+  "class": "grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12"
 };
 var _hoisted_4 = {
   "class": "grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12"
 };
-var _hoisted_5 = {
-  "class": "p-3 bg-white rounded shadow"
-};
-var _hoisted_6 = {
-  "class": "p-3 bg-white rounded shadow"
-};
-var _hoisted_7 = {
-  "class": "p-3 bg-white rounded shadow"
-};
-var _hoisted_8 = {
-  "class": "grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12"
-};
-var _hoisted_9 = {
-  "class": "p-3 bg-white rounded shadow"
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_situation_resident = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("situation-resident");
 
-  var _component_chart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("chart");
-
   var _component_sexe = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("sexe");
+
+  var _component_pays_nationalite = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("pays-nationalite");
+
+  var _component_etat_matrimonial = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("etat-matrimonial");
+
+  var _component_etablisement = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("etablisement");
+
+  var _component_etat_fonctionnel = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("etat-fonctionnel");
+
+  var _component_assurance_medical = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("assurance-medical");
 
   var _component_data_list = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("data-list");
 
@@ -23751,32 +24237,49 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_left_layout, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_situation_resident), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-        id: "nationalite",
-        type: "pie",
-        title: "pays de nationalite"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_sexe)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-        id: "matrimonial",
-        type: "doughnut",
-        title: "Etat matrimonial"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-        id: "etablisement",
-        type: "pie",
-        title: "etablisement"
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-        id: "fonctionnel",
-        type: "line",
-        title: "etat fonctionnel"
-      })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-        id: "assurance",
-        type: "doughnut",
-        title: "assurance medical"
-      })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_list)])];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_situation_resident), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_sexe), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pays_nationalite)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_etat_matrimonial), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_etablisement), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_etat_fonctionnel)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_assurance_medical)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_data_list)])];
     }),
     _: 1
     /* STABLE */
 
   });
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=template&id=7445dc30":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=template&id=7445dc30 ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "p-3 bg-white rounded shadow"
+};
+var _hoisted_2 = {
+  "class": "transform -translate-y-1/2 top-1/2 relative"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": " text-center text-gray-500 text-sm p-2 "
+}, "Assurance Medical", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
+    id: $data.id,
+    "class": "w-full"
+  }, null, 8
+  /* PROPS */
+  , ["id"])])]);
 }
 
 /***/ }),
@@ -23811,10 +24314,10 @@ var _hoisted_4 = {
   "class": "flex ml-auto my-auto"
 };
 var _hoisted_5 = {
-  "class": "mt-2 mb-6 bg-current rounded shadow overflow-x-auto w-full"
+  "class": "mt-2 mb-6 bg-current rounded shadow overflow-auto bg-white max-h-96 w-full"
 };
 var _hoisted_6 = {
-  "class": "w-full flex items-center justify-center bg-gray-100 font-sans overflow-x-auto"
+  "class": "w-full flex items-center justify-center bg-gray-100 font-sans"
 };
 var _hoisted_7 = {
   "class": "w-full"
@@ -23834,7 +24337,7 @@ var _hoisted_11 = {
   "class": "bg-gray-200 text-gray-600 uppercase text-sm py-6 leading-normal"
 };
 var _hoisted_12 = {
-  "class": "text-gray-600 text-sm font-light"
+  "class": "text-gray-600 text-sm font-light overflow-y-auto"
 };
 var _hoisted_13 = {
   key: 0,
@@ -23948,7 +24451,7 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
-  "class": "my-auto ml-2  select-none"
+  "class": "my-auto ml-2 select-none"
 }, "Fichier CSV", -1
 /* HOISTED */
 );
@@ -23972,7 +24475,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "cursor-pointer p-2 border rounded border-pink-500 hover:bg-pink-100 text-pink-500 capitalize"
   }, [_hoisted_1]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_dialog_modal, {
     show: $data.show,
-    onClose: _cache[6] || (_cache[6] = function ($event) {
+    onClose: _cache[5] || (_cache[5] = function ($event) {
       return $data.show = false;
     })
   }, {
@@ -24002,10 +24505,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     footer: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_secondary_button, {
-        "class": "cursor-pointer",
-        onClick: _cache[4] || (_cache[4] = function ($event) {
-          return $data.show = false;
-        })
+        "class": "cursor-pointer"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [_hoisted_10];
@@ -24017,11 +24517,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": ["cursor-pointer rounded ml-2 p-2 border border-pink-600 bg-pink-600 text-white", {
           ' opacity-20 cursor-not-allowed ': $data.fileformat === ''
         }],
-        onClick: _cache[5] || (_cache[5] = function ($event) {
-          return $options.exportTableToExcel('table', 'data');
-        }),
         role: "button",
-        disabled: $data.fileformat === ''
+        disabled: $data.fileformat === '',
+        onClick: _cache[4] || (_cache[4] = function ($event) {
+          return $options.createXLSXTableDemo();
+        })
       }, " télécharger ", 10
       /* CLASS, PROPS */
       , ["disabled"])];
@@ -24032,6 +24532,154 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["show"])]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Etablisement.vue?vue&type=template&id=058b8aee":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Etablisement.vue?vue&type=template&id=058b8aee ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "p-3 bg-white rounded shadow"
+};
+var _hoisted_2 = {
+  "class": "transform -translate-y-1/2 top-1/2 relative"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": " text-center text-gray-500 text-sm p-2 capitalize "
+}, "etablisement", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
+    id: $data.id,
+    "class": "w-full"
+  }, null, 8
+  /* PROPS */
+  , ["id"])])]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=template&id=cf2747b6":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=template&id=cf2747b6 ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "p-3 bg-white rounded shadow"
+};
+var _hoisted_2 = {
+  "class": "transform -translate-y-1/2 top-1/2 relative"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": " text-center text-gray-500 text-sm p-2 "
+}, "Etat Fonctionnel", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
+    id: $data.id,
+    "class": "w-full"
+  }, null, 8
+  /* PROPS */
+  , ["id"])])]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=template&id=19c5a041":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=template&id=19c5a041 ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "p-3 bg-white rounded shadow"
+};
+var _hoisted_2 = {
+  "class": "transform -translate-y-1/2 top-1/2 relative"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": " text-center text-gray-500 text-sm p-2 "
+}, "Etat Matrimonial", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
+    id: $data.id,
+    "class": "w-full"
+  }, null, 8
+  /* PROPS */
+  , ["id"])])]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/PaysNationalite.vue?vue&type=template&id=7b2b86fe":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/PaysNationalite.vue?vue&type=template&id=7b2b86fe ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "p-3 bg-white rounded shadow"
+};
+var _hoisted_2 = {
+  "class": "transform -translate-y-1/2 top-1/2 relative"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": " text-center text-gray-500 text-sm p-2 capitalize "
+}, "pays de nationalite", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
+    id: $data.id,
+    "class": "w-full"
+  }, null, 8
+  /* PROPS */
+  , ["id"])])]);
 }
 
 /***/ }),
@@ -24052,14 +24700,23 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "p-3 bg-white rounded shadow"
 };
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_chart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("chart");
+var _hoisted_2 = {
+  "class": "transform -translate-y-1/2 top-1/2 relative"
+};
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_chart, {
-    id: "sexe",
-    type: "line",
-    title: "sexe"
-  })]);
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "text-center text-gray-500 text-sm p-2 capitalize"
+}, "sexe", -1
+/* HOISTED */
+);
+
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
+    id: $data.id,
+    "class": "w-full"
+  }, null, 8
+  /* PROPS */
+  , ["id"])])]);
 }
 
 /***/ }),
@@ -24080,13 +24737,23 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "p-3 bg-white rounded shadow"
 };
+var _hoisted_2 = {
+  "class": "transform -translate-y-1/2 top-1/2 relative"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", {
+  "class": "text-center text-gray-500 text-sm p-2 capitalize"
+}, " Situation de résidence ", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("canvas", {
     id: $data.id,
     "class": "w-full"
   }, null, 8
   /* PROPS */
-  , ["id"])]);
+  , ["id"])])]);
 }
 
 /***/ }),
@@ -64591,6 +65258,32 @@ _DataCollection_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Data/AssuranceMedical.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/Pages/Data/AssuranceMedical.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _AssuranceMedical_vue_vue_type_template_id_7445dc30__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AssuranceMedical.vue?vue&type=template&id=7445dc30 */ "./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=template&id=7445dc30");
+/* harmony import */ var _AssuranceMedical_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AssuranceMedical.vue?vue&type=script&lang=js */ "./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=script&lang=js");
+
+
+
+_AssuranceMedical_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _AssuranceMedical_vue_vue_type_template_id_7445dc30__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_AssuranceMedical_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Pages/Data/AssuranceMedical.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_AssuranceMedical_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Data/DataList.vue":
 /*!**********************************************!*\
   !*** ./resources/js/Pages/Data/DataList.vue ***!
@@ -64640,6 +65333,110 @@ if (false) {}
 _DownloadDataList_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Pages/Data/DownloadDataList.vue"
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_DownloadDataList_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/Etablisement.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/Pages/Data/Etablisement.vue ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Etablisement_vue_vue_type_template_id_058b8aee__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Etablisement.vue?vue&type=template&id=058b8aee */ "./resources/js/Pages/Data/Etablisement.vue?vue&type=template&id=058b8aee");
+/* harmony import */ var _Etablisement_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Etablisement.vue?vue&type=script&lang=js */ "./resources/js/Pages/Data/Etablisement.vue?vue&type=script&lang=js");
+
+
+
+_Etablisement_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _Etablisement_vue_vue_type_template_id_058b8aee__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_Etablisement_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Pages/Data/Etablisement.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Etablisement_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/EtatFonctionnel.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/Pages/Data/EtatFonctionnel.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EtatFonctionnel_vue_vue_type_template_id_cf2747b6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EtatFonctionnel.vue?vue&type=template&id=cf2747b6 */ "./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=template&id=cf2747b6");
+/* harmony import */ var _EtatFonctionnel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EtatFonctionnel.vue?vue&type=script&lang=js */ "./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=script&lang=js");
+
+
+
+_EtatFonctionnel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _EtatFonctionnel_vue_vue_type_template_id_cf2747b6__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_EtatFonctionnel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Pages/Data/EtatFonctionnel.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_EtatFonctionnel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/EtatMatrimonial.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/Pages/Data/EtatMatrimonial.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _EtatMatrimonial_vue_vue_type_template_id_19c5a041__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EtatMatrimonial.vue?vue&type=template&id=19c5a041 */ "./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=template&id=19c5a041");
+/* harmony import */ var _EtatMatrimonial_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EtatMatrimonial.vue?vue&type=script&lang=js */ "./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=script&lang=js");
+
+
+
+_EtatMatrimonial_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _EtatMatrimonial_vue_vue_type_template_id_19c5a041__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_EtatMatrimonial_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Pages/Data/EtatMatrimonial.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_EtatMatrimonial_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/PaysNationalite.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/Pages/Data/PaysNationalite.vue ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _PaysNationalite_vue_vue_type_template_id_7b2b86fe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaysNationalite.vue?vue&type=template&id=7b2b86fe */ "./resources/js/Pages/Data/PaysNationalite.vue?vue&type=template&id=7b2b86fe");
+/* harmony import */ var _PaysNationalite_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaysNationalite.vue?vue&type=script&lang=js */ "./resources/js/Pages/Data/PaysNationalite.vue?vue&type=script&lang=js");
+
+
+
+_PaysNationalite_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _PaysNationalite_vue_vue_type_template_id_7b2b86fe__WEBPACK_IMPORTED_MODULE_0__.render
+/* hot reload */
+if (false) {}
+
+_PaysNationalite_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/Pages/Data/PaysNationalite.vue"
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_PaysNationalite_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
 
 /***/ }),
 
@@ -65987,6 +66784,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=script&lang=js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=script&lang=js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AssuranceMedical_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AssuranceMedical_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./AssuranceMedical.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Data/DataList.vue?vue&type=script&lang=js":
 /*!**********************************************************************!*\
   !*** ./resources/js/Pages/Data/DataList.vue?vue&type=script&lang=js ***!
@@ -66015,6 +66828,70 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DownloadDataList_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DownloadDataList_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./DownloadDataList.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/DownloadDataList.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/Etablisement.vue?vue&type=script&lang=js":
+/*!**************************************************************************!*\
+  !*** ./resources/js/Pages/Data/Etablisement.vue?vue&type=script&lang=js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Etablisement_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Etablisement_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Etablisement.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Etablisement.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=script&lang=js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EtatFonctionnel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EtatFonctionnel_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./EtatFonctionnel.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=script&lang=js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EtatMatrimonial_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EtatMatrimonial_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./EtatMatrimonial.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/PaysNationalite.vue?vue&type=script&lang=js":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/Pages/Data/PaysNationalite.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PaysNationalite_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PaysNationalite_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PaysNationalite.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/PaysNationalite.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -67155,6 +68032,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=template&id=7445dc30":
+/*!************************************************************************************!*\
+  !*** ./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=template&id=7445dc30 ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AssuranceMedical_vue_vue_type_template_id_7445dc30__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AssuranceMedical_vue_vue_type_template_id_7445dc30__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./AssuranceMedical.vue?vue&type=template&id=7445dc30 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/AssuranceMedical.vue?vue&type=template&id=7445dc30");
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Data/DataList.vue?vue&type=template&id=9056d218":
 /*!****************************************************************************!*\
   !*** ./resources/js/Pages/Data/DataList.vue?vue&type=template&id=9056d218 ***!
@@ -67183,6 +68076,70 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DownloadDataList_vue_vue_type_template_id_8f0818c8__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_DownloadDataList_vue_vue_type_template_id_8f0818c8__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./DownloadDataList.vue?vue&type=template&id=8f0818c8 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/DownloadDataList.vue?vue&type=template&id=8f0818c8");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/Etablisement.vue?vue&type=template&id=058b8aee":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Data/Etablisement.vue?vue&type=template&id=058b8aee ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Etablisement_vue_vue_type_template_id_058b8aee__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Etablisement_vue_vue_type_template_id_058b8aee__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Etablisement.vue?vue&type=template&id=058b8aee */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/Etablisement.vue?vue&type=template&id=058b8aee");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=template&id=cf2747b6":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=template&id=cf2747b6 ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EtatFonctionnel_vue_vue_type_template_id_cf2747b6__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EtatFonctionnel_vue_vue_type_template_id_cf2747b6__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./EtatFonctionnel.vue?vue&type=template&id=cf2747b6 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatFonctionnel.vue?vue&type=template&id=cf2747b6");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=template&id=19c5a041":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=template&id=19c5a041 ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EtatMatrimonial_vue_vue_type_template_id_19c5a041__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_EtatMatrimonial_vue_vue_type_template_id_19c5a041__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./EtatMatrimonial.vue?vue&type=template&id=19c5a041 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/EtatMatrimonial.vue?vue&type=template&id=19c5a041");
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Data/PaysNationalite.vue?vue&type=template&id=7b2b86fe":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/Data/PaysNationalite.vue?vue&type=template&id=7b2b86fe ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PaysNationalite_vue_vue_type_template_id_7b2b86fe__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_PaysNationalite_vue_vue_type_template_id_7b2b86fe__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./PaysNationalite.vue?vue&type=template&id=7b2b86fe */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/Pages/Data/PaysNationalite.vue?vue&type=template&id=7b2b86fe");
 
 
 /***/ }),
@@ -68234,10 +69191,20 @@ var map = {
 	"./Dashboard.vue": "./resources/js/Pages/Dashboard.vue",
 	"./Dashboard/TeamLocation": "./resources/js/Pages/Dashboard/TeamLocation.vue",
 	"./Dashboard/TeamLocation.vue": "./resources/js/Pages/Dashboard/TeamLocation.vue",
+	"./Data/AssuranceMedical": "./resources/js/Pages/Data/AssuranceMedical.vue",
+	"./Data/AssuranceMedical.vue": "./resources/js/Pages/Data/AssuranceMedical.vue",
 	"./Data/DataList": "./resources/js/Pages/Data/DataList.vue",
 	"./Data/DataList.vue": "./resources/js/Pages/Data/DataList.vue",
 	"./Data/DownloadDataList": "./resources/js/Pages/Data/DownloadDataList.vue",
 	"./Data/DownloadDataList.vue": "./resources/js/Pages/Data/DownloadDataList.vue",
+	"./Data/Etablisement": "./resources/js/Pages/Data/Etablisement.vue",
+	"./Data/Etablisement.vue": "./resources/js/Pages/Data/Etablisement.vue",
+	"./Data/EtatFonctionnel": "./resources/js/Pages/Data/EtatFonctionnel.vue",
+	"./Data/EtatFonctionnel.vue": "./resources/js/Pages/Data/EtatFonctionnel.vue",
+	"./Data/EtatMatrimonial": "./resources/js/Pages/Data/EtatMatrimonial.vue",
+	"./Data/EtatMatrimonial.vue": "./resources/js/Pages/Data/EtatMatrimonial.vue",
+	"./Data/PaysNationalite": "./resources/js/Pages/Data/PaysNationalite.vue",
+	"./Data/PaysNationalite.vue": "./resources/js/Pages/Data/PaysNationalite.vue",
 	"./Data/Sexe": "./resources/js/Pages/Data/Sexe.vue",
 	"./Data/Sexe.vue": "./resources/js/Pages/Data/Sexe.vue",
 	"./Data/SituationResident": "./resources/js/Pages/Data/SituationResident.vue",

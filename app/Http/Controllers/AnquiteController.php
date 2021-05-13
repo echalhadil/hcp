@@ -227,19 +227,133 @@ class AnquiteController extends Controller
             ->select('option_id', DB::raw('COUNT(*) as percent'))
             ->groupBy('option_id')
             ->get();
-        
+
         foreach ($options as $option) {
             $option->percent = 0;
             foreach ($reponses as $reponse) {
                 if ($option->id == $reponse->option_id)
-                $option->percent = (int) round(($reponse->percent / $numberofAnquites) * 100);
-                // $option->percent =(float) round(($reponse->percent / $numberofAnquites) * 100, 2);
+                    $option->percent = (float) round(($reponse->percent / $numberofAnquites) * 100, 2);
             }
         }
-        
 
-        // return response()->json($options);
-        return collect($options)->toJson();
 
+        return response()->json($options);
+    }
+
+
+    public function sexeStatistics()
+    {
+        $numberofAnquites = Anquite::count(); //get number of anquites
+        $options = Option::select('id', 'libelle')->where('question_id', '7')->orderby('id')->get(); //get all availible options
+        $reponses = DB::table('reponses')
+            ->where('question_id', '7')
+            ->select('option_id', DB::raw('COUNT(*) as percent'))
+            ->groupBy('option_id')
+            ->get();
+
+        foreach ($options as $option) {
+            $option->percent = 0;
+            foreach ($reponses as $reponse) {
+                if ($option->id == $reponse->option_id)
+                    $option->percent = (float) round(($reponse->percent / $numberofAnquites) * 100, 2);
+            }
+        }
+
+
+        return response()->json($options);
+    }
+
+    public function nationaliteStatistics()
+    {
+        $numberofAnquites = Anquite::count(); //get number of anquites
+        $options = Option::select('id', 'libelle')->where('question_id', '6')->orderby('id')->get(); //get all availible options
+        $reponses = DB::table('reponses')
+            ->where('question_id', '6')
+            ->select('option_id', DB::raw('COUNT(*) as percent'))
+            ->groupBy('option_id')
+            ->get();
+
+        foreach ($options as $option) {
+            $option->percent = 0;
+            foreach ($reponses as $reponse) {
+                if ($option->id == $reponse->option_id)
+                    $option->percent = (float) round(($reponse->percent / $numberofAnquites) * 100, 2);
+            }
+        }
+
+
+        return response()->json($options);
+    }
+
+
+    public function etatMatrimonialStatistics()
+    {
+        $numberofAnquites = Anquite::count(); //get number of anquites
+        $options = Option::select('id', 'libelle')->where('question_id', '15')->orderby('id')->get(); //get all availible options
+        $reponses = DB::table('reponses')
+            ->where('question_id', '15')
+            ->select('option_id', DB::raw('COUNT(*) as percent'))
+            ->groupBy('option_id')
+            ->get();
+
+        foreach ($options as $option) {
+            $option->percent = 0;
+            foreach ($reponses as $reponse) {
+                if ($option->id == $reponse->option_id)
+                    $option->percent = (float) round(($reponse->percent / $numberofAnquites) * 100, 2);
+            }
+        }
+
+
+        return response()->json($options);
+    }
+
+
+
+    
+    public function etablisementStatistics()
+    {
+        $numberofAnquites = Anquite::count(); //get number of anquites
+        $options = Option::select('id', 'libelle')->where('question_id', '17')->orderby('id')->get(); //get all availible options
+        $reponses = DB::table('reponses')
+            ->where('question_id', '17')
+            ->select('option_id', DB::raw('COUNT(*) as percent'))
+            ->groupBy('option_id')
+            ->get();
+
+        foreach ($options as $option) {
+            $option->percent = 0;
+            foreach ($reponses as $reponse) {
+                if ($option->id == $reponse->option_id)
+                    $option->percent = (float) round(($reponse->percent / $numberofAnquites) * 100, 2);
+            }
+        }
+
+
+        return response()->json($options);
+    }
+
+
+
+    public function assuranceMedicalStatistics()
+    {
+        $numberofAnquites = Anquite::count(); //get number of anquites
+        $options = Option::select('id', 'libelle')->where('question_id', '20')->orderby('id')->get(); //get all availible options
+        $reponses = DB::table('reponses')
+            ->where('question_id', '20')
+            ->select('option_id', DB::raw('COUNT(*) as percent'))
+            ->groupBy('option_id')
+            ->get();
+
+        foreach ($options as $option) {
+            $option->percent = 0;
+            foreach ($reponses as $reponse) {
+                if ($option->id == $reponse->option_id)
+                    $option->percent = (float) round(($reponse->percent / $numberofAnquites) * 100, 2);
+            }
+        }
+
+
+        return response()->json($options);
     }
 }

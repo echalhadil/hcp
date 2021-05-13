@@ -1,9 +1,8 @@
+                        
 <template>
     <div class="p-3 bg-white rounded shadow">
         <div class="transform -translate-y-1/2 top-1/2 relative">
-            <p class="text-center text-gray-500 text-sm p-2 capitalize">
-                Situation de résidence
-            </p>
+            <p class=" text-center text-gray-500 text-sm p-2 capitalize ">pays de nationalite</p>
             <canvas :id="id" class="w-full"></canvas>
         </div>
     </div>
@@ -16,15 +15,16 @@ export default {
     data() {
         return {
             statistics: [],
-            id: "residentstatistics",
+            id: "paynationalite",
             chartType: "pie",
         };
     },
     methods: {
         getresidentstatistics() {
             axios
-                .get(this.route("residentstatistics"))
+                .get(this.route("nationalitestatistics"))
                 .then((response) => {
+                    
                     this.statistics = response.data;
                     let rest =
                         100 -
@@ -33,9 +33,11 @@ export default {
                         );
 
                     this.statistics.push({
-                        libelle: "NaN",
-                        percent: rest,
+                        libelle:'NaN',
+                        percent:rest
                     });
+
+                    console.log(rest);
                     const ctx = document.getElementById(this.id);
                     new Chart(ctx, {
                         type: this.chartType,
@@ -50,13 +52,9 @@ export default {
                                         _.mapValues(this.statistics, "percent")
                                     ),
                                     backgroundColor: [
-                                        "rgb(255, 99, 132)",
-                                        "rgb(54, 162, 235)",
                                         "rgb(55, 99, 132)",
-                                        "rgb(54, 12, 235)",
-                                        "rgb(54, 12, 35)",
-                                        "rgb(134, 12, 35)",
-                                        "#F4F4F4F4",
+                                        "rgb(174, 162, 235)",
+                                        "#F4F4F4",
                                     ],
                                     borderWidth: 2,
                                     pointRadius: 5,
@@ -68,13 +66,11 @@ export default {
                             plugins: {
                                 legend: {
                                     position: "bottom",
-                                    labels: {
-                                        usePointStyle: true,
-                                    },
+                                    
                                 },
                                 // title: {
                                 //     display: true,
-                                //     text: "Situation de résidence",
+                                //     text: "pays de nationalite",
                                 //     fullSize: true,
                                 //     position: "top",
                                 // },
