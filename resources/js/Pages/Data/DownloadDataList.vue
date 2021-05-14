@@ -77,7 +77,9 @@
 </template>
 <script>
 import JetDialogModal from "@/Jetstream/DialogModal";
-
+// window.xlsx = require('xlsx');
+// 
+import xlsx from 'xlsx';
 export default {
     components: {
         JetDialogModal,

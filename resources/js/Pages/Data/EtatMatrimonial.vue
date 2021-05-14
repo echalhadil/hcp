@@ -65,7 +65,7 @@ export default {
                         options: {
                             plugins: {
                                 legend: {
-                                    position: "bottom",
+                                    position: "right",
                                 },
                                 // title: {
                                 //     display: true,

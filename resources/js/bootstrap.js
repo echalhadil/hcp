@@ -10,10 +10,7 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-
-// window.Chart = require('chart.js');
-// var Chart = require('chart.js');
-var Chart = require('chart.js/auto');
+// var Chart = require('chart.js/auto');
 
 // require('chart.js')
 
@@ -33,10 +30,3 @@ var Chart = require('chart.js/auto');
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
-
-// window.expo = require('tableexport');
-// import TableExport from 'tableexport';
-// window.shim = require('shim');
-window.xlsx = require('xlsx');
-// window.blob = require('blob');
-// window.FileSaver = require('file-saver');

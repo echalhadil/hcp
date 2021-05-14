@@ -1,13 +1,15 @@
 <template>
     <left-layout>
         <div class=" p-5 md:p-12 w-full">
-            <div class="grid md:grid-cols-4 grid-cols-1 my-auto gap-4">
-                <situation-resident />
+            <div class="grid md:grid-cols-4 md:grid-rows-2 grid-cols-1 my-auto gap-4">
+                <situation-resident class=" col-span-2 row-span-2 " />
 
                 <sexe />
 
                 <pays-nationalite />
                 <etat-matrimonial />
+                <etablisement />
+
 
             </div>
 
@@ -16,7 +18,6 @@
 
                 <assurance-medical />
                 
-                <etablisement />
 
                 <etat-fonctionnel />
 
