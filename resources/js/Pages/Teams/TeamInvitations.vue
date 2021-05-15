@@ -1,8 +1,8 @@
 <template>
-    <div class="p-5 mt-10 bg-white w-full rounded shadow">
+    <div class="p-5 mt-10 bg-white dark:bg-gray-400 w-full rounded shadow">
         <div class="md:flex mr-auto w-full">
-            <div class="my-auto text-sm text-gray-500 capitalize">
-                <p class="text-gray-800 font-semibold text-lg pb-1">
+            <div class="my-auto text-sm text-gray-500 dark:text-gray-100 capitalize">
+                <p class="text-gray-800 dark:text-gray-200 font-semibold text-lg pb-1">
                     Pending Team Invitations
                 </p>
 

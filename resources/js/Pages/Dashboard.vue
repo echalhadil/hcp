@@ -14,25 +14,22 @@
 
                 <!--total anquite-->
 
-                <div class="bg-white rounded shadow p-4">
-                    <div class="flex capitalize text-xs text-gray-600">
+                <div class="bg-white dark:bg-gray-400 rounded shadow p-4">
+                    <div class="flex capitalize text-xs text-gray-600 dark:text-gray-200">
                         <p class="my-auto">total d'enquites</p>
-                        <i
-                            class="fa fa-anchor my-auto ml-auto"
-                            aria-hidden="true"
-                        ></i>
+                       
                     </div>
 
                     <div class="p-5 text-center">
                         <p
-                            class="font-semibold text-4xl capitalize text-pink-600"
+                            class="font-semibold text-4xl capitalize text-pink-600 dark:text-gray-100"
                         >
                             {{ total }}
                         </p>
                     </div>
 
                     <div
-                        class="flex justify-center text-xs font-semibold text-green-600 text-center"
+                        class="flex justify-center text-xs font-semibold text-green-600 dark:text-gray-200 text-center"
                     >
                         <i
                             class="far my-auto fa-arrow-up mr-2 animate-bounce"
@@ -47,25 +44,22 @@
 
                 <!--total anquite of your team-->
 
-                <div class="bg-white rounded shadow p-4">
-                    <div class="flex capitalize text-xs text-gray-600">
+                <div class="bg-white dark:bg-gray-400 rounded shadow p-4">
+                    <div class="flex capitalize text-xs text-gray-600 dark:text-gray-200">
                         <p class="my-auto">total d'enquites de votre equipe</p>
-                        <i
-                            class="fa fa-anchor my-auto ml-auto"
-                            aria-hidden="true"
-                        ></i>
+                        
                     </div>
 
                     <div class="p-5 text-center">
                         <p
-                            class="font-semibold text-4xl capitalize text-pink-600"
+                            class="font-semibold text-4xl capitalize text-pink-600 dark:text-gray-100"
                         >
                             {{ totalteam }}
                         </p>
                     </div>
 
                     <div
-                        class="flex justify-center text-xs font-semibold text-green-600 text-center"
+                        class="flex justify-center text-xs font-semibold text-green-600 dark:text-gray-200 text-center"
                     >
                         <i
                             class="far my-auto fa-arrow-up mr-2 animate-bounce"
@@ -85,42 +79,42 @@
                 class="grid md:grid-cols-3 md:grid-rows-2 grid-cols-1 my-auto gap-4"
             >
                 <div
-                    class="bg-white md:col-span-2 md:row-span-2 rounded shadow"
+                    class="bg-white dark:bg-gray-400 md:col-span-2 md:row-span-2 rounded shadow"
                 >
                     <statistics-card-line />
                 </div>
 
                 <!--total anquite-->
 
-                <div class="bg-white rounded p-4 shadow">
+                <div class="bg-white dark:bg-gray-400 rounded p-4 shadow">
                     <!--     <statistics-card-pie /> -->
 
-                    <p class="capitalize text-gray-500">Votre Equipe</p>
+                    <p class="capitalize text-gray-500 dark:text-gray-200">Votre Equipe</p>
                     <div
-                        class="p-5 flex transform top-1/2 relative -translate-y-1/2 text-center"
+                        class="p-5 flex transform top-1/2 relative -translate-y-1/2 text-pink-600 dark:text-gray-100 text-center"
                     >
                         <p
-                            class="font-semibold ml-auto text-4xl capitalize text-pink-600"
+                            class="font-semibold ml-auto text-4xl capitalize "
                         >
                             {{ numberofmembers.myteam }}
                         </p>
-                        <p class="mb-0 ml-1 m-auto text-pink-500">Membre</p>
+                        <p class="mb-0 ml-1 m-auto ">Membre</p>
                     </div>
                 </div>
-                <div class="bg-white rounded p-4 shadow">
+                <div class="bg-white dark:bg-gray-400 rounded p-4 shadow">
                     <!--     <statistics-card-pie /> -->
 
-                    <p class="capitalize text-gray-500">Total</p>
+                    <p class="capitalize text-gray-500 dark:text-gray-200">Total</p>
 
                     <div
-                        class="p-5 flex transform top-1/2 relative -translate-y-1/2 text-center"
+                        class="p-5 flex transform top-1/2 relative -translate-y-1/2 text-pink-600 dark:text-gray-100 text-center"
                     >
                         <p
-                            class="font-semibold ml-auto text-4xl capitalize text-pink-600"
+                            class="font-semibold ml-auto text-4xl capitalize "
                         >
                             {{ numberofmembers.total }}
                         </p>
-                        <p class="mb-0 ml-1 m-auto text-pink-500">Membre</p>
+                        <p class="mb-0 ml-1 m-auto" >Membre</p>
                     </div>
                 </div>
             </div>

@@ -31,6 +31,8 @@ Route::get('/', function () {
     ]);
 });
 
+
+
 Route::middleware(['auth:sanctum', 'verified'])
     ->get('/dashboard', [DashboardController::class, 'index'])
     ->name('dashboard');

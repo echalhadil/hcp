@@ -1,6 +1,6 @@
 <template>
     <div class="">
-        <div class="p-5 mt-10 bg-white w-full rounded shadow">
+        <div class="p-5 mt-10 bg-white dark:bg-gray-400 w-full rounded shadow">
             <div class="flex mr-auto w-full">
                 <!--<p class="my-auto capitalize font-semibold text-gray-600 mr-3"> current Team </p>
                 -->
@@ -9,11 +9,11 @@
                 <div class=" my-auto">
                     <input
                         type="text"
-                        class="focus:border-pink-500 focus:ring-0 pr-8 placeholder-gray-400 p-1 rounded"
+                        class=" dark:text-gray-100 bg-transparent focus:border-pink-500 focus:ring-0 pr-8 placeholder-gray-400 dark:placeholder-gray-200 p-1 rounded"
                         placeholder="Search"
                         v-model="searchvalue"
                     />
-                    <i class="fal fa-search text-pink-500 my-auto -ml-6"></i>
+                    <i class="fal fa-search text-pink-500 dark:text-gray-100 my-auto -ml-6"></i>
                 </div>
 
                 <div class="flex ml-auto my-auto">

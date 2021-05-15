@@ -5,18 +5,18 @@
 
 <template>
     <div>
-        <div  class="mt-10 mb-4 bg-white p-6 flex rounded-md shadow sm:mt-0">
-            <div class=" text-gray-500 my-auto ">Create a new team to collaborate with others on projects.</div>
+        <div  class="mt-10 mb-4 bg-white text-gray-500 dark:bg-gray-400 dark:text-gray-200 p-6 flex rounded-md shadow sm:mt-0">
+            <div class="  my-auto ">Create a new team to collaborate with others on projects.</div>
             
             <div class="text-sm w-28 ml-auto my-auto ">
-                <button @click="show = true" class=" flex w-full focus:ring focus:ring-green-600 p-1  py-2 border font-semibold border-green-700 rounded bg-green-600 text-white ">
+                <button @click="show = true" class=" flex w-full focus:ring  p-1  py-2 border font-semibold rounded border-green-700  dark:border-gray-700  focus:ring-green-600 dark:focus:ring-gray-600 bg-green-600 dark:bg-gray-600 text-white ">
                     <i class="fal m-auto fa-plus mr-1"></i>
                     <p class="mr-auto">New Team</p> 
                 </button>
             </div>
         </div>
 
-        <jet-dialog-modal :show="show" @close="show = false">
+        <jet-dialog-modal class=" dark:bg-gray-400 " :show="show" @close="show = false">
             <template #title>
               
             </template>
@@ -43,7 +43,7 @@
                                     
                                     <div class="ml-4 leading-tight">
                                         <div>{{ $page.props.user.fname }} {{ $page.props.user.lname }}</div>
-                                        <div class="text-gray-700 text-sm">{{ $page.props.user.email }}</div>
+                                        <div class="text-gray-700 dark:text-gray-200 text-sm">{{ $page.props.user.email }}</div>
                                     </div>
                                 </div>
                             </div>

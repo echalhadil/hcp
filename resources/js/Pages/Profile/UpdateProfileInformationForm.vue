@@ -41,11 +41,32 @@
                 <jet-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
-            <!-- Name -->
+            <!-- Nom -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
+                <jet-label for="nom" value="Nom" />
+                <jet-input id="nom" type="text" class="mt-1 block w-full" v-model="form.fname" autocomplete="name" />
+                <jet-input-error :message="form.errors.fname" class="mt-2" />
+            </div>
+
+            <!-- Prenom -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="prenom" value="Prenom" />
+                <jet-input id="prenom" type="text" class="mt-1 block w-full" v-model="form.lname" autocomplete="name" />
+                <jet-input-error :message="form.errors.lname" class="mt-2" />
+            </div>
+
+            <!-- CIN -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="cin" value="CIN" />
+                <jet-input id="cin" type="text" class="mt-1 block w-full" v-model="form.cin" autocomplete="name" />
+                <jet-input-error :message="form.errors.cin" class="mt-2" />
+            </div>
+
+            <!-- TELE -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="tele" value="Tele" />
+                <jet-input id="tele" type="text" class="mt-1 block w-full" v-model="form.tele" autocomplete="name" />
+                <jet-input-error :message="form.errors.tele" class="mt-2" />
             </div>
 
             <!-- Email -->
@@ -94,7 +115,10 @@
             return {
                 form: this.$inertia.form({
                     _method: 'PUT',
-                    name: this.user.name,
+                    fname: this.user.fname,
+                    lname: this.user.lname,
+                    cin: this.user.cin,
+                    tele: this.user.tele,
                     email: this.user.email,
                     photo: null,
                 }),

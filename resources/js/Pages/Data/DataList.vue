@@ -3,7 +3,7 @@
         <div class="flex mr-auto w-full">
             <div class="flex relative ml-9 my-auto"></div>
 
-            <div class="flex ml-auto my-auto">
+            <div class="flex ml-auto my-auto" v-if="questionAndAnswer.length > 0">
                 <download-data-list />
             </div>
         </div>

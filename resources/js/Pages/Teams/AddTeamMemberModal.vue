@@ -4,7 +4,7 @@
     <div>
         <button
             @click="show = true"
-            class="font-semibold bg-pink-700 focus:ring-0 py-2 px-1 w-28 rounded text-gray-100 capitalize"
+            class="font-semibold bg-pink-700 dark:bg-gray-700 focus:ring-0 py-2 px-1 w-28 rounded text-gray-100 capitalize"
         >
             Inviter membre
         </button>
@@ -12,7 +12,7 @@
             <template #title> Add Team Member </template>
 
             <template #content>
-                <div class="text-sm text-gray-500">
+                <div class="text-sm text-gray-500 dark:text-gray-100">
                     Add a new team member to your team, allowing them to
                     collaborate with you.
                 </div>
@@ -20,7 +20,7 @@
                     <jet-form-section @submitted="addTeamMember">
                         <template #form>
                             <div class="col-span-6">
-                                <div class="max-w-xl text-sm text-gray-600">
+                                <div class="max-w-xl text-sm dark:text-gray-100 text-gray-600">
                                     Please provide the email address of the
                                     person you would like to add to this team.
                                 </div>
@@ -86,7 +86,7 @@
                                             <!-- Role Name -->
                                             <div class="flex items-center">
                                                 <div
-                                                    class="text-sm text-gray-600"
+                                                    class="text-sm text-gray-600 dark:text-gray-100"
                                                     :class="{
                                                         'font-semibold':
                                                             addTeamMemberForm.role ==
@@ -101,7 +101,7 @@
                                                         addTeamMemberForm.role ==
                                                         role.key
                                                     "
-                                                    class="ml-2 h-5 w-5 text-green-400"
+                                                    class="ml-2 h-5 w-5 text-green-400 dark:text-gray-50"
                                                     fill="none"
                                                     stroke-linecap="round"
                                                     stroke-linejoin="round"
@@ -117,7 +117,7 @@
 
                                             <!-- Role Description -->
                                             <div
-                                                class="mt-2 text-xs text-gray-600"
+                                                class="mt-2 text-xs text-gray-600 dark:text-gray-200"
                                             >
                                                 {{ role.description }}
                                             </div>

@@ -1,16 +1,16 @@
 <template>
     <div
-        class="bg-white p-3 grid grid-cols-2 md:col-span-2 rounded shadow text-sm"
+        class="bg-white dark:bg-gray-400 dark:text-gray-200 text-gray-500 p-3 grid grid-cols-2 md:col-span-2 rounded shadow text-sm"
     >
-        <p class="col-span-2 px-3 text-base text-gray-500 capitalize">
+        <p class="col-span-2 px-3 text-base capitalize">
             location de votre equipe
         </p>
         <div class="px-3 py-1">
-            <p class="capitalize text-gray-500 pb-1">region</p>
+            <p class="capitalize  pb-1">region</p>
 
             <select
                 v-model="selectedregion"
-                class="w-full rounded text-sm appearance-none form-select"
+                class="w-full rounded text-sm appearance-none form-select dark:bg-gray-400"
                 name=""
                 id=""
             >
@@ -25,15 +25,15 @@
         </div>
 
         <div class="px-3 py-1">
-            <p class="capitalize text-gray-500 pb-1">province</p>
+            <p class="capitalize  pb-1">province</p>
             <select
                 v-model="selectedprovince"
-                class="w-full rounded text-sm appearance-none form-select"
+                class="w-full rounded text-sm appearance-none form-select dark:bg-gray-400"
                 name=""
                 id=""
             >
                 <option
-                    class="h-28 rounded-md hover:bg-indigo-400"
+                    class="h-28 rounded-md "
                     v-for="(province, index) in provinces"
                     :key="index"
                     :value="province.id"
@@ -44,10 +44,10 @@
         </div>
 
         <div class="px-3 pb-1">
-            <p class="capitalize text-gray-500 pb-1">commune</p>
+            <p class="capitalize pb-1">commune</p>
             <select
                 v-model="selectedcommune"
-                class="w-full rounded text-sm appearance-none form-select"
+                class="w-full rounded text-sm appearance-none dark:bg-gray-400 form-select"
                 name=""
                 id=""
             >
@@ -63,7 +63,7 @@
 
         <div class="px-3 pb-1 flex mt-auto">
             <button
-                class="my-auto rounded bg-pink-700 text-white p-2"
+                class="my-auto rounded bg-pink-700 dark:bg-gray-500  text-white dark:text-gray-100 p-2"
                 @click="setlocation()"
                 :disabled="!canchange"
                 :class="{ ' opacity-50 ': !canchange }"

@@ -8,10 +8,10 @@
 
                 <div class="flex items-center mt-2">
                     
-                    <div class=" leading-tight">
+                    <div class=" leading-tight dark:text-gray-200">
                         <div>{{ team.owner.fname }} {{ team.owner.lname }}</div>
                        
-                        <div class="text-gray-700 text-sm">{{ team.owner.email }}</div>
+                        <div class="text-gray-700 dark:text-gray-100 text-sm">{{ team.owner.email }}</div>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
 
                 <jet-input id="name"
                             type="text"
-                            class="mt-1 block w-full"
+                            class="mt-1 block w-full dark:text-gray-200"
                             v-model="form.name"
                             :disabled="! permissions.canUpdateTeam" />
 

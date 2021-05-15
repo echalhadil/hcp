@@ -3,7 +3,7 @@
         <jet-banner />
 
         <div class="min-h-screen bg-gray-100 ">
-            <nav class="bg-white fixed w-full z-50 border-b border-gray-100">
+            <nav class="bg-white fixed w-full z-50 border-b  border-gray-100 dark:bg-gray-400 dark:border-gray-400">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto  px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -27,7 +27,7 @@
                                 <jet-dropdown align="right" width="60" v-if="$page.props.jetstream.hasTeamFeatures">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-100  bg-transparent hover:bg-gray-50 dark:hover:bg-gray-400 hover:text-gray-700 dark:hover:text-gray-100 focus:outline-none  active:bg-gray-50 transition">
                                                 {{ $page.props.user.current_team.name }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -83,7 +83,7 @@
                                         </button>
 
                                         <span v-else class="inline-flex rounded-md">
-                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition">
+                                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-100  bg-transparent hover:text-gray-700 dark:hover:text-gray-100 focus:outline-none transition">
                                                 {{ $page.props.user.fname }} {{ $page.props.user.lname }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">

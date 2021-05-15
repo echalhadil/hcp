@@ -9,7 +9,7 @@
         </template>
 
         <template #form>
-            <div class="col-span-6">
+            <div class="col-span-6 dark:bg-gray-400">
                 <jet-label value="Team Owner" />
 
                 <div class="flex items-center mt-2">
@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6 dark:bg-gray-400 sm:col-span-4">
                 <jet-label for="name" value="Team Name" />
                 <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus />
                 <jet-input-error :message="form.errors.name" class="mt-2" />
