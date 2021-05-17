@@ -1,6 +1,5 @@
 <template>
     <div class="w-full p-5 pb-3">
-        
         <div class="grid grid-cols-7 w-full gap-1">
             <CalendarWeekHeader
                 v-for="(day, index) in daysInWeek"
@@ -8,7 +7,7 @@
                 :day="day"
             />
         </div>
-        <div class="grid grid-cols-7  gap-1">
+        <div class="grid grid-cols-7 gap-1">
             <CalendarWeek
                 v-for="(week, index) in datesPerWeek"
                 :key="index"
@@ -50,7 +49,8 @@ export default {
     },
     data() {
         return {
-            daysInWeek: ["S", "M", "T", "W", "T", "F", "S"],
+            // daysInWeek: ["S", "M", "T", "W", "T", "F", "S"],
+            daysInWeek: ["D", "L", "M", "M", "J", "V", "S"],
         };
     },
     created() {

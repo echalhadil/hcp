@@ -127,7 +127,7 @@
                 <!--total anquite-->
 
                 <div
-                    class="bg-white md:col-span-2 overflow-y-auto h-72 md:row-span-2 p-4 rounded shadow"
+                    class="bg-white md:col-span-2 overflow-y-auto p-4 rounded shadow"
                 >
                 </div>
 

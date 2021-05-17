@@ -2,7 +2,7 @@
     <td>
         <div
             v-show="date"
-            class="single-date-picker__date border-box h-7 w-7 align-middle cursor-default cell"
+            class="table-cell border-box h-7 w-7 align-middle cursor-default cell"
             :class="{
                 'bg-pink-800 rounded-full text-gray-100': isToday,
                 'border border-pink-800 rounded-full ': isSelected,
@@ -37,9 +37,3 @@ export default {
     },
 };
 </script>
-
-<style scoped>
-.single-date-picker__date {
-    display: table-cell;
-}
-</style>
