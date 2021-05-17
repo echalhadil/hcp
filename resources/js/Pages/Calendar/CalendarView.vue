@@ -12,7 +12,6 @@
             :is-today="isToday"
             :is-selected="isSelected"
             :week-start-day="weekStartDay"
-            @selectDate="selectDate"
         />
     </div>
 </template>
@@ -126,12 +125,12 @@ export default {
                 : 0;
         },
         isSelected() {
-            if (this.selectedDate) {
-                return this.selectedDate.year === this.year &&
-                    this.selectedDate.month === this.month
-                    ? this.selectedDate.date
-                    : 0;
-            }
+            // if (this.selectedDate) {
+            //     return this.selectedDate.year === this.year &&
+            //         this.selectedDate.month === this.month
+            //         ? this.selectedDate.date
+            //         : 0;
+            // }
             return 0;
         },
     },
@@ -181,16 +180,7 @@ export default {
                 this.year = newYear;
             }
         },
-        selectDate(date) {
-            if (date) {
-                this.selectedDate = {
-                    year: this.year,
-                    month: this.month,
-                    date,
-                };
-                this.$emit("selectDate", this.selectedDate);
-            }
-        },
+   
         setDate(date) {
             this.year = date.year;
             this.month = date.month;

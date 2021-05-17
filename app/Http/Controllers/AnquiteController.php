@@ -74,12 +74,10 @@ class AnquiteController extends Controller
             'questions' => ['array'],
         ]);
 
-
         $anquite = new Anquite();
         $anquite->user_id = $request->user_id;
         $anquite->commune_id = $request->commune_id;
         $anquite->save();
-
 
         if (
             $anquite->reponses()->createMany([
@@ -149,10 +147,7 @@ class AnquiteController extends Controller
 
         $avgteams =  DB::table('anquites')
             ->select(DB::raw('DATE(created_at) as day'), DB::raw('COUNT(id) as avg'))
-            // ->whereRaw('DATE(created_at) = DATE_SUB(CURDATE(), INTERVAL 7 DAY)')
-            // ->whereDate('created_at', Carbon::now()->subDays(7))
             ->whereDate('created_at', '>=', DB::raw('DATE(NOW()) - INTERVAL 7 DAY'))
-
             ->groupBy('day')
             ->get();
 

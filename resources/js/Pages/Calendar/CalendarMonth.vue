@@ -14,7 +14,6 @@
                 :week="week"
                 :is-today="isToday"
                 :is-selected="isSelected"
-                @selectDate="selectDate"
             />
         </div>
     </div>
@@ -57,9 +56,6 @@ export default {
         this.rotateDaysInWeek(this.daysInWeek, this.weekStartDay);
     },
     methods: {
-        selectDate(date) {
-            this.$emit("selectDate", date);
-        },
         rotateDaysInWeek(daysInWeek, shifts) {
             while (shifts--) {
                 var temp = daysInWeek.shift();

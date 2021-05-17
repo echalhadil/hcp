@@ -3,7 +3,10 @@
         <div class="flex mr-auto w-full">
             <div class="flex relative ml-9 my-auto"></div>
 
-            <div class="flex ml-auto my-auto" v-if="questionAndAnswer.length > 0">
+            <div
+                class="flex ml-auto my-auto"
+                v-if="questionAndAnswer.length > 0"
+            >
                 <download-data-list />
             </div>
         </div>
@@ -26,9 +29,14 @@
                                 class="bg-gray-200 text-gray-600 uppercase text-sm py-6 leading-normal"
                             >
                                 <th
+                                    class="py-3 text-xs cursor-pointer select-none px-6 text-left"
+                                >
+                                    #
+                                </th>
+                                <th
                                     v-for="(question, index) in questions"
                                     :key="index"
-                                    class="py-3 text-xs cursor-pointer select-none px-6 text-left"
+                                    class="py-3 text-xs cursor-pointer select-none px-6 text-center"
                                 >
                                     {{ question.libelle }}
                                 </th>
@@ -55,11 +63,17 @@
                                 class="border-b w-full bg-white text-xs hover:bg-gray-50 capitalize border-gray-200"
                                 :class="{ ' bg-gray-100 ': index % 2 != 0 }"
                             >
+                                <td class="py-3 px-6 text-center">
+                                    <span vif class="font-medium">
+                                        {{ index + 1 }}
+                                    </span>
+                                </td>
+
                                 <td
                                     v-for="(question,
                                     index) in anquite.questions"
                                     :key="index"
-                                    class="py-3 px-6 text-center"
+                                    class="py-3 px-6 text-center select-none"
                                 >
                                     <span
                                         class="font-medium"
@@ -73,8 +87,6 @@
                                     </span>
                                 </td>
                             </tr>
-
-                            
                         </tbody>
                     </table>
                 </div>

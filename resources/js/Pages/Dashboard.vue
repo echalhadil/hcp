@@ -12,7 +12,7 @@
 
                 <div class="bg-white dark:bg-gray-400 rounded shadow p-4">
                     <div
-                        class="flex capitalize text-xs text-gray-600 dark:text-gray-200"
+                        class="flex capitalize text-sm text-gray-600 dark:text-gray-200"
                     >
                         <p class="my-auto">Total D'enquêtes</p>
                     </div>
@@ -44,8 +44,8 @@
 
                 <div class="bg-white dark:bg-gray-400 rounded shadow p-4">
                     <div
-                        class="flex capitalize text-xs text-gray-600 dark:text-gray-200"
-                    >
+                        class="flex capitalize text-sm text-gray-600 dark:text-gray-200"
+                      >
                         <p class="my-auto">Total D'enquêtes de votre equipe</p>
                     </div>
 
@@ -76,17 +76,17 @@
 
         <div class="w-full px-5 md:px-12 pt-4 items-stretch align-middle">
             <div
-                class="grid md:grid-cols-3 md:grid-rows-2 grid-cols-1 my-auto gap-4"
-            >
+                class="grid md:grid-cols-6  md:grid-rows-3 grid-cols-1 my-auto gap-4"
+              >
                 <div
-                    class="bg-white dark:bg-gray-400 md:col-span-2 md:row-span-2 rounded shadow"
-                >
+                    class="bg-white dark:bg-gray-400 md:col-span-4 md:row-span-3 rounded shadow"
+                  >
                     <statistics-card-line />
                 </div>
 
                 <!--total anquite-->
 
-                <div class="bg-white dark:bg-gray-400 rounded p-4 shadow">
+                <div class="bg-white dark:bg-gray-400 rounded p-4 md:row-span-1 shadow">
                     <!--     <statistics-card-pie /> -->
 
                     <p class="capitalize text-gray-500 dark:text-gray-200">
@@ -98,10 +98,10 @@
                         <p class="font-semibold ml-auto text-4xl capitalize">
                             {{ numberofmembers.myteam }}
                         </p>
-                        <p class="mb-0 ml-1 m-auto">Membre</p>
+                        <p class="mb-0 ml-1 m-auto text-xs">Membre</p>
                     </div>
                 </div>
-                <div class="bg-white dark:bg-gray-400 rounded p-4 shadow">
+                <div class="bg-white dark:bg-gray-400 rounded p-4 md:row-span-1 shadow">
                     <!--     <statistics-card-pie /> -->
 
                     <p class="capitalize text-gray-500 dark:text-gray-200">
@@ -114,9 +114,12 @@
                         <p class="font-semibold ml-auto text-4xl capitalize">
                             {{ numberofmembers.total }}
                         </p>
-                        <p class="mb-0 ml-1 m-auto">Membre</p>
+                        <p class="mb-0 ml-1 m-auto text-xs">Membre</p>
                     </div>
                 </div>
+
+                <calendar-view class=" md:col-span-2  md:row-span-2 " />
+
             </div>
         </div>
 
@@ -127,12 +130,16 @@
                 <!--total anquite-->
 
                 <div
+                    class="bg-white md:col-span-1 overflow-y-auto p-4 rounded shadow"
+                >
+                </div>
+
+                <div
                     class="bg-white md:col-span-2 overflow-y-auto p-4 rounded shadow"
                 >
                 </div>
 
                 
-                <calendar-view />
                 
             </div>
         </div>

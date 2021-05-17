@@ -6,7 +6,7 @@
             location de votre equipe
         </p>
         <div class="px-3 py-1">
-            <p class="capitalize  pb-1">region</p>
+            <p class="capitalize pb-1">region</p>
 
             <select
                 v-model="selectedregion"
@@ -25,7 +25,7 @@
         </div>
 
         <div class="px-3 py-1">
-            <p class="capitalize  pb-1">province</p>
+            <p class="capitalize pb-1">province</p>
             <select
                 v-model="selectedprovince"
                 class="w-full rounded text-sm appearance-none form-select dark:bg-gray-400"
@@ -33,7 +33,7 @@
                 id=""
             >
                 <option
-                    class="h-28 rounded-md "
+                    class="h-28 rounded-md"
                     v-for="(province, index) in provinces"
                     :key="index"
                     :value="province.id"
@@ -63,25 +63,27 @@
 
         <div class="px-3 pb-1 flex mt-auto">
             <button
-                class="my-auto rounded bg-pink-700 dark:bg-gray-500  text-white dark:text-gray-100 p-2"
+                class="my-auto rounded bg-pink-700 dark:bg-gray-500 text-white dark:text-gray-100 p-2"
                 @click="setlocation()"
                 :disabled="!canchange"
                 :class="{ ' opacity-50 ': !canchange }"
             >
                 Enregistrer
             </button>
-            <p
-                v-if="message.visible"
-                class="font-semibold text-green-400 ml-auto mt-auto capitalize"
-            >
+            <jet-action-message :on="message.visible" class="my-auto ml-3">
                 {{ message.text }}.
-            </p>
+            </jet-action-message>
         </div>
     </div>
 </template>
 
 <script>
+import JetActionMessage from "@/Jetstream/ActionMessage";
+
 export default {
+    components: {
+        JetActionMessage,
+    },
     props: ["region", "province", "commune"],
     data() {
         return {
@@ -101,7 +103,7 @@ export default {
     methods: {
         getallregions() {
             axios
-                .get("/regions")
+                .get(this.route("regions"))
                 .then((response) => {
                     this.regions = response.data;
                 })
@@ -110,30 +112,36 @@ export default {
                 });
         },
         getregionprovinces() {
-            axios
-                .get("/regions/" + this.selectedregion + "/provinces")
-                .then((response) => {
-                    this.provinces = response.data;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+            if (this.selectedregion) {
+                var region_id = this.selectedregion;
+                axios
+                    .get(this.route("provinces", { region_id }))
+                    .then((response) => {
+                        this.provinces = response.data;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
         },
         getprovincecommunes() {
-            axios
-                .get(
-                    "/regions/" +
-                        this.selectedregion +
-                        "/provinces/" +
-                        this.selectedprovince +
-                        "/communes"
-                )
-                .then((response) => {
-                    this.communes = response.data;
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+            if (this.selectedprovince) {
+                var region_id = this.selectedregion;
+                var province_id = this.selectedprovince;
+                axios
+                    .get(
+                        this.route("communes", {
+                            region_id,
+                            province_id,
+                        })
+                    )
+                    .then((response) => {
+                        this.communes = response.data;
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            }
         },
         setlocation() {
             if (this.selectedcommune != "") {
@@ -142,14 +150,14 @@ export default {
                         commune_id: this.selectedcommune,
                     })
                     .then((response) => {
-                        //    (this.commune = this.selectedcommune),
-                        //     (this.province = this.selectedprovince),
-                        //     (this.region = this.selectedregion),
-                        this.message = { text: " success ", visble: true };
-
-                        console.log(this.message)
-
-                        // setTimeout(15000, (this.message = {text:"",visible:false}));
+                        
+                            (this.message.text = "Succès");
+                        this.message.visible = true;
+                        // this.canchange = false;
+                        console.log(this.message);
+                        setTimeout(() => {
+                            this.message.visible = false;
+                        }, 500);
                     })
                     .catch((err) => {
                         console.log(err);
@@ -177,10 +185,10 @@ export default {
     },
     computed: {
         canchange() {
-            return this.selectedcommune === "" ||
-                (this.selectedcommune === this.commune &&
-                    this.selectedprovince === this.province &&
-                    this.selectedregion === this.region)
+            return this.selectedcommune == "" ||
+                (this.selectedcommune == this.commune &&
+                    this.selectedprovince == this.province &&
+                    this.selectedregion == this.region)
                 ? false
                 : true;
         },

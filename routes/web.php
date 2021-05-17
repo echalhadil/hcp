@@ -66,9 +66,12 @@ Route::get('/anquiteteam', [AnquiteController::class, 'AnquiteTeam']);
 
 ///LOC1ATION ////
 
-Route::get('/regions', [LocationController::class, 'regions']);
-Route::get('/regions/{region_id}/provinces', [LocationController::class, 'provinces']);
-Route::get('/regions/{region_id}/provinces/{province_id}/communes', [LocationController::class, 'communes']);
+Route::get('/regions', [LocationController::class, 'regions'])
+    ->name('regions');
+Route::get('/regions/{region_id}/provinces', [LocationController::class, 'provinces'])
+    ->name('provinces');
+Route::get('/regions/{region_id}/provinces/{province_id}/communes', [LocationController::class, 'communes'])
+    ->name('communes');
 
 //set team location
 
@@ -93,7 +96,7 @@ Route::get('/question-statistics/{question_id}', [AnquiteController::class, 'que
     ->name('questionstatistics');
 
 
-Route::get('insert', function(){
+Route::get('insert', function () {
 
     $anq = new Anquite();
     $anq->user_id = Auth::id();

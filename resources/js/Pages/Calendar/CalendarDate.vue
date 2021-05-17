@@ -7,7 +7,6 @@
                 'bg-pink-800 rounded-full text-gray-100': isToday,
                 'border border-pink-800 rounded-full ': isSelected,
             }"
-            @click="selectDate"
         >
             {{ date }}
         </div>
@@ -28,11 +27,6 @@ export default {
         isSelected: {
             type: Boolean,
             default: false,
-        },
-    },
-    methods: {
-        selectDate() {
-            this.$emit("selectDate", this.date);
         },
     },
 };

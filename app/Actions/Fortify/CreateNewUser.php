@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Models\Membership;
 use App\Models\Team;
+use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -59,28 +60,31 @@ class CreateNewUser implements CreatesNewUsers
      */
     protected function createTeam(User $user)
     {
-        $team = Team::forceCreate([
-            'user_id' => $user->id,
-            // 'name' => explode(' ', $user->name, 2)[0]."'s Team",
-            'name' => $user->fname . "'s Team",
-            'personal_team' => true,
-        ]);
-        $user->ownedTeams()->save(
-            $team
-        );
-
-        $this->createUserTeam($user, $team);
-    }
-
-
-
-
-    protected function createUserTeam(User $user, Team $team)
-    {
+        $invitation = TeamInvitation::where('email', $user->email)->first();
         $membership = new Membership();
-        $membership->team_id = $team->id;
         $membership->user_id = $user->id;
-        $membership->role  = 'admin';
-        $membership->save();
+
+        if ($invitation) {
+            $user->current_team_id = $invitation->team_id;
+            $user->save();
+
+            $membership->team_id =  $invitation->team_id;
+            $membership->role  =  $invitation->role;
+            $invitation->delete(); //delete invitation
+        } else {
+            $team = Team::forceCreate([
+                'user_id' => $user->id,
+                'name' => $user->fname . "'s Team",
+                'personal_team' => true,
+            ]);
+            $user->ownedTeams()->save(
+                $team
+            );
+
+            $membership->team_id =  $team->id;
+            $membership->role  = "admin";
+        }
+        $membership->save(); //save the member
+
     }
 }

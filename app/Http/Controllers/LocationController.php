@@ -38,7 +38,6 @@ class LocationController extends Controller
             'commune_id' => ['required']
         ]);
 
-
         try {
             $currentTeam = Team::find(Auth::user()->current_team_id);
             $currentTeam->commune_id = $request->commune_id;
