@@ -101,56 +101,6 @@ class AnquiteController extends Controller
         return response()->json(false);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Anquite  $anquite
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Anquite $anquite)
-    {
-        //
-
-
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Anquite  $anquite
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Anquite $anquite)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Anquite  $anquite
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Anquite $anquite)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Anquite  $anquite
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Anquite $anquite)
-    {
-        //
-    }
-
-
-
     public function totalAnquite()
     {
         $members = Auth::user()->currentTeam->memberships;
@@ -181,11 +131,17 @@ class AnquiteController extends Controller
 
     public function AnquiteTeam()
     {
+        ////////this week  ///////////
+        //DATE(NOW()) - INTERVAL 7 DAY
+        ////////last week  ///////////
+        // BETWEEN DATE(NOW()) - INTERVAL 7 DAY AND  DATE(NOW()) - INTERVAL 7 DAY
+
         $numberofteams =  Team::count();
 
         $anquites =  DB::table('anquites')
             ->join('team_user', 'team_user.user_id', '=', 'anquites.user_id')
             ->where('team_user.team_id', Auth::user()->current_team_id)
+            ->whereDate('anquites.created_at', '>=', DB::raw('DATE(NOW()) - INTERVAL 7 DAY'))
             ->select(DB::raw('DATE(anquites.created_at) as day'), DB::raw('COUNT(anquites.id) as total'))
             ->groupBy('day')
             ->orderBy('anquites.id')
@@ -193,6 +149,10 @@ class AnquiteController extends Controller
 
         $avgteams =  DB::table('anquites')
             ->select(DB::raw('DATE(created_at) as day'), DB::raw('COUNT(id) as avg'))
+            // ->whereRaw('DATE(created_at) = DATE_SUB(CURDATE(), INTERVAL 7 DAY)')
+            // ->whereDate('created_at', Carbon::now()->subDays(7))
+            ->whereDate('created_at', '>=', DB::raw('DATE(NOW()) - INTERVAL 7 DAY'))
+
             ->groupBy('day')
             ->get();
 

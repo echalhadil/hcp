@@ -4,8 +4,10 @@ use App\Http\Controllers\AnquiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TeamController;
+use App\Models\Anquite;
 use App\Models\Team;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -89,3 +91,11 @@ Route::get('e/{format}', [AnquiteController::class, 'exportData']);
 
 Route::get('/question-statistics/{question_id}', [AnquiteController::class, 'questionStatistics'])
     ->name('questionstatistics');
+
+
+Route::get('insert', function(){
+
+    $anq = new Anquite();
+    $anq->user_id = Auth::id();
+    $anq->save();
+});

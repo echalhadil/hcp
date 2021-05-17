@@ -128,36 +128,12 @@
 
                 <div
                     class="bg-white md:col-span-2 overflow-y-auto h-72 md:row-span-2 p-4 rounded shadow"
-                ></div>
-
-                <div class="bg-white rounded p-4 shadow">
-                    <!--     <statistics-card-pie /> -->
-
-                    <p class="capitalize text-gray-500">
-                        nombre des membre d'enquipe
-                    </p>
-                    <div class="p-5 text-center">
-                        <p
-                            class="font-semibold text-4xl capitalize text-pink-600"
-                        >
-                            20,340
-                        </p>
-                    </div>
+                >
                 </div>
-                <div class="bg-white rounded p-4 shadow">
-                    <!--     <statistics-card-pie /> -->
 
-                    <p class="capitalize text-gray-500">
-                        nombre des membre d'equipe
-                    </p>
-                    <div class="p-5 text-center">
-                        <p
-                            class="font-semibold text-4xl capitalize text-pink-600"
-                        >
-                            20,340
-                        </p>
-                    </div>
-                </div>
+                
+                <calendar-view />
+                
             </div>
         </div>
     </left-layout>
@@ -167,6 +143,7 @@
 import LeftLayout from "@/Layouts/LeftLayout";
 import StatisticsCardLine from "@/StatisticsCards/StatisticsCardLine";
 import StatisticsCardPie from "@/StatisticsCards/StatisticsCardPie";
+import CalendarView from "@/Pages/Calendar/CalendarView";
 
 import MyTeamLocation from "./Dashboard/TeamLocation";
 
@@ -176,6 +153,7 @@ export default {
         StatisticsCardLine,
         StatisticsCardPie,
         MyTeamLocation,
+        CalendarView,
     },
     data() {
         return {

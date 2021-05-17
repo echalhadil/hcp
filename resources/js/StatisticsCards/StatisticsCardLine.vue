@@ -1,12 +1,15 @@
 <template>
-    <canvas id="pie-chart" class="w-full"></canvas>
-    
+    <div class="p-2 transform relative top-1/2 -translate-y-1/2">
+        <p class="text-center text-gray-500 pb-1">Nombre D'enquêtes</p>
+        <div class=" ">fa</div>
+        <canvas id="pie-chart" class="w-full"></canvas>
+    </div>
 </template>
 <script>
 // import  Chart from 'chart.js'
 
 import chartConfig from "./chartConfig.js";
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
 
 export default {
     // props: ["teamdata"],
@@ -27,26 +30,8 @@ export default {
                     const ctx = document
                         .getElementById("pie-chart")
                         .getContext("2d");
-                        
-                    var border_gradient = ctx.createLinearGradient(
-                        0,
-                        0,
-                        0,
-                        230
-                    );
-                    border_gradient.addColorStop(1, "#831843");
-                    border_gradient.addColorStop(0, "#f9a8d4");
 
-                    var border_gradient1 = ctx.createLinearGradient(
-                        0,
-                        0,
-                        0,
-                        320
-                    );
-                    border_gradient1.addColorStop(1, "#231843");
-                    border_gradient1.addColorStop(0, "#14a8d4");
-
-                  var mychart = new Chart(ctx, {
+                    var mychart = new Chart(ctx, {
                         type: "line",
                         // data:this.teamdata,
                         data: {
@@ -60,11 +45,13 @@ export default {
                                         _.mapValues(this.teamdata, "total")
                                     ),
                                     // backgroundColor:background_gradient,
-                                    borderColor: border_gradient,
+                                    // borderColor: border_gradient,
+                                    borderColor: "rgb(75, 192, 192)",
+                                    tension: 0.5,
                                     borderWidth: 2,
                                     pointStyle: "rectRot",
                                     pointRadius: 5,
-                                    pointBorderColor: "rgb(261, 24, 0)",
+                                    pointBorderColor: "rgb(7, 192, 192)",
                                     // fill: true,
                                 },
                                 {
@@ -73,7 +60,8 @@ export default {
                                         _.mapValues(this.teamdata, "avg")
                                     ),
                                     backgroundColor: "rgba(221, 232, 119,0.2) ",
-                                    borderColor: border_gradient1,
+                                    tension: 0.5,
+                                    borderColor: "#831843",
                                     borderWidth: 2,
                                     pointStyle: "circle",
                                     pointRadius: 5,
@@ -87,11 +75,7 @@ export default {
                             responsive: true,
                             plugins: {
                                 legend: {
-                                    position: "top",
-                                },
-                                title: {
-                                    display: true,
-                                    text: "Nombre de enqutes",
+                                    position: "bottom",
                                 },
                             },
                             scales: {
