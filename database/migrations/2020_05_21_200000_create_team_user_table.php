@@ -18,6 +18,7 @@ class CreateTeamUserTable extends Migration
             $table->foreignId('team_id')->references('id')->on('teams');
             $table->foreignId('user_id')->references('id')->on('users');
             $table->string('role')->nullable();
+            // $table->foreignId('role_id')->nullable()->unsigned();
             $table->timestamps();
 
             $table->unique(['team_id', 'user_id']);

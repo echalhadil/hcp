@@ -21,7 +21,8 @@ export default {
     methods: {
         getresidentstatistics() {
             axios
-                .get(this.route("etatmatrimonialstatistics"))
+                .get(this.route("questionstatistics",18))   
+                // .get(this.route("etatmatrimonialstatistics"))
                 .then((response) => {
                     this.statistics = response.data;
                     let rest =
@@ -65,7 +66,7 @@ export default {
                         options: {
                             plugins: {
                                 legend: {
-                                    position: "bottom",
+                                    position: "right",
                                 },
                                 // title: {
                                 //     display: true,

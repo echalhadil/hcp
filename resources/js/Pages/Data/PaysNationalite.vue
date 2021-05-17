@@ -22,7 +22,8 @@ export default {
     methods: {
         getresidentstatistics() {
             axios
-                .get(this.route("nationalitestatistics"))
+                // .get(this.route("nationalitestatistics"))
+                .get(this.route("questionstatistics",6))   
                 .then((response) => {
                     
                     this.statistics = response.data;

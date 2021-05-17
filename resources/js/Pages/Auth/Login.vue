@@ -17,7 +17,7 @@
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
+                <jet-label for="password" value="Mot de passe" />
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
             </div>
 
@@ -30,11 +30,11 @@
 
             <div class="flex items-center justify-end mt-4">
                 <inertia-link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm dark:text-gray-200 text-gray-600 hover:text-gray-900">
-                    Forgot your password?
+                    Mot de passe oublié?
                 </inertia-link>
 
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
+                    Connexion
                 </jet-button>
             </div>
         </form>

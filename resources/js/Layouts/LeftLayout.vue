@@ -15,7 +15,8 @@
                 >
                     <i class="fal fa-home mx-auto md:m-0 w-10 p-3"></i>
                     <p class="w-0 md:w-auto invisible md:my-auto md:visible">
-                        Dashboard
+                       <!-- Dashboard -->
+                       Tableau de bord
                     </p>
                 </inertia-link>
 
@@ -29,7 +30,8 @@
                     <i class="fal fa-users mx-auto md:m-0 w-10 p-3"></i>
 
                     <p class="w-0 md:w-auto invisible md:my-auto md:visible">
-                        Team
+                        <!--Team-->
+                        Équipe
                     </p>
                 </inertia-link>
 
@@ -43,7 +45,8 @@
                     <i class="fal fa-database mx-auto md:m-0 w-10 p-3"></i>
 
                     <p class="w-0 md:w-auto invisible md:my-auto md:visible">
-                        Data
+                       <!-- Data-->
+                       Les données
                     </p>
                 </inertia-link>
             </div>

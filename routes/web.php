@@ -87,36 +87,5 @@ Route::resource('anquites', AnquiteController::class);
 Route::get('e/{format}', [AnquiteController::class, 'exportData']);
 
 
-
-
-Route::get('/situation-resident-statistics', [AnquiteController::class, 'situationResidentStatistics'])
-    ->name('residentstatistics');
-
-
-
-Route::get('/sexe-statistics', [AnquiteController::class, 'sexeStatistics'])
-    ->name('sexestatistics');
-
-Route::get('/nationalite-statistics', [AnquiteController::class, 'nationaliteStatistics'])
-    ->name('nationalitestatistics');
-
-
-
-Route::get('/etat-matrimonial-statistics', [AnquiteController::class, 'etatMatrimonialStatistics'])
-    ->name('etatmatrimonialstatistics');
-
-
-
-Route::get('/etablisement-statistics', [AnquiteController::class, 'etablisementStatistics'])
-    ->name('etablisementstatistics');
-
-
-
-
-Route::get('/etat-fonctionnel-statistics', [AnquiteController::class, 'etatFonctionnelStatistics'])
-    ->name('etatfonctionnelstatistics');
-
-
-
-Route::get('/assurance-medical-statistics', [AnquiteController::class, 'assuranceMedicalStatistics'])
-    ->name('assurancemedicalstatistics');
+Route::get('/question-statistics/{question_id}', [AnquiteController::class, 'questionStatistics'])
+    ->name('questionstatistics');

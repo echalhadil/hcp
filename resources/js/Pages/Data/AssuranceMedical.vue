@@ -21,7 +21,8 @@ export default {
     methods: {
         getresidentstatistics() {
             axios
-                .get(this.route("assurancemedicalstatistics"))
+                .get(this.route("questionstatistics",20))   
+                // .get(this.route("assurancemedicalstatistics"))
                 .then((response) => {
                     this.statistics = response.data;
                     let rest =
@@ -65,7 +66,7 @@ export default {
                         options: {
                             plugins: {
                                 legend: {
-                                    position: "bottom",
+                                    position: "left",
                                 },
                                 // title: {
                                 //     display: true,

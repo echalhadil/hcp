@@ -1,5 +1,5 @@
 <template>
-    <div class="p-5 bg-white w-full mt-12 rounded shadow">
+    <div class="p-5 bg-white w-full mt-4 rounded shadow">
         <div class="flex mr-auto w-full">
             <div class="flex relative ml-9 my-auto"></div>
 

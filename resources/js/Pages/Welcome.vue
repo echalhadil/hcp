@@ -19,7 +19,7 @@
                     :href="route('login')"
                     class="text-sm capitalize  m-1 border-pink-700 border font-semibold py-2 px-3 rounded text-pink-700 dark:text-gray-400 dark:border-gray-300"
                 >
-                    Log in
+                    connexion
                 </inertia-link>
 
                 <inertia-link
@@ -28,7 +28,7 @@
                     class="text-sm m-1 border-pink-700 text-gray-100 border font-semibold py-2 px-3 rounded bg-pink-700 dark:border-gray-200 dark:bg-gray-200 dark:text-gray-700"
                     
                 >
-                    Register
+                    S'inscrire
                 </inertia-link>
             </template>
         </div>

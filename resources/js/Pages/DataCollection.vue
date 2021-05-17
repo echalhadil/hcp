@@ -1,30 +1,27 @@
 <template>
     <left-layout>
-        <div class=" p-5 md:p-12 w-full">
-            <div class="grid md:grid-cols-4 md:grid-rows-2 grid-cols-1 my-auto gap-4">
-                <situation-resident class=" col-span-2 row-span-2 " />
-
+        <div class="p-5 md:p-12 w-full">
+            
+            <div
+                class="grid md:grid-cols-4 md:grid-rows-2 grid-rows-1 grid-cols-1 my-auto gap-4"
+            >
+                <situation-resident class="md:col-span-2 md:row-span-2" />
                 <sexe />
-
                 <pays-nationalite />
                 <etat-matrimonial />
                 <etablisement />
-
-
             </div>
 
-            <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
-                
-
-                <assurance-medical />
-                
-
-                <etat-fonctionnel />
-
+            <div class="grid md:grid-cols-3 md:grid-rows-2  grid-cols-1 my-auto gap-4 mt-4">
+                <assurance-medical class=" md:row-span-2" />
+                <etat-fonctionnel class=" md:row-span-2" />
+                <div class=" shadow bg-white " ></div>
+                <div class=" shadow bg-white " ></div>
             </div>
 
-            <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-12">
-            </div>
+            <div
+                class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4 mt-4"
+            ></div>
 
             <data-list />
         </div>
@@ -54,7 +51,6 @@ import Etablisement from "@/Pages/Data/Etablisement";
 import EtatFonctionnel from "@/Pages/Data/EtatFonctionnel";
 import AssuranceMedical from "@/Pages/Data/AssuranceMedical";
 
-
 export default {
     components: {
         LeftLayout,
@@ -76,7 +72,7 @@ export default {
         EtatMatrimonial,
         Etablisement,
         EtatFonctionnel,
-        AssuranceMedical
+        AssuranceMedical,
     },
     data() {
         return {
