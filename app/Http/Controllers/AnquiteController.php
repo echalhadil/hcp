@@ -208,4 +208,20 @@ class AnquiteController extends Controller
 
         return response()->json($options);
     }
+
+    public function personneUnderOver18()
+    {
+
+
+        return response()->json([
+            [
+                'question' => Question::find(12)->libelle,
+                'nombre' => Reponse::where("question_id", 12)->sum('value'),
+            ],
+            [
+                'question' => Question::find(13)->libelle,
+                'nombre' => Reponse::where("question_id", 13)->sum('value'),
+            ]
+        ]);
+    }
 }

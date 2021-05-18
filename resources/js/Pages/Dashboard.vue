@@ -1,147 +1,58 @@
 <template>
     <left-layout>
-        <div class="w-full px-5 md:px-12 pt-12 items-stretch align-middle">
-            <div class="grid md:grid-cols-4 grid-cols-1 my-auto gap-4">
-                <my-team-location
-                    :commune="$page.props.location.id"
-                    :province="$page.props.location.province.id"
-                    :region="$page.props.location.province.region.id"
-                />
+        <div
+            class="w-full px-5 md:px-12 pt-12 grid md:grid-cols-4 grid-cols-1 my-auto gap-4"
+        >
+            <my-team-location
+                :commune="$page.props.location.id"
+                :province="$page.props.location.province.id"
+                :region="$page.props.location.province.region.id"
+            />
 
-                <!--total anquite-->
+            <total-anquite
+                :today="todaytotal"
+                :total="total"
+                title="Total D'enquêtes"
+            />
 
-                <div class="bg-white dark:bg-gray-400 rounded shadow p-4">
-                    <div
-                        class="flex capitalize text-sm text-gray-600 dark:text-gray-200"
-                    >
-                        <p class="my-auto">Total D'enquêtes</p>
-                    </div>
-
-                    <div class="p-5 text-center">
-                        <p
-                            class="font-semibold text-4xl capitalize text-pink-600 dark:text-gray-100"
-                        >
-                            {{ total }}
-                        </p>
-                    </div>
-
-                    <div
-                        v-if="todaytotal > 0"
-                        class="flex justify-center text-xs font-semibold text-green-600 dark:text-gray-200 text-center"
-                    >
-                        <i
-                            class="far my-auto fa-arrow-up mr-2 animate-bounce"
-                            aria-hidden="true"
-                        ></i>
-                        <p class="my-auto capitalize">
-                            <span class="animate-ping">+</span>
-                            {{ todaytotal }} aujourd’hui
-                        </p>
-                    </div>
-                </div>
-
-                <!--total anquite of your team-->
-
-                <div class="bg-white dark:bg-gray-400 rounded shadow p-4">
-                    <div
-                        class="flex capitalize text-sm text-gray-600 dark:text-gray-200"
-                      >
-                        <p class="my-auto">Total D'enquêtes de votre equipe</p>
-                    </div>
-
-                    <div class="p-5 text-center">
-                        <p
-                            class="font-semibold text-4xl capitalize text-pink-600 dark:text-gray-100"
-                        >
-                            {{ totalteam }}
-                        </p>
-                    </div>
-
-                    <div
-                        v-if="totalteam > 0"
-                        class="flex justify-center text-xs font-semibold text-green-600 dark:text-gray-200 text-center"
-                    >
-                        <i
-                            class="far my-auto fa-arrow-up mr-2 animate-bounce"
-                            aria-hidden="true"
-                        ></i>
-                        <p class="my-auto capitalize">
-                            <span class="animate-ping">+</span>
-                            {{ todayteam }} aujourd’hui
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="w-full px-5 md:px-12 pt-4 items-stretch align-middle">
-            <div
-                class="grid md:grid-cols-6  md:grid-rows-3 grid-cols-1 my-auto gap-4"
-              >
-                <div
-                    class="bg-white dark:bg-gray-400 md:col-span-4 md:row-span-3 rounded shadow"
-                  >
-                    <statistics-card-line />
-                </div>
-
-                <!--total anquite-->
-
-                <div class="bg-white dark:bg-gray-400 rounded p-4 md:row-span-1 shadow">
-                    <!--     <statistics-card-pie /> -->
-
-                    <p class="capitalize text-gray-500 dark:text-gray-200">
-                        Votre équipe
-                    </p>
-                    <div
-                        class="p-5 flex transform top-1/2 relative -translate-y-1/2 text-pink-600 dark:text-gray-100 text-center"
-                    >
-                        <p class="font-semibold ml-auto text-4xl capitalize">
-                            {{ numberofmembers.myteam }}
-                        </p>
-                        <p class="mb-0 ml-1 m-auto text-xs">Membre</p>
-                    </div>
-                </div>
-                <div class="bg-white dark:bg-gray-400 rounded p-4 md:row-span-1 shadow">
-                    <!--     <statistics-card-pie /> -->
-
-                    <p class="capitalize text-gray-500 dark:text-gray-200">
-                        Total
-                    </p>
-
-                    <div
-                        class="p-5 flex transform top-1/2 relative -translate-y-1/2 text-pink-600 dark:text-gray-100 text-center"
-                    >
-                        <p class="font-semibold ml-auto text-4xl capitalize">
-                            {{ numberofmembers.total }}
-                        </p>
-                        <p class="mb-0 ml-1 m-auto text-xs">Membre</p>
-                    </div>
-                </div>
-
-                <calendar-view class=" md:col-span-2  md:row-span-2 " />
-
-            </div>
+            <total-anquite
+                :today="todayteam"
+                :total="totalteam"
+                title="Total D'enquêtes de votre equipe"
+            />
         </div>
 
         <div
-            class="w-full px-5 md:px-12 pt-4 items-stretch align-middle mb-12"
+            class="w-full px-5 md:px-12 pt-4 grid md:grid-cols-6 md:grid-rows-3 grid-cols-1 my-auto gap-4"
         >
-            <div class="grid md:grid-cols-3 grid-cols-1 my-auto gap-4">
-                <!--total anquite-->
-
-                <div
-                    class="bg-white md:col-span-1 overflow-y-auto p-4 rounded shadow"
-                >
-                </div>
-
-                <div
-                    class="bg-white md:col-span-2 overflow-y-auto p-4 rounded shadow"
-                >
-                </div>
-
-                
-                
+            <div
+                class="bg-white dark:bg-gray-400 md:col-span-4 md:row-span-3 rounded shadow"
+            >
+                <statistics-card-line />
             </div>
+
+            <!--total anquite-->
+
+            <total-member
+                :number="numberofmembers.myteam"
+                title=" Votre équipe"
+            />
+            <total-member :number="numberofmembers.total" title="Total" />
+            <calendar-view class="md:col-span-2 md:row-span-2" />
+        </div>
+
+        <div
+            class="w-full px-5 md:px-12 pt-4 mb-12 grid md:grid-cols-3 grid-cols-1 my-auto gap-4"
+        >
+            <!--total anquite-->
+
+            <div
+                class="bg-white md:col-span-1 overflow-y-auto p-4 rounded shadow"
+            ></div>
+
+            <div
+                class="bg-white md:col-span-2 overflow-y-auto p-4 rounded shadow"
+            ></div>
         </div>
     </left-layout>
 </template>
@@ -150,8 +61,9 @@
 import LeftLayout from "@/Layouts/LeftLayout";
 import StatisticsCardLine from "@/StatisticsCards/StatisticsCardLine";
 import StatisticsCardPie from "@/StatisticsCards/StatisticsCardPie";
-import CalendarView from "@/Pages/Calendar/CalendarView";
-
+import CalendarView from "@/Pages/Dashboard/Calendar/CalendarView";
+import TotalAnquite from "@/Pages/Dashboard/TotalAnquite";
+import TotalMember from "@/Pages/Dashboard/TotalMember";
 import MyTeamLocation from "./Dashboard/TeamLocation";
 
 export default {
@@ -161,6 +73,8 @@ export default {
         StatisticsCardPie,
         MyTeamLocation,
         CalendarView,
+        TotalAnquite,
+        TotalMember,
     },
     data() {
         return {

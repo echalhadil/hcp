@@ -102,3 +102,8 @@ Route::get('insert', function () {
     $anq->user_id = Auth::id();
     $anq->save();
 });
+
+
+
+
+Route::get('/personneUnderOver18',[AnquiteController::class,'personneUnderOver18'])->name('personneunderover18');
