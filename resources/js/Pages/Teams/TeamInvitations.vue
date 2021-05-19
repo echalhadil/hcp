@@ -1,15 +1,19 @@
 <template>
     <div class="p-5 mt-10 bg-white dark:bg-gray-400 w-full rounded shadow">
         <div class="md:flex mr-auto w-full">
-            <div class="my-auto text-sm text-gray-500 dark:text-gray-100 capitalize">
-                <p class="text-gray-800 dark:text-gray-200 font-semibold text-lg pb-1">
-                    Pending Team Invitations
+            <div
+                class="my-auto text-sm text-gray-500 dark:text-gray-100 capitalize"
+            >
+                <p
+                    class="text-gray-800 dark:text-gray-200 font-semibold text-lg pb-1"
+                >
+                    Invitations d'équipe en attente
                 </p>
 
                 <p>
-                    These people have been invited to your team and have been
-                    sent an invitation email. They may join the team by
-                    accepting the email invitation
+                    Ces personnes ont été invitées dans votre équipe et ont reçu
+                    un e-mail d'invitation. Ils peuvent rejoindre l'équipe en
+                    acceptant l'invitation par e-mail
                 </p>
             </div>
             <div class="ml-auto mt-1 md:mt-0 my-auto text-sm">
@@ -92,7 +96,7 @@
                                     class="py-3 px-6 text-center capitalize"
                                     colspan="4"
                                 >
-                                    aucune membre
+                                    aucune invitation
                                 </td>
                             </tr>
                             <tr
@@ -181,7 +185,11 @@ export default {
     },
     watch: {
         sorting() {
-            this.team.team_invitations = _.orderBy(this.team.team_invitations, this.sortBy, this.sorting);
+            this.team.team_invitations = _.orderBy(
+                this.team.team_invitations,
+                this.sortBy,
+                this.sorting
+            );
         },
     },
 };

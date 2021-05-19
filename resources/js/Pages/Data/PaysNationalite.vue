@@ -1,8 +1,9 @@
-                        
 <template>
     <div class="p-3 bg-white rounded shadow">
         <div class="transform -translate-y-1/2 top-1/2 relative">
-            <p class=" text-center text-gray-500 text-sm p-2 capitalize ">pays de nationalite</p>
+            <p class="text-center text-gray-500 text-sm p-2 capitalize">
+                pays de nationalite
+            </p>
             <canvas :id="id" class="w-full"></canvas>
         </div>
     </div>
@@ -23,9 +24,8 @@ export default {
         getresidentstatistics() {
             axios
                 // .get(this.route("nationalitestatistics"))
-                .get(this.route("questionstatistics",6))   
+                .get(this.route("questionstatistics", 6))
                 .then((response) => {
-                    
                     this.statistics = response.data;
                     let rest =
                         100 -
@@ -34,11 +34,10 @@ export default {
                         );
 
                     this.statistics.push({
-                        libelle:'NaN',
-                        percent:rest
+                        libelle: "NaN",
+                        percent: rest,
                     });
 
-                    console.log(rest);
                     const ctx = document.getElementById(this.id);
                     new Chart(ctx, {
                         type: this.chartType,
@@ -53,8 +52,8 @@ export default {
                                         _.mapValues(this.statistics, "percent")
                                     ),
                                     backgroundColor: [
-                                        "rgb(55, 99, 132)",
-                                        "rgb(174, 162, 235)",
+                                        "#867ae9",
+                                        "#c449c2",
                                         "#F4F4F4",
                                     ],
                                     borderWidth: 2,
@@ -67,7 +66,6 @@ export default {
                             plugins: {
                                 legend: {
                                     position: "bottom",
-                                    
                                 },
                                 // title: {
                                 //     display: true,

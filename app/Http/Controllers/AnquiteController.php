@@ -30,13 +30,22 @@ class AnquiteController extends Controller
     {
         $anquites = Anquite::select(
             "id",
-            "user_id"
+            "user_id",
+            "commune_id"
         )->get();
         $questions = Question::all();
 
         foreach ($anquites as $anquite) {
             $anquite->questions = $questions;
             $anquite->reponses = $anquite->reponses;
+
+            $anquite->commune = $anquite->commune;
+            $anquite->province = $anquite->commune->province;
+            $anquite->region  = $anquite->province->region;
+
+            $anquite->region  = $anquite->region->libelle;
+            $anquite->province = $anquite->province->libelle;
+            $anquite->commune = $anquite->commune->libelle;
 
             foreach ($anquite->reponses as $reponse) {
                 $reponse->value = ($reponse->option != null) ? $reponse->option->libelle : $reponse->value;
@@ -133,6 +142,8 @@ class AnquiteController extends Controller
         //DATE(NOW()) - INTERVAL 7 DAY
         ////////last week  ///////////
         // BETWEEN DATE(NOW()) - INTERVAL 7 DAY AND  DATE(NOW()) - INTERVAL 7 DAY
+
+        
 
         $numberofteams =  Team::count();
 

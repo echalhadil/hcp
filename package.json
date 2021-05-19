@@ -29,6 +29,7 @@
     "dependencies": {
         "blob": "^0.1.0",
         "file-saver": "^2.0.5",
+        "moment": "^2.29.1",
         "shim": "^0.6.0",
         "tableexport": "^5.2.0",
         "xlsx": "^0.14.5"

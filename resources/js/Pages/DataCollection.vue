@@ -14,9 +14,11 @@
             <div
                 class="grid md:grid-cols-3 md:grid-rows-2 grid-cols-1 my-auto gap-4 mt-4"
             >
+                <personne-moin-plus class="md:row-span-2" />
                 <assurance-medical class="md:row-span-2" />
                 <etat-fonctionnel class="md:row-span-2" />
-                <personne-moin-plus class="md:row-span-2" />
+                <age-pyramid class="md:row-span-2 col-span-3" />
+
             </div>
             <data-list />
         </div>
@@ -24,16 +26,17 @@
 </template>
 
 <script>
-import LeftLayout           from "@/Layouts/LeftLayout";
-import DataList             from "@/Pages/Data/DataList";
-import SituationResident    from "@/Pages/Data/SituationResident";
-import Sexe                 from "@/Pages/Data/Sexe";
-import PaysNationalite      from "@/Pages/Data/PaysNationalite";
-import EtatMatrimonial      from "@/Pages/Data/EtatMatrimonial";
-import Etablisement         from "@/Pages/Data/Etablisement";
-import EtatFonctionnel      from "@/Pages/Data/EtatFonctionnel";
-import AssuranceMedical     from "@/Pages/Data/AssuranceMedical";
-import PersonneMoinPlus     from "@/Pages/Data/PersonneMoinPlus";
+import LeftLayout from "@/Layouts/LeftLayout";
+import DataList from "@/Pages/Data/DataList";
+import SituationResident from "@/Pages/Data/SituationResident";
+import Sexe from "@/Pages/Data/Sexe";
+import PaysNationalite from "@/Pages/Data/PaysNationalite";
+import EtatMatrimonial from "@/Pages/Data/EtatMatrimonial";
+import Etablisement from "@/Pages/Data/Etablisement";
+import EtatFonctionnel from "@/Pages/Data/EtatFonctionnel";
+import AssuranceMedical from "@/Pages/Data/AssuranceMedical";
+import PersonneMoinPlus from "@/Pages/Data/PersonneMoinPlus";
+import AgePyramid from "@/Pages/Data/AgePyramid";
 
 export default {
     components: {
@@ -47,6 +50,7 @@ export default {
         EtatFonctionnel,
         AssuranceMedical,
         PersonneMoinPlus,
+        AgePyramid,
     },
 };
 </script>

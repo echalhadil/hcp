@@ -1,8 +1,9 @@
-                        
 <template>
     <div class="p-3 bg-white rounded shadow">
         <div class="transform -translate-y-1/2 top-1/2 relative">
-            <p class=" text-center text-gray-500 text-sm p-2 capitalize ">etablisement</p>
+            <p class="text-center text-gray-500 text-sm p-2 capitalize">
+                etablisement
+            </p>
             <canvas :id="id" class="w-full"></canvas>
         </div>
     </div>
@@ -22,11 +23,9 @@ export default {
     methods: {
         getresidentstatistics() {
             axios
-                
-                .get(this.route("questionstatistics",17))   
-                // .get(this.route("etablisementstatistics"))
+
+                .get(this.route("questionstatistics", 17))
                 .then((response) => {
-                    
                     this.statistics = response.data;
                     let rest =
                         100 -
@@ -35,11 +34,10 @@ export default {
                         );
 
                     this.statistics.push({
-                        libelle:'NaN',
-                        percent:rest
+                        libelle: "NaN",
+                        percent: rest,
                     });
 
-                    console.log(rest);
                     const ctx = document.getElementById(this.id);
                     new Chart(ctx, {
                         type: this.chartType,
@@ -68,14 +66,7 @@ export default {
                             plugins: {
                                 legend: {
                                     position: "bottom",
-                                    
                                 },
-                                // title: {
-                                //     display: true,
-                                //     text: "pays de nationalite",
-                                //     fullSize: true,
-                                //     position: "top",
-                                // },
                             },
                             responsive: true,
                             lineTension: 1,

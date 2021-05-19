@@ -79,7 +79,7 @@ class Questionseeder extends Seeder
             ['question_id' => "18", 'libelle' => "Employé privé, secteur informel"],
 
             ['question_id' => "20", 'libelle' => "CNSS"],
-            ['question_id' => "20", 'libelle' => "ASMR"],
+            ['question_id' => "20", 'libelle' => "RMSA"],
             ['question_id' => "20", 'libelle' => "RAMED"],
             ['question_id' => "20", 'libelle' => "Sans assurance"],
 

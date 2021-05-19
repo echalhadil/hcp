@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Reponse extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['question_id', 'option_id', 'value'];
+
+    
 
 
     public function option()
@@ -20,5 +25,4 @@ class Reponse extends Model
     {
         return $this->belongsTo(Question::class);
     }
-
 }

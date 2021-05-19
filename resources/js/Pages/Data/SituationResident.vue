@@ -50,12 +50,12 @@ export default {
                                         _.mapValues(this.statistics, "percent")
                                     ),
                                     backgroundColor: [
-                                        "rgb(255, 99, 132)",
-                                        "rgb(54, 162, 235)",
-                                        "rgb(55, 99, 132)",
-                                        "rgb(54, 12, 235)",
-                                        "rgb(54, 12, 35)",
-                                        "rgb(134, 12, 35)",
+                                        "#233e8b",
+                                        "#1eae98",
+                                        "#693c72",
+                                        "#c15050",
+                                        "#d97642",
+                                        "#d49d42",
                                         "#F4F4F4F4",
                                     ],
                                     borderWidth: 2,
@@ -81,6 +81,7 @@ export default {
                             },
                             responsive: true,
                             lineTension: 1,
+                            
                         },
                     });
                 })

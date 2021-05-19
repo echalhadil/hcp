@@ -2,9 +2,9 @@
     <div class="p-3 bg-white rounded shadow">
         <div class="transform -translate-y-1/2 top-1/2 relative">
             <p class="text-center text-gray-500 text-sm p-2">
-                les personnes plus et mois de 18ans.
+                les personnes plus et mois de 18ans
             </p>
-            <canvas :id="id" class="w-full"></canvas>
+            <canvas :id="id" class="w-full h-screen"></canvas>
         </div>
     </div>
 </template>
@@ -28,12 +28,14 @@ export default {
                     this.statistics = response.data;
 
                     const ctx = document.getElementById(this.id);
+                    ctx.height = 310;
                     new Chart(ctx, {
                         type: this.chartType,
                         data: {
-                            labels: _.toArray(
-                                _.mapValues(this.statistics, "question")
-                            ),
+                            // labels: _.toArray(
+                            //     _.mapValues(this.statistics, "question")
+                            // ),
+                            labels: ["moin de 18ans", "plus de 18ans"],
                             datasets: [
                                 {
                                     data: _.toArray(
@@ -52,6 +54,13 @@ export default {
                             },
                             responsive: true,
                             lineTension: 1,
+                            scales: {
+                                xAxes: [
+                                    {
+                                        barPercentage: 0.1,
+                                    },
+                                ]
+                            },
                         },
                     });
                 })

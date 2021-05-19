@@ -5,9 +5,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\TeamController;
 use App\Models\Anquite;
+use App\Models\Option;
 use App\Models\Team;
+use App\Models\Reponse;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -100,10 +103,46 @@ Route::get('insert', function () {
 
     $anq = new Anquite();
     $anq->user_id = Auth::id();
+    $anq->commune_id = Team::find(Auth::user()->current_team_id)->commune_id;
     $anq->save();
 });
 
 
 
 
-Route::get('/personneUnderOver18',[AnquiteController::class,'personneUnderOver18'])->name('personneunderover18');
+Route::get('/personneUnderOver18', [AnquiteController::class, 'personneUnderOver18'])->name('personneunderover18');
+
+
+
+Route::get('/age-pyramid', function () {
+    //group by sexe 
+    //group by age
+    // $an = Anquite::with('reponses')->get();
+    $an = Anquite::select('id')->get();
+
+
+    // return $an ;
+    foreach ($an as $anquite) {
+        $sexe = Option::find(
+            Reponse::where('question_id', 7)
+                ->where('anquite_id', $anquite->id)
+                ->first()->option_id
+        );
+        $age =
+            Reponse::select('value')->where('question_id', "=", (int) 8)
+                ->where('anquite_id', $anquite->id)
+                ->first();
+            // DB::table('reponses')
+            // ->select('value')
+            // ->where('question_id', "=", (int) 8)
+            // ->where('anquite_id', $anquite->id)
+            // ->first();
+        $anquite->sexe =  $sexe->libelle;
+        // $anquite->age = DateTime::createFromFormat('d-m-Y', $age->value);
+        $anquite->age = $age->value;
+    }
+
+
+    return collect($an)->groupBy('sexe');
+    
+})->name('agepyramid');

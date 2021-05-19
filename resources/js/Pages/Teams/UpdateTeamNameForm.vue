@@ -4,7 +4,7 @@
         <template #form>
             <!-- Team Owner Information -->
             <div class="col-span-6">
-                <jet-label value="Cheff d'equipe" />
+                <jet-label value="Propriétaire de l'équipe" />
 
                 <div class="flex items-center mt-2">
                     
@@ -18,7 +18,7 @@
 
             <!-- Team Name -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Nom d'equipe" />
+                <jet-label for="name" value="Nom de l'équipe" />
 
                 <jet-input id="name"
                             type="text"
@@ -32,11 +32,11 @@
 
         <template #actions v-if="permissions.canUpdateTeam">
             <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Saved.
+                Enregistré.
             </jet-action-message>
 
             <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Sauvegarder
             </jet-button>
         </template>
     </jet-form-section>

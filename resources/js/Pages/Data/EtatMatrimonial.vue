@@ -22,7 +22,6 @@ export default {
         getresidentstatistics() {
             axios
                 .get(this.route("questionstatistics",15))   
-                // .get(this.route("etatmatrimonialstatistics"))
                 .then((response) => {
                     this.statistics = response.data;
                     let rest =
@@ -35,8 +34,6 @@ export default {
                         libelle: "NaN",
                         percent: rest,
                     });
-
-                    console.log(rest);
                     const ctx = document.getElementById(this.id);
                     new Chart(ctx, {
                         type: this.chartType,
@@ -51,10 +48,10 @@ export default {
                                         _.mapValues(this.statistics, "percent")
                                     ),
                                     backgroundColor: [
-                                        "rgb(255, 99, 132)",
-                                        "rgb(54, 12, 235)",
-                                        "rgb(54, 12, 35)",
-                                        "rgb(134, 12, 35)",
+                                        "#233e8b",
+                                        "#1eae98",
+                                        "#a9f1df",
+                                        "#ffffc7",
                                         "#F4F4F4F4",
                                     ],
                                     borderWidth: 2,

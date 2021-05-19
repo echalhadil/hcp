@@ -10,7 +10,7 @@
                     <input
                         type="text"
                         class=" dark:text-gray-100 bg-transparent focus:border-pink-500 focus:ring-0 pr-8 placeholder-gray-400 dark:placeholder-gray-200 p-1 rounded"
-                        placeholder="Search"
+                        placeholder="Rechercher"
                         v-model="searchvalue"
                     />
                     <i class="fal fa-search text-pink-500 dark:text-gray-100 my-auto -ml-6"></i>
@@ -222,7 +222,7 @@
                                         </span>
                                     </td>
                                     <td class="py-3 px-5 text-center">
-                                        <span> {{ user.anquites }}</span>
+                                        <span> {{ user.anquites || '---' }}</span>
                                     </td>
                                     <td class="py-3 px-5 text-center">
                                         <div

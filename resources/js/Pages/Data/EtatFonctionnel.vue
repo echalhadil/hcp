@@ -1,7 +1,9 @@
 <template>
     <div class="p-3 bg-white rounded shadow">
         <div class="transform -translate-y-1/2 top-1/2 relative">
-            <p class=" text-center text-gray-500 text-sm p-2 ">Etat Fonctionnel</p>
+            <p class="text-center text-gray-500 text-sm p-2">
+                Etat Fonctionnel
+            </p>
             <canvas :id="id" class="w-full"></canvas>
         </div>
     </div>
@@ -21,7 +23,7 @@ export default {
     methods: {
         getresidentstatistics() {
             axios
-                .get(this.route("questionstatistics",18))   
+                .get(this.route("questionstatistics", 18))
                 // .get(this.route("etatmatrimonialstatistics"))
                 .then((response) => {
                     this.statistics = response.data;
@@ -35,8 +37,6 @@ export default {
                         libelle: "NaN",
                         percent: rest,
                     });
-
-                    console.log(rest);
                     const ctx = document.getElementById(this.id);
                     new Chart(ctx, {
                         type: this.chartType,
@@ -51,10 +51,10 @@ export default {
                                         _.mapValues(this.statistics, "percent")
                                     ),
                                     backgroundColor: [
-                                        "rgb(255, 99, 132)",
-                                        "rgb(54, 12, 235)",
-                                        "rgb(54, 12, 35)",
-                                        "rgb(134, 12, 35)",
+                                        "#693c72",
+                                        "#c15050",
+                                        "#d97642",
+                                        "#d49d42",
                                         "#F4F4F4F4",
                                     ],
                                     borderWidth: 2,
@@ -68,12 +68,6 @@ export default {
                                 legend: {
                                     position: "right",
                                 },
-                                // title: {
-                                //     display: true,
-                                //     text: "Etat Matrimonial",
-                                //     fullSize: true,
-                                //     position: "top",
-                                // },
                             },
                             responsive: true,
                             lineTension: 1,

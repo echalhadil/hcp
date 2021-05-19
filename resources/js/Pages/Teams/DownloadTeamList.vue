@@ -8,7 +8,7 @@
         </div>
 
         <jet-dialog-modal :show="show" @close="show = false">
-            <template #title> Selectionner le format </template>
+            <template #title>Sélectionner le format </template>
 
             <template #content>
                 <div class="flex justify-around">

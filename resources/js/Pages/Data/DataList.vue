@@ -29,9 +29,28 @@
                                 class="bg-gray-200 text-gray-600 uppercase text-sm py-6 leading-normal"
                             >
                                 <th
+                                    v-if="finish"
                                     class="py-3 text-xs cursor-pointer select-none px-6 text-left"
                                 >
                                     #
+                                </th>
+                                <th
+                                    v-if="finish"
+                                    class="py-3 text-xs cursor-pointer select-none px-6 text-left"
+                                >
+                                    région
+                                </th>
+                                <th
+                                    v-if="finish"
+                                    class="py-3 text-xs cursor-pointer select-none px-6 text-left"
+                                >
+                                    province
+                                </th>
+                                <th
+                                    v-if="finish"
+                                    class="py-3 text-xs cursor-pointer select-none px-6 text-left"
+                                >
+                                    commune
                                 </th>
                                 <th
                                     v-for="(question, index) in questions"
@@ -46,14 +65,27 @@
                             class="text-gray-600 text-sm font-light overflow-y-auto"
                         >
                             <tr
-                                v-if="questionAndAnswer.length === 0"
+                                v-if="questionAndAnswer.length === 0 && finish"
                                 class="border-b text-lg border-gray-200"
                             >
                                 <td
                                     class="py-3 px-6 text-center capitalize"
-                                    colspan="4"
+                                    colspan="10"
                                 >
                                     aucune membre
+                                </td>
+                            </tr>
+                            <tr
+                            v-if="!finish"
+                                class="border-b text-lg border-gray-200">
+                                <td
+                                    class="py-3 px-6 text-center capitalize"
+                                    colspan="10"
+                                >
+                                    <i
+                                        class="fa fa-spinner-third animate-spin"
+                                        aria-hidden="true"
+                                    ></i>
                                 </td>
                             </tr>
                             <tr
@@ -66,6 +98,23 @@
                                 <td class="py-3 px-6 text-center">
                                     <span vif class="font-medium">
                                         {{ index + 1 }}
+                                    </span>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <span vif class="font-medium">
+                                        {{ anquite.region }}
+                                    </span>
+                                </td>
+
+                                <td class="py-3 px-6 text-center">
+                                    <span vif class="font-medium">
+                                        {{ anquite.province }}
+                                    </span>
+                                </td>
+
+                                <td class="py-3 px-6 text-center">
+                                    <span vif class="font-medium">
+                                        {{ anquite.commune.libelle }}
                                     </span>
                                 </td>
 
@@ -106,6 +155,7 @@ export default {
         return {
             questions: [],
             questionAndAnswer: [],
+            finish: false,
         };
     },
     methods: {
@@ -113,6 +163,7 @@ export default {
             axios
                 .get(this.route("anquites.index"))
                 .then((response) => {
+                    this.finish = true;
                     this.questionAndAnswer = response.data.anquites;
                     this.questions = response.data.questions;
                     _.forEach(this.questionAndAnswer, function (anquite) {

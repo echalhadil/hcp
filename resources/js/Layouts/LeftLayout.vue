@@ -53,6 +53,29 @@
                         Les données
                     </p>
                 </inertia-link>
+
+
+                                <inertia-link
+                    :href="route('profile.show')"
+                    class="flex hover:scale-105 transform duration-200 mx-6 my-3 rounded-md"
+                    :class="{
+                        'text-pink-700 dark:text-gray-50': route().current(
+                            'profile.show'
+                        ),
+                    }"
+                >
+                    <i class="fal fa-user mx-auto md:m-0 w-10 p-3"></i>
+
+                    <p class="w-0 md:w-auto invisible md:my-auto md:visible">
+                        <!-- Data-->
+                        Profile
+                    </p>
+                </inertia-link>
+
+
+
+
+                
             </div>
 
             <div class="w-5/6 ml-auto dark:bg-gray-700">

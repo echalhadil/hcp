@@ -26,4 +26,10 @@ class Anquite extends Model
      {
         return $this->hasMany(Reponse::class);
      }
+
+
+      public function commune()
+     {
+        return $this->belongsTo(Commune::class,'commune_id');
+     }
 }
