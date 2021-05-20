@@ -27,11 +27,13 @@
         "vue-loader": "^16.1.2"
     },
     "dependencies": {
+        "apexcharts": "^3.26.3",
         "blob": "^0.1.0",
         "file-saver": "^2.0.5",
         "moment": "^2.29.1",
         "shim": "^0.6.0",
         "tableexport": "^5.2.0",
-        "xlsx": "^0.14.5"
+        "xlsx": "^0.14.5",
+        "zingchart": "^2.9.4"
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="p-3 bg-white rounded shadow">
         <div
-            class="transform -translate-y-1/2 top-1/2 relative flex flex-col justify-between"
+            class="transform -translate-y-1/2 top-1/2 relative"
         >
             <p class="text-center text-gray-500 text-sm p-2">
                 Assurance Medical

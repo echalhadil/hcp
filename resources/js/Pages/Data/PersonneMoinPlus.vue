@@ -4,7 +4,7 @@
             <p class="text-center text-gray-500 text-sm p-2">
                 les personnes plus et mois de 18ans
             </p>
-            <canvas :id="id" class="w-full h-screen"></canvas>
+            <canvas :id="id" class="w-full "></canvas>
         </div>
     </div>
 </template>
@@ -28,7 +28,6 @@ export default {
                     this.statistics = response.data;
 
                     const ctx = document.getElementById(this.id);
-                    ctx.height = 310;
                     new Chart(ctx, {
                         type: this.chartType,
                         data: {
@@ -57,7 +56,7 @@ export default {
                             scales: {
                                 xAxes: [
                                     {
-                                        barPercentage: 0.1,
+                                   
                                     },
                                 ]
                             },
