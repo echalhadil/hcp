@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\DataExport;
 use App\Models\Anquite;
 use App\Models\Option;
 use App\Models\Question;
@@ -13,8 +12,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
-use Inertia\Inertia;
-use Maatwebsite\Excel\Facades\Excel as Excel;
 
 
 class AnquiteController extends Controller
@@ -111,15 +108,17 @@ class AnquiteController extends Controller
 
     public function update(Request $request, Anquite $anquite)
     {
-        foreach ($request->all() as $question) {
+        $questions =  $request->all();
+        foreach ($questions as $question) {
 
-            $question = (object)$question; //parse into object.
+            $question = (object)$question; //parse array into object.
 
             $reponse = Reponse::where('question_id', $question->id) //exists ??
                 ->where('anquite_id', $question->anquite_id)
                 ->first();
 
             if ($reponse) {
+
                 ($question->has_option) ? ($reponse->option_id = $question->option_id)  //do this if reponse exists
                     : ($reponse->value = $question->reponse);
                 $reponse->save();
@@ -132,11 +131,14 @@ class AnquiteController extends Controller
                 $reponse->save();
             }
 
+            // $question = (array)$question; //parse into array.
+
+
         }
 
 
         // return $reponse;
-         return response()->json($request->all());
+        return response()->json($questions);
     }
 
 

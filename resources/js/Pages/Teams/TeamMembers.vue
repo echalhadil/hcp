@@ -1,6 +1,5 @@
 <template>
     <div class="">
-
         <div class="p-5 mt-10 bg-white dark:bg-gray-400 w-full rounded shadow">
             <div class="md:flex md:flex-row md:justify-between mr-auto w-full">
                 <!--<p class="my-auto capitalize font-semibold text-gray-600 mr-3"> current Team </p>
@@ -66,7 +65,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'nom'"
-                                        class="py-3 px-3 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-center"
                                     >
                                         nom
                                         <i
@@ -83,7 +82,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'prenom'"
-                                        class="py-3 px-3 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-center"
                                     >
                                         prenom
                                         <i
@@ -100,7 +99,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'cin'"
-                                        class="py-3 px-3 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-center"
                                     >
                                         cin
                                         <i
@@ -117,7 +116,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'email'"
-                                        class="py-3 px-3 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-center"
                                     >
                                         email
                                         <i
@@ -133,7 +132,7 @@
                                         ></i>
                                     </th>
                                     <th
-                                        class="py-3 px-3 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-center"
                                         @click="sortBy = 'tele'"
                                     >
                                         tele
@@ -151,7 +150,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'role'"
-                                        class="py-3 px-3 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-center"
                                     >
                                         role
                                         <i
@@ -168,7 +167,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'anquites'"
-                                        class="py-3 px-3 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-center"
                                     >
                                         total d'anquite
                                         <i
@@ -196,8 +195,6 @@
                                     class="border-b border-gray-200 hover:bg-gray-100"
                                     :class="{ 'bg-gray-50': index % 2 === 0 }"
                                 >
-                                   
-
                                     <td class="py-3 px-3 text-left">
                                         <span class="font-medium">{{
                                             user.id
@@ -209,13 +206,13 @@
                                     <td class="py-3 px-3 text-left">
                                         <span>{{ user.lname }}</span>
                                     </td>
-                                    <td class="py-3 uppercase px-3 text-center">
+                                    <td class="py-3 uppercase px-3 text-left">
                                         <span> {{ user.cin }}</span>
                                     </td>
-                                    <td class="py-3 px-3 text-center">
+                                    <td class="py-3 px-3 text-left">
                                         <span>{{ user.email }}</span>
                                     </td>
-                                    <td class="py-3 px-3 text-center">
+                                    <td class="py-3 px-3 text-left">
                                         <span>{{ user.tele }}</span>
                                     </td>
                                     <td class="py-3 px-3 text-center">
@@ -242,7 +239,7 @@
                                             {{ user.anquites || "---" }}</span
                                         >
                                     </td>
-                                    <td class="py-3 px-3 text-center">
+                                    <td class="py-3 px-3 text-left">
                                         <div
                                             class="flex item-center justify-center"
                                         >
@@ -352,6 +349,7 @@ export default {
         displayableRole(role) {
             return this.availableRoles.find((r) => r.key === role).name;
         },
+       
     },
     watch: {
         sorting() {

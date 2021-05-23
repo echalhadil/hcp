@@ -2,7 +2,7 @@
     <div>
         <div
             @click="show = true"
-            class="cursor-pointer px-2 py-1 border rounded border-pink-500 hover:bg-pink-100 text-pink-500 capitalize"
+            class="cursor-pointer px-2 py-1 border rounded border-green-500 hover:bg-green-100 text-green-500 capitalize"
         >
             <i class="fal fa-download" aria-hidden="true"></i>
         </div>

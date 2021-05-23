@@ -33,7 +33,7 @@
                         >
                             <jet-label
                                 :for="question.libelle"
-                                :value="question.libelle"
+                                :v-model="question.libelle"
                             />
                             <!-- if it have options -->
                             <select
@@ -70,7 +70,10 @@
                         leave-from-class="opacity-100"
                         leave-to-class="opacity-0"
                     >
-                        <div v-show="success" class="text-sm my-auto mr-2 text-gray-600">
+                        <div
+                            v-show="success"
+                            class="text-sm my-auto mr-2 text-gray-600"
+                        >
                             Enregistré.
                         </div>
                     </transition>
@@ -127,17 +130,25 @@ export default {
             axios
                 .put(
                     route("anquites.update", this.selectedAnquite.id),
-                    this.selectedAnquite.questions
+                    this.anquite.questions
                 )
                 .then((response) => {
-                    console.log(response.data);
-                    this.selectedAnquite.questions = response.data;
-                    this.anquite = Object.assign({}, this.selectedAnquite);
-                    (this.success = true), (this.prossessing = false);
-
-                    setTimeout(() => {
-                        this.success = false;
-                    }, 1000);
+                    (this.selectedAnquite.questions = response.data),
+                    _.forEach(
+                        this.selectedAnquite.questions,
+                        (question) => {
+                            _.forEach(question.options, (option) => {
+                                if (option.id == question.option_id)
+                                    question.reponse = option.libelle;
+                            });
+                        }
+                    );
+                    (this.anquite.questions = response.data),
+                    (this.success = true),
+                    (this.prossessing = false),
+                        setTimeout(() => {
+                            this.success = false;
+                        }, 1000);
                 })
                 .catch((err) => {
                     console.log(err);

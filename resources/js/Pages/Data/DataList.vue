@@ -1,8 +1,21 @@
 <template>
     <div class="p-5 bg-white w-full mt-4 rounded shadow">
-        <div class="flex w-full">
-            <div class="my-auto ml-auto">
+        <div class="flex w-full" v-if="finish">
+            <div class="my-auto ml-auto" v-if="questionAndAnswer.length > 0">
                 <edit-anquite :selectedAnquite="selectedAnquite" />
+            </div>
+
+            <div
+                class="my-auto ml-2"
+                v-if="canDelete && questionAndAnswer.length > 0"
+            >
+                <button
+                    class="text-red-600 px-2 py-1 border border-red-600 rounded disabled:opacity-50"
+                    :disabled="!selectedAnquite"
+                    @click="deleteAnquite"
+                >
+                    <i class="fal fa-trash" aria-hidden="true"></i>
+                </button>
             </div>
             <div class="flex ml-2 my-auto" v-if="questionAndAnswer.length > 0">
                 <download-data-list />
@@ -212,9 +225,26 @@ export default {
                     ? anquite
                     : null;
         },
+        deleteAnquite() {
+            this.questionAndAnswer = _.without(
+                this.questionAndAnswer,
+                this.selectedAnquite
+            );
+
+            this.selectedAnquite = null;
+        },
     },
     mounted() {
         this.getAnquites();
+    },
+    computed: {
+        canDelete() {
+            return _.findLast(this.$page.props.user.all_teams, (team) => {
+                return team.id == this.$page.props.user.current_team.id;
+            }).membership.role == "admin"
+                ? true
+                : false;
+        },
     },
 };
 </script>
