@@ -20,6 +20,6 @@ class Question extends Model
     }
 
 
-    protected $hidden = ['has_option'];
+    // protected $hidden = ['has_option'];
 
 }

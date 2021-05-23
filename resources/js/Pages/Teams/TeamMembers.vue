@@ -1,22 +1,34 @@
 <template>
     <div class="">
+
         <div class="p-5 mt-10 bg-white dark:bg-gray-400 w-full rounded shadow">
-            <div class="flex mr-auto w-full">
+            <div class="md:flex md:flex-row md:justify-between mr-auto w-full">
                 <!--<p class="my-auto capitalize font-semibold text-gray-600 mr-3"> current Team </p>
                 -->
-                
-
-                <div class=" my-auto">
-                    <input
-                        type="text"
-                        class=" dark:text-gray-100 bg-transparent focus:border-pink-500 focus:ring-0 pr-8 placeholder-gray-400 dark:placeholder-gray-200 p-1 rounded"
-                        placeholder="Rechercher"
-                        v-model="searchvalue"
-                    />
-                    <i class="fal fa-search text-pink-500 dark:text-gray-100 my-auto -ml-6"></i>
+                <div
+                    class="my-auto text-sm text-gray-500 dark:text-gray-100 capitalize"
+                >
+                    <p
+                        class="text-gray-800 dark:text-gray-200 font-semibold text-lg pb-1"
+                    >
+                        Membres de l'équipe
+                    </p>
+                    <p>Toutes les personnes qui font partie de cette équipe.</p>
                 </div>
 
-                <div class="flex ml-auto my-auto">
+                <div class="flex flex-row justify-between my-auto">
+                    <div class="my-auto mr-3">
+                        <input
+                            type="text"
+                            class="dark:text-gray-100 bg-transparent focus:border-pink-500 focus:ring-0 pr-8 placeholder-gray-400 dark:placeholder-gray-200 p-1 rounded"
+                            placeholder="Rechercher"
+                            v-model="searchvalue"
+                        />
+
+                        <i
+                            class="fal fa-search text-pink-500 dark:text-gray-100 my-auto -ml-6"
+                        ></i>
+                    </div>
                     <download-team-list v-if="team.users.length > 0" />
                 </div>
 
@@ -24,9 +36,7 @@
             </div>
         </div>
 
-        <div
-            class="mt-2 bg-current  rounded shadow overflow-x-auto w-full"
-        >
+        <div class="mt-2 bg-current rounded shadow overflow-x-auto w-full">
             <div
                 class="w-full flex items-center justify-center bg-gray-100 font-sans overflow-x-auto"
             >
@@ -39,7 +49,7 @@
                                 >
                                     <th
                                         @click="sortBy = 'id'"
-                                        class="py-3 cursor-pointer select-none px-5 text-left"
+                                        class="py-3 cursor-pointer select-none px-3 text-left"
                                     >
                                         #
                                         <i
@@ -56,7 +66,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'nom'"
-                                        class="py-3 px-5 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-left"
                                     >
                                         nom
                                         <i
@@ -73,7 +83,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'prenom'"
-                                        class="py-3 px-5 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-left"
                                     >
                                         prenom
                                         <i
@@ -90,7 +100,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'cin'"
-                                        class="py-3 px-5 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-left"
                                     >
                                         cin
                                         <i
@@ -107,7 +117,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'email'"
-                                        class="py-3 px-5 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-left"
                                     >
                                         email
                                         <i
@@ -123,7 +133,7 @@
                                         ></i>
                                     </th>
                                     <th
-                                        class="py-3 px-5 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-left"
                                         @click="sortBy = 'tele'"
                                     >
                                         tele
@@ -141,7 +151,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'role'"
-                                        class="py-3 px-5 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-left"
                                     >
                                         role
                                         <i
@@ -158,7 +168,7 @@
                                     </th>
                                     <th
                                         @click="sortBy = 'anquites'"
-                                        class="py-3 px-5 cursor-pointer select-none text-left"
+                                        class="py-3 px-3 cursor-pointer select-none text-left"
                                     >
                                         total d'anquite
                                         <i
@@ -174,7 +184,7 @@
                                         ></i>
                                     </th>
 
-                                    <th class="py-3 px-5 text-center">
+                                    <th class="py-3 px-3 text-center">
                                         Actions
                                     </th>
                                 </tr>
@@ -186,27 +196,29 @@
                                     class="border-b border-gray-200 hover:bg-gray-100"
                                     :class="{ 'bg-gray-50': index % 2 === 0 }"
                                 >
-                                    <td class="py-3 px-5 text-left">
+                                   
+
+                                    <td class="py-3 px-3 text-left">
                                         <span class="font-medium">{{
                                             user.id
                                         }}</span>
                                     </td>
-                                    <td class="py-3 px-5 text-left">
+                                    <td class="py-3 px-3 text-left">
                                         <span class="">{{ user.fname }}</span>
                                     </td>
-                                    <td class="py-3 px-5 text-left">
+                                    <td class="py-3 px-3 text-left">
                                         <span>{{ user.lname }}</span>
                                     </td>
-                                    <td class="py-3 uppercase px-5 text-center">
+                                    <td class="py-3 uppercase px-3 text-center">
                                         <span> {{ user.cin }}</span>
                                     </td>
-                                    <td class="py-3 px-5 text-center">
+                                    <td class="py-3 px-3 text-center">
                                         <span>{{ user.email }}</span>
                                     </td>
-                                    <td class="py-3 px-5 text-center">
+                                    <td class="py-3 px-3 text-center">
                                         <span>{{ user.tele }}</span>
                                     </td>
-                                    <td class="py-3 px-5 text-center">
+                                    <td class="py-3 px-3 text-center">
                                         <span
                                             :class="{
                                                 'py-1 capitalize px-3 rounded-full text-xs': true,
@@ -218,13 +230,19 @@
                                                     'admin',
                                             }"
                                         >
-                                            {{ user.membership.role }}
+                                            {{
+                                                displayableRole(
+                                                    user.membership.role
+                                                )
+                                            }}
                                         </span>
                                     </td>
-                                    <td class="py-3 px-5 text-center">
-                                        <span> {{ user.anquites || '---' }}</span>
+                                    <td class="py-3 px-3 text-center">
+                                        <span>
+                                            {{ user.anquites || "---" }}</span
+                                        >
                                     </td>
-                                    <td class="py-3 px-5 text-center">
+                                    <td class="py-3 px-3 text-center">
                                         <div
                                             class="flex item-center justify-center"
                                         >
@@ -236,6 +254,7 @@
                                             </div>
                                             <div
                                                 @click="showRigthSlid(user)"
+                                                v-if="usercanEdit"
                                                 class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
                                             >
                                                 <i
@@ -243,6 +262,7 @@
                                                 ></i>
                                             </div>
                                             <div
+                                                v-if="usercanEdit"
                                                 class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
                                             >
                                                 <i class="far fa-trash"></i>
@@ -269,6 +289,10 @@
                         :visible="leftside"
                         :user="selectedmember"
                         @hide="hideRigthSlid"
+                        :availableRoles="availableRoles"
+                        :role="userRole"
+                        :team="team"
+                        :usercanEdit="usercanEdit"
                     />
                 </div>
             </div>
@@ -299,6 +323,7 @@ export default {
             sorting: "asc",
             sortBy: "id",
             searchvalue: "",
+            userRole: "",
         };
     },
     methods: {
@@ -314,13 +339,18 @@ export default {
             );
         },
         showRigthSlid(user) {
-            (this.leftside = true), (this.selectedmember = user);
+            (this.leftside = true),
+                (this.selectedmember = user),
+                (this.userRole = user.membership.role);
         },
         hideRigthSlid() {
             (this.leftside = false), (this.selectedmember = {});
         },
         change() {
             this.sorting = this.sorting === "asc" ? "desc" : "asc";
+        },
+        displayableRole(role) {
+            return this.availableRoles.find((r) => r.key === role).name;
         },
     },
     watch: {
@@ -354,6 +384,15 @@ export default {
                 );
             });
         },
+        usercanEdit() {
+            // user.membership.role
+
+            return _.find(this.team.users, { id: this.$page.props.user.id })
+                .membership.role == "admin"
+                ? true
+                : false;
+        },
     },
+    mounted() {},
 };
 </script>

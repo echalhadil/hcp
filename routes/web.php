@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnquiteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TeamController;
 use App\Models\Anquite;
 use App\Models\Option;
@@ -91,7 +92,6 @@ Route::resource('anquites', AnquiteController::class);
 
 
 
-
 Route::get('e/{format}', [AnquiteController::class, 'exportData']);
 
 
@@ -146,3 +146,7 @@ Route::get('/age-pyramid', function () {
     return collect($an)->groupBy('sexe');
     
 })->name('agepyramid');
+
+
+
+Route::get('questions/{question_id}/questions',[QuestionController::class,'options'])->name('options');

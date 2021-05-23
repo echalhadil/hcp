@@ -19,11 +19,7 @@
                 <etat-fonctionnel class="md:row-span-2" />
             </div>
 
-            <div
-                class="grid md:grid-cols-3 md:grid-rows-2 grid-cols-1 my-auto gap-4 mt-4"
-            >
-                <age-pyramid class="col-span-2 row-span-2" />
-            </div>
+            
 
             <data-list />
         </div>

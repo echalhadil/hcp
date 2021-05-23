@@ -1,7 +1,8 @@
 <template>
     <div
-        class="mt-16 ml-auto w-full md:w-1/4 fixed top-0 right-0 h-full bg-gray-100 shadow-lg"
+        class="mt-16 ml-auto w-full md:w-1/3 fixed top-0 right-0 h-full bg-gray-100 shadow-lg"
         :class="{ hidden: !visible }"
+        v-if="visible"
     >
         <div class="w-full p-2">
             <i
@@ -33,7 +34,6 @@
                         autofocus
                         autocomplete="name"
                         v-model="user.lname"
-
                     />
                 </div>
             </div>
@@ -58,7 +58,6 @@
                     required
                     v-model="user.email"
                     disabled="true"
-
                 />
             </div>
 
@@ -73,25 +72,23 @@
                 />
             </div>
 
-            <div class="mt-4 select-none">
-                <jet-label for="role" value="Role" />
-                <member-role v-if="user.membership =! {}" :member="user" @changeRole="changeRole" />
-                {{ user.membership }}
-                
-            </div>
-
-            <div class="mt-4 flex">
-                <jet-button class=""> sauvgarder </jet-button>
-            </div>
+            <member-role
+                :user="user"
+                :role="role"
+                :availableRoles="availableRoles"
+                :team="team"
+                :usercanEdit="usercanEdit"
+            />
         </div>
     </div>
 </template>
 
 <script>
+import JetLabel from "@/Jetstream/Label";
 import JetButton from "@/Jetstream/Button";
 import JetInput from "@/Jetstream/Input";
 import JetCheckbox from "@/Jetstream/Checkbox";
-import JetLabel from "@/Jetstream/Label";
+
 import MemberRole from "./MemberRole";
 export default {
     components: {
@@ -101,25 +98,17 @@ export default {
         JetLabel,
         MemberRole,
     },
-    props: {
-        visible: {
-            type: Boolean,
-            required: true,
-        },
-        user: {
-            type: Object,
-            required: true,
-        },
-    },
-    data() {
-        
-    },
+    props: ["visible", "user", "availableRoles", "role", "team","usercanEdit"],
+    data() {},
     methods: {
-        changeRole(r) {
-            $emit('changeRole', r)
-            // this.user.role = r;
+        // changeRole(r) {
+        //     $emit("changeRole", r);
+        //     // this.user.role = r;
+        // },
+        displayableRole(role) {
+            return this.availableRoles.find((r) => r.key === role).name;
         },
     },
+    computed: {},
 };
 </script>
-

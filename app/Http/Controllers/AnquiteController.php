@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Response;
+use Inertia\Inertia;
 use Maatwebsite\Excel\Facades\Excel as Excel;
 
 
@@ -108,6 +109,37 @@ class AnquiteController extends Controller
         return response()->json(false);
     }
 
+    public function update(Request $request, Anquite $anquite)
+    {
+        foreach ($request->all() as $question) {
+
+            $question = (object)$question; //parse into object.
+
+            $reponse = Reponse::where('question_id', $question->id) //exists ??
+                ->where('anquite_id', $question->anquite_id)
+                ->first();
+
+            if ($reponse) {
+                ($question->has_option) ? ($reponse->option_id = $question->option_id)  //do this if reponse exists
+                    : ($reponse->value = $question->reponse);
+                $reponse->save();
+            } elseif ($question->option_id || $question->reponse) { //else
+                $reponse = new Reponse();
+                $reponse->anquite_id = $question->anquite_id;
+                $reponse->question_id = $question->id;
+                $reponse->option_id = $question->option_id;
+                $reponse->value = $question->reponse;
+                $reponse->save();
+            }
+
+        }
+
+
+        // return $reponse;
+         return response()->json($request->all());
+    }
+
+
     public function totalAnquite()
     {
         $members = Auth::user()->currentTeam->memberships;
@@ -143,7 +175,7 @@ class AnquiteController extends Controller
         ////////last week  ///////////
         // BETWEEN DATE(NOW()) - INTERVAL 7 DAY AND  DATE(NOW()) - INTERVAL 7 DAY
 
-        
+
 
         $numberofteams =  Team::count();
 

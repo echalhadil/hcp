@@ -9,20 +9,23 @@
             Inviter membre
         </button>
         <jet-dialog-modal :show="show" @close="show = false">
-            <template #title> Add Team Member </template>
+            <template #title>Ajouter un membre de l'équipe </template>
 
             <template #content>
                 <div class="text-sm text-gray-500 dark:text-gray-100">
-                    Add a new team member to your team, allowing them to
-                    collaborate with you.
+                    Ajoutez un nouveau membre de l'équipe à votre équipe, ce qui
+                    lui permet de collaborer avec vous.
                 </div>
                 <div>
                     <jet-form-section @submitted="addTeamMember">
                         <template #form>
                             <div class="col-span-6">
-                                <div class="max-w-xl text-sm dark:text-gray-100 text-gray-600">
-                                    Please provide the email address of the
-                                    person you would like to add to this team.
+                                <div
+                                    class="max-w-xl text-sm dark:text-gray-100 text-gray-600"
+                                >
+                                    Veuillez fournir l'adresse e-mail de la
+                                    personne que vous souhaitez ajouter à cette
+                                    équipe.
                                 </div>
                             </div>
 
@@ -46,7 +49,7 @@
                                 class="col-span-6 lg:col-span-4"
                                 v-if="$page.props.availableRoles.length > 0"
                             >
-                                <jet-label for="roles" value="Role" />
+                                <jet-label for="roles" value="Rôle" />
                                 <jet-input-error
                                     :message="addTeamMemberForm.errors.role"
                                     class="mt-2"
@@ -147,7 +150,7 @@
                                 }"
                                 :disabled="addTeamMemberForm.processing"
                             >
-                                Add
+                                Ajouter
                             </jet-button>
                         </template>
                     </jet-form-section>

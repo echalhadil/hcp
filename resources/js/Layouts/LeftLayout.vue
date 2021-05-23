@@ -6,7 +6,7 @@
             >
                 <inertia-link
                     :href="route('dashboard')"
-                    class="flex hover:scale-105 transform duration-200 mx-6 my-3"
+                    class="flex hover:scale-105 transform duration-200 px-2 my-3"
                     :class="{
                         ' text-pink-700 dark:text-gray-50': route().current(
                             'dashboard'
@@ -14,7 +14,7 @@
                     }"
                 >
                     <i class="fal fa-home mx-auto md:m-0 w-10 p-3"></i>
-                    <p class="w-0  hidden md:grid md:w-auto  md:my-auto ">
+                    <p class="w-0 hidden md:grid md:w-auto flex-none md:my-auto">
                         <!-- Dashboard -->
                         Tableau de bord
                     </p>
@@ -22,7 +22,7 @@
 
                 <inertia-link
                     :href="route('teams.show', $page.props.user.current_team)"
-                    class="flex hover:scale-105 transform duration-200 mx-6 my-3"
+                    class="flex hover:scale-105 transform duration-200 px-2 my-3"
                     :class="{
                         'text-pink-700 dark:text-gray-50': route().current(
                             'teams.show'
@@ -39,7 +39,7 @@
 
                 <inertia-link
                     :href="route('data')"
-                    class="flex hover:scale-105 transform duration-200 mx-6 my-3 rounded-md"
+                    class="flex hover:scale-105 transform duration-200 px-2 my-3 rounded-md"
                     :class="{
                         'text-pink-700 dark:text-gray-50': route().current(
                             'data'
@@ -54,10 +54,9 @@
                     </p>
                 </inertia-link>
 
-
-                                <inertia-link
+                <inertia-link
                     :href="route('profile.show')"
-                    class="flex hover:scale-105 transform duration-200 mx-6 my-3 rounded-md"
+                    class="flex hover:scale-105 transform duration-200 px-2 my-3 rounded-md"
                     :class="{
                         'text-pink-700 dark:text-gray-50': route().current(
                             'profile.show'
@@ -71,11 +70,6 @@
                         Profile
                     </p>
                 </inertia-link>
-
-
-
-
-                
             </div>
 
             <div class="w-5/6 ml-auto dark:bg-gray-700">

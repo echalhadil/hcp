@@ -1,12 +1,10 @@
 <template>
     <div class="p-5 bg-white w-full mt-4 rounded shadow">
-        <div class="flex mr-auto w-full">
-            <div class="flex relative ml-9 my-auto"></div>
-
-            <div
-                class="flex ml-auto my-auto"
-                v-if="questionAndAnswer.length > 0"
-            >
+        <div class="flex w-full">
+            <div class="my-auto ml-auto">
+                <edit-anquite :selectedAnquite="selectedAnquite" />
+            </div>
+            <div class="flex ml-2 my-auto" v-if="questionAndAnswer.length > 0">
                 <download-data-list />
             </div>
         </div>
@@ -28,6 +26,10 @@
                             <tr
                                 class="bg-gray-200 text-gray-600 uppercase text-sm py-6 leading-normal"
                             >
+                                <th
+                                    v-if="finish"
+                                    class="py-3 text-xs cursor-pointer select-none px-6 text-left"
+                                ></th>
                                 <th
                                     v-if="finish"
                                     class="py-3 text-xs cursor-pointer select-none px-6 text-left"
@@ -76,8 +78,9 @@
                                 </td>
                             </tr>
                             <tr
-                            v-if="!finish"
-                                class="border-b text-lg border-gray-200">
+                                v-if="!finish"
+                                class="border-b text-lg border-gray-200"
+                            >
                                 <td
                                     class="py-3 px-6 text-center capitalize"
                                     colspan="10"
@@ -96,7 +99,23 @@
                                 :class="{ ' bg-gray-100 ': index % 2 != 0 }"
                             >
                                 <td class="py-3 px-6 text-center">
-                                    <span vif class="font-medium">
+                                    <span class="font-medium">
+                                        <input
+                                            @click="selectAnquite(anquite)"
+                                            type="checkbox"
+                                            :checked="
+                                                anquite == selectedAnquite
+                                            "
+                                            class="transition duration-300 transform ease-in-out rounded shadow-sm focus:border-pink-500 focus:ring-2 focus:ring-pink-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed text-pink-500 border-gray-300"
+                                            :class="{
+                                                ' rotate-180 ':
+                                                    anquite != selectedAnquite,
+                                            }"
+                                        />
+                                    </span>
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <span class="font-medium">
                                         {{ index + 1 }}
                                     </span>
                                 </td>
@@ -146,16 +165,19 @@
 
 <script>
 import DownloadDataList from "./DownloadDataList";
+import EditAnquite from "./EditAnquite";
 
 export default {
     components: {
         DownloadDataList,
+        EditAnquite,
     },
     data() {
         return {
             questions: [],
             questionAndAnswer: [],
             finish: false,
+            selectedAnquite: null,
         };
     },
     methods: {
@@ -169,10 +191,12 @@ export default {
                     _.forEach(this.questionAndAnswer, function (anquite) {
                         _.forEach(anquite.questions, function (question) {
                             question.reponse = null;
+                            question.option_id = null;
                             question.anquite_id = anquite.id;
                             _.forEach(anquite.reponses, function (reponse) {
                                 if (reponse.question_id == question.id) {
                                     question.reponse = reponse.value;
+                                    question.option_id = reponse.option_id;
                                 }
                             });
                         });
@@ -181,6 +205,12 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        selectAnquite(anquite) {
+            this.selectedAnquite =
+                this.selectedAnquite == null || this.selectedAnquite != anquite
+                    ? anquite
+                    : null;
         },
     },
     mounted() {

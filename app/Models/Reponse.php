@@ -12,6 +12,7 @@ class Reponse extends Model
 
     protected $fillable = ['question_id', 'option_id', 'value'];
 
+    public $timestamps = false;
     
 
 
