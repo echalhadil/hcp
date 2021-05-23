@@ -132,7 +132,7 @@
 
         <template #actions>
             <jet-action-message :on="form.recentlySuccessful" class="mr-3">
-                Enregistré.
+                Enregistré. 
             </jet-action-message>
 
             <jet-button

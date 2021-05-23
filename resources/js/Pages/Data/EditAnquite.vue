@@ -65,16 +65,23 @@
 
             <div class="px-6 py-4 bg-gray-100 dark:bg-gray-400 text-right">
                 <div class="flex flex-row justify-end">
-                    <jet-action-message :on="success" class="my-auto mr-3">
-                        Enregistré.
-                    </jet-action-message>
+                    <transition
+                        leave-active-class="transition ease-in duration-1000"
+                        leave-from-class="opacity-100"
+                        leave-to-class="opacity-0"
+                    >
+                        <div v-show="success" class="text-sm my-auto mr-2 text-gray-600">
+                            Enregistré.
+                        </div>
+                    </transition>
                     <jet-secondary-button @click="show = false"
                         >anuller</jet-secondary-button
                     >
                     <jet-button
                         type="submit"
                         class="ml-2"
-                        :disabled="anquite == selectedAnquite"
+                        :disabled="prossessing"
+                        :class="{ 'opacity-25': prossessing }"
                         @click="updateAnquite"
                         >mettre à jour</jet-button
                     >
@@ -102,7 +109,6 @@ export default {
         JetButton,
         JetDangerButton,
         JetSecondaryButton,
-
         JetActionMessage,
     },
     props: ["selectedAnquite"],
@@ -112,10 +118,12 @@ export default {
             show: false,
             anquite: {},
             success: false,
+            prossessing: false,
         };
     },
     methods: {
         updateAnquite() {
+            this.prossessing = true;
             axios
                 .put(
                     route("anquites.update", this.selectedAnquite.id),
@@ -125,9 +133,11 @@ export default {
                     console.log(response.data);
                     this.selectedAnquite.questions = response.data;
                     this.anquite = Object.assign({}, this.selectedAnquite);
-                    this.success = true;
+                    (this.success = true), (this.prossessing = false);
 
-                    enregistré;
+                    setTimeout(() => {
+                        this.success = false;
+                    }, 1000);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -157,15 +167,9 @@ export default {
             this.anquite = Object.assign({}, this.selectedAnquite);
             // this.anquite = JSON.parse(JSON.stringify(this.selectedAnquite));
         },
-
-        
     },
 
-    computed: {
-        canUpdate(){
-            return true;
-        }
-    },
+    computed: {},
 };
 </script>
 

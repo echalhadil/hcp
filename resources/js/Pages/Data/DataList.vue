@@ -95,13 +95,13 @@
                                 v-if="questionAndAnswer.length > 0"
                                 v-for="(anquite, index) in questionAndAnswer"
                                 :key="index"
-                                class="border-b w-full bg-white text-xs hover:bg-gray-50 capitalize border-gray-200"
+                                @click="selectAnquite(anquite)"
+                                class="border-b w-full bg-white select-none text-xs hover:bg-gray-50 capitalize border-gray-200"
                                 :class="{ ' bg-gray-100 ': index % 2 != 0 }"
                             >
                                 <td class="py-3 px-6 text-center">
                                     <span class="font-medium">
                                         <input
-                                            @click="selectAnquite(anquite)"
                                             type="checkbox"
                                             :checked="
                                                 anquite == selectedAnquite
