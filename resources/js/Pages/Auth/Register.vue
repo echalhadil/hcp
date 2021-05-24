@@ -21,7 +21,7 @@
             
 
             <div class="mt-4">
-                <jet-label for="email" value="Email" />
+                <jet-label for="email" value="E-mail" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
             </div>
 
@@ -31,7 +31,7 @@
                     <jet-input id="cin" type="text" max="10" class="mt-1 block w-full" v-model="form.cin" required />
                 </div>
                 <div class="pl-1">
-                    <jet-label for="tele" value="Tele" />
+                    <jet-label for="tele" value="Téléphone" />
                     <jet-input id="tele" type="text"  class="mt-1 block w-full" v-model="form.tele" required />
                 </div>
             </div>

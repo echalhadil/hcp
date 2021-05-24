@@ -15,15 +15,14 @@
                     :available-roles="availableRoles"
                     :user-permissions="permissions"
                 />
-
-                <!--
+    <!-- 
                 <team-member-manager class="mt-10 sm:mt-0"
                             :team="team"
                             :available-roles="availableRoles"
                             :user-permissions="permissions" />
-                -->
-
-                <team-invitations
+                
+-->
+           <team-invitations
                     :team="team"
                     :available-roles="availableRoles"
                     :user-permissions="permissions"
@@ -50,6 +49,7 @@ import UpdateTeamNameForm from "./UpdateTeamNameForm";
 
 import TeamInvitations from "./TeamInvitations";
 import TeamMembers from "./TeamMembers";
+import TeamMemberManager from "./TeamMemberManager";
 import CreateTeamModal from "./CreateTeamModal";
 
 export default {
@@ -59,7 +59,7 @@ export default {
         LeftLayout,
         DeleteTeamForm,
         JetSectionBorder,
-        // TeamMemberManager,
+        TeamMemberManager,
         UpdateTeamNameForm,
         TeamInvitations,
         TeamMembers,

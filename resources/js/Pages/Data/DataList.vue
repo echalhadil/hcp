@@ -180,6 +180,8 @@
 import DownloadDataList from "./DownloadDataList";
 import EditAnquite from "./EditAnquite";
 
+import Swal from "sweetalert2";
+
 export default {
     components: {
         DownloadDataList,
@@ -226,12 +228,30 @@ export default {
                     : null;
         },
         deleteAnquite() {
-            this.questionAndAnswer = _.without(
-                this.questionAndAnswer,
-                this.selectedAnquite
-            );
+            Swal.fire({
+                title: "Êtes-vous sûr?",
+                text: "Une fois que vous supprimez, vous perdrez toutes les informations!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#888888",
+                cancelButtonText: "Annuler",
+                confirmButtonText: "Supprimer",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.questionAndAnswer = _.without(
+                        this.questionAndAnswer,
+                        this.selectedAnquite
+                    );
 
-            this.selectedAnquite = null;
+                    this.selectedAnquite = null;
+                    Swal.fire(
+                        "Supprimé!",
+                        "Votre enquête a été supprimé.",
+                        "success"
+                    );
+                }
+            });
         },
     },
     mounted() {

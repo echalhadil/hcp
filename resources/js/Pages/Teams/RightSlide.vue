@@ -1,6 +1,6 @@
 <template>
     <div
-        class="mt-16 ml-auto w-full md:w-1/3 fixed top-0 right-0 h-full bg-gray-100 shadow-lg"
+        class="mt-16 ml-auto w-full select-none md:w-1/3 fixed top-0 right-0 h-full bg-gray-100 shadow-lg"
         :class="{ hidden: !visible }"
         v-if="visible"
     >
@@ -21,6 +21,7 @@
                         required
                         autofocus
                         autocomplete="name"
+                        disabled="true"
                         v-model="user.fname"
                     />
                 </div>
@@ -33,6 +34,7 @@
                         required
                         autofocus
                         autocomplete="name"
+                        disabled="true"
                         v-model="user.lname"
                     />
                 </div>
@@ -45,6 +47,7 @@
                     type="text"
                     class="mt-1 block w-full"
                     required
+                    disabled="true"
                     v-model="user.cin"
                 />
             </div>
@@ -68,6 +71,7 @@
                     type="text"
                     class="mt-1 block w-full"
                     required
+                    disabled="true"
                     v-model="user.tele"
                 />
             </div>
@@ -78,6 +82,7 @@
                 :availableRoles="availableRoles"
                 :team="team"
                 :usercanEdit="usercanEdit"
+                :ownsTeam="ownsTeam"
             />
         </div>
     </div>
@@ -98,7 +103,15 @@ export default {
         JetLabel,
         MemberRole,
     },
-    props: ["visible", "user", "availableRoles", "role", "team","usercanEdit"],
+    props: [
+        "visible",
+        "user",
+        "availableRoles",
+        "role",
+        "team",
+        "usercanEdit",
+        "ownsTeam",
+    ],
     data() {},
     methods: {
         // changeRole(r) {

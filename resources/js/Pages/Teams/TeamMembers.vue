@@ -245,25 +245,41 @@
                                         >
                                             <div
                                                 @click="showRigthSlid(user)"
-                                                class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+                                                class="cursor-pointer w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
                                             >
                                                 <i class="far fa-eye"></i>
                                             </div>
                                             <div
                                                 @click="showRigthSlid(user)"
                                                 v-if="usercanEdit"
-                                                class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+                                                class="cursor-pointer w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
                                             >
                                                 <i
                                                     class="far fa-pencil-alt"
                                                 ></i>
                                             </div>
-                                            <div
-                                                v-if="usercanEdit"
-                                                class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
-                                            >
-                                                <i class="far fa-trash"></i>
-                                            </div>
+
+                                            <remove-member
+                                                v-if="
+                                                    $page.props.user.id !==
+                                                        user.id &&
+                                                    (usercanEdit || ownsTeam)
+                                                "
+                                                :userPermissions="
+                                                    userPermissions
+                                                "
+                                                :user="user"
+                                                :team="team"
+                                            />
+
+                                            <leave-team
+                                                v-if="
+                                                    $page.props.user.id ===
+                                                    user.id
+                                                "
+                                                :team="team"
+
+                                            />
                                         </div>
                                     </td>
                                 </tr>
@@ -290,6 +306,7 @@
                         :role="userRole"
                         :team="team"
                         :usercanEdit="usercanEdit"
+                        :ownsTeam="ownsTeam"
                     />
                 </div>
             </div>
@@ -303,6 +320,9 @@ import TeamSettings from "./Settings";
 import TeamSort from "./Sort";
 import DownloadTeamList from "./DownloadTeamList";
 import RightSlide from "./RightSlide";
+import LeaveTeam from "./LeaveTeam";
+import RemoveMember from "./RemoveMember";
+
 export default {
     components: {
         JetDropdown,
@@ -311,6 +331,8 @@ export default {
         DownloadTeamList,
         RightSlide,
         JetDropdownLink,
+        LeaveTeam,
+        RemoveMember,
     },
     props: ["team", "availableRoles", "userPermissions"],
     data() {
@@ -349,7 +371,6 @@ export default {
         displayableRole(role) {
             return this.availableRoles.find((r) => r.key === role).name;
         },
-       
     },
     watch: {
         sorting() {
@@ -384,11 +405,20 @@ export default {
         },
         usercanEdit() {
             // user.membership.role
+            // _.find(this.team.users, { id: this.$page.props.user.id })
+            //     .membership.role === "admin" ||
+            return (
+                _.findLast(this.$page.props.user.teams, (team) => {
+                    return team.id == this.$page.props.user.current_team.id;
+                }).membership.role === "admin"
+            );
+        },
 
-            return _.find(this.team.users, { id: this.$page.props.user.id })
-                .membership.role == "admin"
-                ? true
-                : false;
+        ownsTeam() {
+            return (
+                this.$page.props.user.current_team.user_id ==
+                this.$page.props.user.id
+            );
         },
     },
     mounted() {},

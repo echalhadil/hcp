@@ -6,7 +6,11 @@
                 <div
                     v-for="(availiblerole, index) in availableRoles"
                     :key="index"
-                    @click="(role=='admin')? updateRoleForm.role = availiblerole.key:''"
+                    @click="
+                        (isAdmin && isMember) || (!isAdmin && usercanEdit) ||ownsTeam
+                            ? (updateRoleForm.role = availiblerole.key)
+                            : ''
+                    "
                     class="cursor-pointer border p-3 text-gray-500 border-gray-500 rounded"
                     :class="{
                         'text-green-500 border-green-500':
@@ -27,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="usercanEdit" class="mt-4 flex">
+        <div v-if="usercanEdit ||ownsTeam" class="mt-4 flex">
             <jet-button
                 class=""
                 @click="updateRole()"
@@ -59,7 +63,7 @@ export default {
         JetLabel,
         JetActionMessage,
     },
-    props: ["role", "availableRoles", "team", "user","usercanEdit"],
+    props: ["role", "availableRoles", "team", "user", "usercanEdit","ownsTeam"],
     data() {
         return {
             updateRoleForm: this.$inertia.form({
@@ -75,9 +79,7 @@ export default {
                 route("team-members.update", [t, this.user]),
                 {
                     preserveScroll: true,
-                    onSuccess: () => (
-                        (this.role = this.updateRoleForm.role)
-                    ),
+                    onSuccess: () => (this.role = this.updateRoleForm.role),
                 }
             );
         },
@@ -85,6 +87,12 @@ export default {
     computed: {
         canSubmit() {
             return this.updateRoleForm.role == this.role ? false : true;
+        },
+        isAdmin() {
+            return this.role == "admin" ? true : false;
+        },
+        isMember() {
+            return this.user.id === this.$page.props.user.id ? true : false;
         },
     },
     mounted() {
