@@ -24,7 +24,15 @@ export default {
         getresidentstatistics() {
             axios
 
-                .get(this.route("questionstatistics", 17))
+                // .get(this.route("questionstatistics", 17))
+                .get(
+                    this.route("spesq", [
+                        17,
+                        this.$page.props.selectedregion,
+                        this.$page.props.selectedprovince,
+                        this.$page.props.selectedcommune,
+                    ])
+                )
                 .then((response) => {
                     this.statistics = response.data;
                     let rest =

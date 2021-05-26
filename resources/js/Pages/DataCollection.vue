@@ -1,8 +1,11 @@
 <template>
     <left-layout>
         <div class="p-5 md:p-12 w-full">
+            <location-filter
+         
+            />
             <div
-                class="grid md:grid-cols-4 md:grid-rows-2 grid-rows-1 grid-cols-1 my-auto gap-4"
+                class="grid md:grid-cols-4 md:grid-rows-2 grid-rows-1 grid-cols-1 mt-4 my-auto gap-4"
             >
                 <situation-resident class="md:col-span-2 md:row-span-2" />
                 <sexe />
@@ -18,8 +21,6 @@
                 <assurance-medical class="md:row-span-2" />
                 <etat-fonctionnel class="md:row-span-2" />
             </div>
-
-            
 
             <data-list />
         </div>
@@ -38,6 +39,7 @@ import EtatFonctionnel from "@/Pages/Data/EtatFonctionnel";
 import AssuranceMedical from "@/Pages/Data/AssuranceMedical";
 import PersonneMoinPlus from "@/Pages/Data/PersonneMoinPlus";
 import AgePyramid from "@/Pages/Data/AgePyramid";
+import LocationFilter from "@/Pages/Data/LocationFilter";
 
 export default {
     components: {
@@ -52,6 +54,7 @@ export default {
         AssuranceMedical,
         PersonneMoinPlus,
         AgePyramid,
+        LocationFilter,
     },
 };
 </script>

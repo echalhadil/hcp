@@ -14,7 +14,9 @@
                     }"
                 >
                     <i class="fal fa-home mx-auto md:m-0 w-10 p-3"></i>
-                    <p class="w-0 hidden md:grid md:w-auto flex-none md:my-auto">
+                    <p
+                        class="w-0 hidden md:grid md:w-auto flex-none md:my-auto"
+                    >
                         <!-- Dashboard -->
                         Tableau de bord
                     </p>
@@ -41,9 +43,8 @@
                     :href="route('data')"
                     class="flex hover:scale-105 transform duration-200 px-2 my-3 rounded-md"
                     :class="{
-                        'text-pink-700 dark:text-gray-50': route().current(
-                            'data'
-                        ),
+                        'text-pink-700 dark:text-gray-50':
+                            route().current('data') || route().current('actualiser'),
                     }"
                 >
                     <i class="fal fa-database mx-auto md:m-0 w-10 p-3"></i>

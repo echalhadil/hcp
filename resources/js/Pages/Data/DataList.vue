@@ -1,6 +1,6 @@
 <template>
-    <div class="p-5 bg-white w-full mt-4 rounded shadow">
-        <div class="flex w-full" v-if="finish">
+    <div v-if="finish" class="p-5 bg-white w-full mt-4 rounded shadow">
+        <div class="flex w-full" >
             <div class="my-auto ml-auto" v-if="questionAndAnswer.length > 0">
                 <edit-anquite :selectedAnquite="selectedAnquite" />
             </div>
@@ -198,7 +198,13 @@ export default {
     methods: {
         getAnquites() {
             axios
-                .get(this.route("anquites.index"))
+                .get(
+                    this.route("datacollection", [
+                        this.$page.props.selectedregion,
+                        this.$page.props.selectedprovince,
+                        this.$page.props.selectedcommune,
+                    ])
+                )
                 .then((response) => {
                     this.finish = true;
                     this.questionAndAnswer = response.data.anquites;
@@ -230,7 +236,8 @@ export default {
         deleteAnquite() {
             Swal.fire({
                 title: "Êtes-vous sûr?",
-                text: "Une fois que vous supprimez, vous perdrez toutes les informations!",
+                text:
+                    "Une fois que vous supprimez, vous perdrez toutes les informations!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#d33",

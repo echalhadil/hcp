@@ -23,7 +23,11 @@ export default {
     methods: {
         getresidentstatistics() {
             axios
-                .get(this.route("personneunderover18"))
+                .get(this.route("personneunderover18",[
+                        this.$page.props.selectedregion,
+                        this.$page.props.selectedprovince,
+                        this.$page.props.selectedcommune,
+                    ]))
                 .then((response) => {
                     this.statistics = response.data;
 

@@ -1,6 +1,6 @@
 <template>
     <div class="p-2 transform relative top-1/2 -translate-y-1/2">
-        <p class="text-center text-gray-500 p-2">Nombre D'enquêtes</p>
+        <p class="text-center text-gray-500 p-2">Nombre De Questionnaires</p>
         <div class=" "></div>
         <canvas id="pie-chart" class="w-full"></canvas>
     </div>

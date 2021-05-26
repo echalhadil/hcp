@@ -13,6 +13,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use phpDocumentor\Reflection\Types\Resource_;
@@ -44,7 +45,12 @@ Route::middleware(['auth:sanctum', 'verified'])
     ->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/data', function () {
-    return Inertia::render('DataCollection');
+    return
+        Inertia::render('DataCollection', [
+            "selectedcommune" => 0,
+            'selectedprovince' => 0,
+            'selectedregion' => 0,
+        ]);
 })->name('data');
 
 
@@ -70,17 +76,35 @@ Route::get('/anquiteteam', [AnquiteController::class, 'AnquiteTeam']);
 
 ///LOC1ATION ////
 
-Route::get('/regions', [LocationController::class, 'regions'])
+Route::get(
+    '/regions',
+    [LocationController::class, 'regions']
+)
     ->name('regions');
-Route::get('/regions/{region_id}/provinces', [LocationController::class, 'provinces'])
+
+Route::get(
+    '/regions/{region_id}/provinces',
+    [LocationController::class, 'provinces']
+)
     ->name('provinces');
-Route::get('/regions/{region_id}/provinces/{province_id}/communes', [LocationController::class, 'communes'])
+
+Route::get(
+    '/regions/{region_id}/provinces/{province_id}/communes',
+    [LocationController::class, 'communes']
+)
     ->name('communes');
 
 //set team location
 
-Route::post('/setTeamLocation', [LocationController::class, 'setTeamLocation'])->name('setlocation');
-Route::get('/location', [LocationController::class, 'getTeamLocation']);
+Route::post(
+    '/setTeamLocation',
+    [LocationController::class, 'setTeamLocation']
+)
+    ->name('setlocation');
+Route::get(
+    '/location',
+    [LocationController::class, 'getTeamLocation']
+);
 
 
 
@@ -110,43 +134,52 @@ Route::get('insert', function () {
 
 
 
-Route::get('/personneUnderOver18', [AnquiteController::class, 'personneUnderOver18'])->name('personneunderover18');
+Route::get(
+    '/personneUnderOver18/{selectedregion}/{selectedprovince}/{selectedcommune}',
+    [AnquiteController::class, 'personneUnderOver18']
+)->name('personneunderover18');
 
 
 
-Route::get('/age-pyramid', function () {
-    //group by sexe 
-    //group by age
-    // $an = Anquite::with('reponses')->get();
-    $an = Anquite::select('id')->get();
+Route::get(
+    '/datatable/{selectedregion}/{selectedprovince}/{selectedcommune}',
+    [AnquiteController::class, 'data']
+)->name('datacollection');
 
 
-    // return $an ;
-    foreach ($an as $anquite) {
-        $sexe = Option::find(
-            Reponse::where('question_id', 7)
-                ->where('anquite_id', $anquite->id)
-                ->first()->option_id
-        );
-        $age =
-            Reponse::select('value')->where('question_id', "=", (int) 8)
-                ->where('anquite_id', $anquite->id)
-                ->first();
-            // DB::table('reponses')
-            // ->select('value')
-            // ->where('question_id', "=", (int) 8)
-            // ->where('anquite_id', $anquite->id)
-            // ->first();
-        $anquite->sexe =  $sexe->libelle;
-        // $anquite->age = DateTime::createFromFormat('d-m-Y', $age->value);
-        $anquite->age = $age->value;
+
+Route::get(
+    'questions/{question_id}/questions',
+    [QuestionController::class, 'options']
+)
+    ->name('options');
+
+
+
+
+Route::get(
+    'datas/{selectedregion}/{selectedprovince}/{selectedcommune}',
+    function ($selectedregion, $selectedprovince, $selectedcommune) {
+        return
+            Inertia::render('DataCollection', [
+                "selectedcommune" => $selectedcommune,
+                'selectedprovince' => $selectedprovince,
+                'selectedregion' => $selectedregion,
+            ]);
     }
-
-
-    return collect($an)->groupBy('sexe');
-    
-})->name('agepyramid');
+)->name('actualiser');
 
 
 
-Route::get('questions/{question_id}/questions',[QuestionController::class,'options'])->name('options');
+
+
+
+
+
+
+
+
+Route::get(
+    '/q/{question_id}/{selectedregion}/{selectedprovince}/{selectedcommune}',
+    [AnquiteController::class, 'questionStatisticsSp']
+)->name('spesq');

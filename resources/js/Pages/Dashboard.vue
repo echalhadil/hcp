@@ -12,13 +12,13 @@
             <total-anquite
                 :today="todaytotal"
                 :total="total"
-                title="Total D'enquêtes"
+                title="Total De Questionnaires"
             />
 
             <total-anquite
                 :today="todayteam"
                 :total="totalteam"
-                title="Total D'enquêtes de votre equipe"
+                title="Questionnaires de votre equipe"
             />
         </div>
 

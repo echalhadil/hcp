@@ -1,8 +1,6 @@
 <template>
     <div class="p-3 bg-white rounded shadow">
-        <div
-            class="transform -translate-y-1/2 top-1/2 relative"
-        >
+        <div class="transform -translate-y-1/2 top-1/2 relative">
             <p class="text-center text-gray-500 text-sm p-2">
                 Assurance Medical
             </p>
@@ -25,7 +23,16 @@ export default {
     methods: {
         getresidentstatistics() {
             axios
-                .get(this.route("questionstatistics", 20))
+                // .get(this.route("questionstatistics", 20))
+                .get(
+                    this.route("spesq", [
+                        20,
+                        this.$page.props.selectedregion,
+                        this.$page.props.selectedprovince,
+                        this.$page.props.selectedcommune,
+                    ])
+                )
+
                 .then((response) => {
                     this.statistics = response.data;
                     let rest =

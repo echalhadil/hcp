@@ -3,17 +3,22 @@
 <template>
     <div>
         <button
-            class="px-2 py-1 rounded bg-pink-500 text-white border-pink-500 focus:border-pink-500 focus:ring-2 focus:ring-pink-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50"
+            class="px-2 py-1 rounded border border-blue-500 focus:border-plue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50"
             :disabled="selectedAnquite == null"
             @click="show = true"
-            :class="{ 'cursor-not-allowed': selectedAnquite == null }"
+            :class="{
+                'cursor-not-allowed text-blue-500 bg-white ':
+                    selectedAnquite == null,
+                'cursor-pointer text-white bg-blue-500 ':
+                    selectedAnquite != null,
+            }"
         >
-            Éditer
+            <i class="fal fa-pen-alt"></i>
         </button>
         <jet-modal :show="show" @close="show = false">
             <div class="px-6 py-4 dark:bg-gray-400">
-                <div class="text-lg dark:text-gray-200">
-                    <div>Ajouter un membre de l'équipe</div>
+                <div class="text-lg capitalize dark:text-gray-200">
+                    <div>modifier un questionnaire</div>
                 </div>
 
                 <div class="mt-4">
@@ -24,16 +29,18 @@
                 </div>
                 <div class="mt-4 overflow-y-auto p-2 md:p-0 height">
                     <div
-                        class="text-sm grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-500 dark:text-gray-100"
+                        class="text-sm grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-500 dark:text-gray-100"
+                        v-if="finish"
                     >
                         <div
                             v-for="(question, index) in anquite.questions"
                             :key="index"
-                            class="mt-4"
+                            class="mt-2"
                         >
                             <jet-label
                                 :for="question.libelle"
-                                :v-model="question.libelle"
+                                :value="question.libelle"
+                                class="capitalize text-sm"
                             />
                             <!-- if it have options -->
                             <select
@@ -60,6 +67,16 @@
                             />
                         </div>
                     </div>
+
+                    <div
+                        v-else
+                        class="p-7 relative flex flex-col items-top justify-center min-h-full overflow-hidden text-3xl"
+                    >
+                        <i
+                            class="fa w-full fa-spinner-third text-center animate-spin"
+                            aria-hidden="true"
+                        ></i>
+                    </div>
                 </div>
             </div>
 
@@ -83,7 +100,7 @@
                     <jet-button
                         type="submit"
                         class="ml-2"
-                        :disabled="prossessing"
+                        :disabled="prossessing || !finish"
                         :class="{ 'opacity-25': prossessing }"
                         @click="updateAnquite"
                         >mettre à jour</jet-button
@@ -122,6 +139,7 @@ export default {
             anquite: {},
             success: false,
             prossessing: false,
+            finish: false,
         };
     },
     methods: {
@@ -134,18 +152,19 @@ export default {
                 )
                 .then((response) => {
                     (this.selectedAnquite.questions = response.data),
-                    _.forEach(
-                        this.selectedAnquite.questions,
-                        (question) => {
-                            _.forEach(question.options, (option) => {
-                                if (option.id == question.option_id)
-                                    question.reponse = option.libelle;
-                            });
-                        }
-                    );
+                        _.forEach(
+                            this.selectedAnquite.questions,
+                            (question) => {
+                                _.forEach(question.options, (option) => {
+                                    if (option.id == question.option_id)
+                                        question.reponse = option.libelle;
+                                });
+                            }
+                        );
+
                     (this.anquite.questions = response.data),
-                    (this.success = true),
-                    (this.prossessing = false),
+                        (this.success = true),
+                        (this.prossessing = false),
                         setTimeout(() => {
                             this.success = false;
                         }, 1000);
@@ -177,6 +196,10 @@ export default {
             // var a = this.selectedAnquite.slice();
             this.anquite = Object.assign({}, this.selectedAnquite);
             // this.anquite = JSON.parse(JSON.stringify(this.selectedAnquite));
+
+            setTimeout(() => {
+                this.finish = true;
+            }, 400);
         },
     },
 

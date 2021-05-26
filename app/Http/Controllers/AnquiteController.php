@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anquite;
+use App\Models\Commune;
 use App\Models\Option;
+use App\Models\Province;
 use App\Models\Question;
 use App\Models\Reponse;
 use App\Models\Team;
@@ -24,13 +26,98 @@ class AnquiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    // public function index()
+    // {
+    //     $anquites = Anquite::select(
+    //         "id",
+    //         "user_id",
+    //         "commune_id"
+    //     )->get();
+    //     $questions = Question::all();
+
+    //     foreach ($anquites as $anquite) {
+    //         $anquite->questions = $questions;
+    //         $anquite->reponses = $anquite->reponses;
+
+    //         $anquite->commune = $anquite->commune;
+    //         $anquite->province = $anquite->commune->province;
+    //         $anquite->region  = $anquite->province->region;
+
+    //         $anquite->region  = $anquite->region->libelle;
+    //         $anquite->province = $anquite->province->libelle;
+    //         $anquite->commune = $anquite->commune->libelle;
+
+    //         foreach ($anquite->reponses as $reponse) {
+    //             $reponse->value = ($reponse->option != null) ? $reponse->option->libelle : $reponse->value;
+    //         }
+    //     }
+
+    //     return response()->json([
+    //         'anquites' => $anquites,
+    //         'questions' => $questions
+    //     ]);
+    // }
+
+
+
+
+
+
+
+
+    public function data($region_id, $province_id, $commune_id)
     {
-        $anquites = Anquite::select(
-            "id",
-            "user_id",
-            "commune_id"
-        )->get();
+        $anquites = array();
+
+        // $query = Anquite::query();
+
+        if ($commune_id) {
+            $anquites[] = Anquite::select(
+                "id",
+                "user_id",
+                "commune_id"
+            )->where('commune_id', $commune_id)->get();
+
+            $anquites = collect($anquites)->collapse();
+        } elseif ($province_id) {
+
+            $communes = Commune::where('province_id', $province_id)->get();
+            foreach ($communes as $commune) {
+                $anquites[] = Anquite::select(
+                    "id",
+                    "user_id",
+                    "commune_id"
+                )->where('commune_id', $commune->id)->get();
+            }
+            $anquites = collect($anquites)->collapse();
+        } elseif ($region_id) {
+
+            $provinces = Province::where('region_id', $region_id)->get();
+            foreach ($provinces as $province) {
+                $communes = Commune::where('province_id', $province->id)->get();
+                foreach ($communes as $commune) {
+                    $anquites[] = Anquite::select(
+                        "id",
+                        "user_id",
+                        "commune_id"
+                    )->where('commune_id', $commune->id)->get();
+                }
+            }
+            $anquites = collect($anquites)->collapse();
+        } else {
+
+            $anquites = Anquite::select(
+                "id",
+                "user_id",
+                "commune_id"
+            )->get();
+        }
+
+
+
+
+
+
         $questions = Question::all();
 
         foreach ($anquites as $anquite) {
@@ -254,19 +341,184 @@ class AnquiteController extends Controller
         return response()->json($options);
     }
 
-    public function personneUnderOver18()
+    // public function personneUnderOver18()
+    // {
+
+
+    //     return response()->json([
+    //         [
+    //             'question' => Question::find(12)->libelle,
+    //             'nombre' => Reponse::where("question_id", 12)->sum('value'),
+    //         ],
+    //         [
+    //             'question' => Question::find(13)->libelle,
+    //             'nombre' => Reponse::where("question_id", 13)->sum('value'),
+    //         ]
+    //     ]);
+    // }
+
+
+
+    public function personneUnderOver18($region_id, $province_id, $commune_id)
     {
+        $nombre = $nombre2 = 0;
+        if ($commune_id != 0) {
+            $anquites = Anquite::where('commune_id', $commune_id)->get();
+            foreach ($anquites as $anquite) {
+
+                $nombre = Reponse::where('question_id', 12)
+                    ->where('anquite_id', $anquite->id)
+                    ->sum('value');
+
+                $nombre2 = Reponse::where('question_id', 13)
+                    ->where('anquite_id', $anquite->id)
+                    ->sum('value');
+            }
+        } elseif ($province_id != 0) {
+
+            $communes = Commune::where('province_id', $province_id)->get();
+            foreach ($communes as $commune) {
+                $anquites = Anquite::where('commune_id', $commune->id)->get();
+                foreach ($anquites as $anquite) {
+
+                    $nombre = Reponse::where('question_id', 12)
+                        ->where('anquite_id', $anquite->id)
+                        ->sum('value');
+
+                    $nombre2 = Reponse::where('question_id', 13)
+                        ->where('anquite_id', $anquite->id)
+                        ->sum('value');
+                }
+            }
+        } elseif ($region_id != 0) {
+
+            $provinces = Province::where('region_id', $region_id)->get();
+            foreach ($provinces as $province) {
+                $communes = Commune::where('province_id', $province->id)->get();
+                foreach ($communes as $commune) {
+                    $anquites = Anquite::where('commune_id', $commune->id)->get();
+                    foreach ($anquites as $anquite) {
+
+                        $nombre = Reponse::where('question_id', 12)
+                            ->where('anquite_id', $anquite->id)
+                            ->sum('value');
+
+                        $nombre2 = Reponse::where('question_id', 13)
+                            ->where('anquite_id', $anquite->id)
+                            ->sum('value');
+                    }
+                }
+            }
+        } elseif ($region_id == 0) {
+
+            $nombre = Reponse::where('question_id', 12)
+                ->sum('value');
+
+            $nombre2 = Reponse::where('question_id', 13)
+            ->sum('value');
+
+        }
+
+
 
 
         return response()->json([
             [
                 'question' => Question::find(12)->libelle,
-                'nombre' => Reponse::where("question_id", 12)->sum('value'),
+                'nombre' => $nombre,
             ],
             [
                 'question' => Question::find(13)->libelle,
-                'nombre' => Reponse::where("question_id", 13)->sum('value'),
+                'nombre' => $nombre2,
             ]
         ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function questionStatisticsSp($question_id, $region_id, $province_id, $commune_id)
+    {
+        $numberofAnquites = 0; //initialize variable by 0.
+        $reponses = array();
+        if ($commune_id != 0) {
+            $numberofAnquites = Anquite::where('commune_id', $commune_id)->count();
+            $reponses[] = $this->reponses($question_id, $commune_id);
+        } elseif ($province_id != 0) {
+
+            $communes = Commune::where('province_id', $province_id)->get();
+            foreach ($communes as $commune) {
+                $numberofAnquites += Anquite::where('commune_id', $commune->id)->count();
+
+                $reponses[] = $this->reponses($question_id, $commune->id);
+            }
+        } elseif ($region_id != 0) {
+
+            $provinces = Province::where('region_id', $region_id)->get();
+            foreach ($provinces as $province) {
+                $communes = Commune::where('province_id', $province->id)->get();
+                foreach ($communes as $commune) {
+                    $numberofAnquites += Anquite::where('commune_id', $commune->id)->count();
+
+                    $reponses[] = $this->reponses($question_id, $commune->id);
+                }
+            }
+        } elseif ($region_id == 0) {
+
+            $numberofAnquites = Anquite::count();
+
+            $reponses[] = DB::table('reponses')
+                ->where('question_id', $question_id)
+                ->select('option_id', DB::raw('COUNT(*) as percent'))
+                ->groupBy('option_id')
+                ->get();
+        }
+
+        //get number of anquites
+        $options = Option::select('id', 'libelle')->where('question_id', $question_id)->orderby('id')->get();
+
+        $reponses = collect($reponses)->collapse(); //collapse all data .
+
+        foreach ($options as $option) {
+            $option->percent = 0;
+            foreach ($reponses as $reponse) {
+                if ($option->id == $reponse->option_id)
+                    $option->percent = ($numberofAnquites) ? (float) round(($reponse->percent / $numberofAnquites) * 100, 2) : $numberofAnquites;
+            }
+        }
+
+        return response()->json($options);
+        // return response()->json($reponses);
+    }
+
+
+    public function reponses($question_id, $commune_id)
+    {
+        $anquites = Anquite::where('commune_id', $commune_id)->get();
+        $reponses = null;
+        foreach ($anquites as $anquite) {
+            $reponses[] = DB::table('reponses')
+                ->where('question_id', $question_id)
+                ->where('anquite_id', $anquite->id)
+                ->select('option_id', DB::raw('COUNT(*) as percent'))
+                ->groupBy('option_id')
+                ->get();
+        }
+        return collect($reponses)->collapse();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Models\Membership;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
@@ -24,7 +25,10 @@ class RemoveTeamMember implements RemovesTeamMembers
 
         $this->ensureUserDoesNotOwnTeam($teamMember, $team);
 
+        Membership::where('user_id', $teamMember->id)->where('team_id', $team->id)->first()->delete();
+
         $team->removeUser($teamMember);
+
 
         TeamMemberRemoved::dispatch($team, $teamMember);
     }
@@ -39,8 +43,10 @@ class RemoveTeamMember implements RemovesTeamMembers
      */
     protected function authorize($user, $team, $teamMember)
     {
-        if (! Gate::forUser($user)->check('removeTeamMember', $team) &&
-            $user->id !== $teamMember->id) {
+        if (
+            !Gate::forUser($user)->check('removeTeamMember', $team) &&
+            $user->id !== $teamMember->id
+        ) {
             throw new AuthorizationException;
         }
     }
