@@ -40,18 +40,166 @@ Route::get('/', function () {
 
 
 
-Route::middleware(['auth:sanctum', 'verified'])
-    ->get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/data', function () {
-    return
-        Inertia::render('DataCollection', [
-            "selectedcommune" => 0,
-            'selectedprovince' => 0,
-            'selectedregion' => 0,
-        ]);
-})->name('data');
+    Route::get('/data', function () {
+        return
+            Inertia::render('DataCollection', [
+                "selectedcommune" => 0,
+                'selectedprovince' => 0,
+                'selectedregion' => 0,
+            ]);
+    })->name('data');
+
+
+
+    Route::get('/export/{format}', [TeamController::class, 'exportTeamMembers'])
+        ->name('exportmembers');
+
+
+
+    Route::get('/totalAnquite', [AnquiteController::class, 'totalAnquite']);
+
+    Route::get('/anquiteteam', [AnquiteController::class, 'AnquiteTeam']);
+
+
+
+
+
+
+
+
+
+
+
+    ///LOCATION ////
+
+    Route::get(
+        '/regions',
+        [LocationController::class, 'regions']
+    )
+        ->name('regions');
+
+    Route::get(
+        '/regions/{region_id}/provinces',
+        [LocationController::class, 'provinces']
+    )
+        ->name('provinces');
+
+    Route::get(
+        '/regions/{region_id}/provinces/{province_id}/communes',
+        [LocationController::class, 'communes']
+    )
+        ->name('communes');
+
+    //set team location
+
+    Route::post(
+        '/setTeamLocation',
+        [LocationController::class, 'setTeamLocation']
+    )
+        ->name('setlocation');
+    Route::get(
+        '/location',
+        [LocationController::class, 'getTeamLocation']
+    );
+
+
+
+    Route::get('/countmembers', [TeamController::class, 'countMembers']);
+
+
+
+    Route::resource('anquites', AnquiteController::class);
+
+
+
+    Route::get('e/{format}', [AnquiteController::class, 'exportData']);
+
+
+    Route::get('/question-statistics/{question_id}', [AnquiteController::class, 'questionStatistics'])
+        ->name('questionstatistics');
+
+
+    Route::get('insert', function () {
+
+        $anq = new Anquite();
+        $anq->user_id = Auth::id();
+        $anq->commune_id = Team::find(Auth::user()->current_team_id)->commune_id;
+        $anq->save();
+    });
+
+
+
+
+    Route::get(
+        '/personneUnderOver18/{selectedregion}/{selectedprovince}/{selectedcommune}',
+        [AnquiteController::class, 'personneUnderOver18']
+    )->name('personneunderover18');
+
+
+
+    Route::get(
+        '/datatable/{selectedregion}/{selectedprovince}/{selectedcommune}',
+        [AnquiteController::class, 'data']
+    )->name('datacollection');
+
+
+
+    Route::get(
+        'questions/{question_id}/questions',
+        [QuestionController::class, 'options']
+    )
+        ->name('options');
+
+
+
+
+    Route::get(
+        'datas/{selectedregion}/{selectedprovince}/{selectedcommune}',
+        function ($selectedregion, $selectedprovince, $selectedcommune) {
+            return
+                Inertia::render('DataCollection', [
+                    "selectedcommune" => $selectedcommune,
+                    'selectedprovince' => $selectedprovince,
+                    'selectedregion' => $selectedregion,
+                ]);
+        }
+    )->name('actualiser');
+
+
+
+
+
+
+
+
+
+
+
+    Route::get(
+        '/q/{question_id}/{selectedregion}/{selectedprovince}/{selectedcommune}',
+        [AnquiteController::class, 'questionStatisticsSp']
+    )->name('spesq');
+});
+
+
+
+
+// Route::middleware(['auth:sanctum', 'verified'])
+//     ->get('/dashboard', [DashboardController::class, 'index'])
+//     ->name('dashboard');
+
+// Route::middleware(['auth:sanctum', 'verified'])->get('/data', function () {
+//     return
+//         Inertia::render('DataCollection', [
+//             "selectedcommune" => 0,
+//             'selectedprovince' => 0,
+//             'selectedregion' => 0,
+//         ]);
+// })->name('data');
 
 
 
@@ -60,118 +208,114 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/data', function () {
 
 
 
-Route::get('/export/{format}', [TeamController::class, 'exportTeamMembers'])
-    ->name('exportmembers');
+// Route::get('/export/{format}', [TeamController::class, 'exportTeamMembers'])
+//     ->name('exportmembers');
 
 
 
-Route::get('/totalAnquite', [AnquiteController::class, 'totalAnquite']);
+// Route::get('/totalAnquite', [AnquiteController::class, 'totalAnquite']);
 
-Route::get('/anquiteteam', [AnquiteController::class, 'AnquiteTeam']);
-
-
-
-
-
-
-///LOC1ATION ////
-
-Route::get(
-    '/regions',
-    [LocationController::class, 'regions']
-)
-    ->name('regions');
-
-Route::get(
-    '/regions/{region_id}/provinces',
-    [LocationController::class, 'provinces']
-)
-    ->name('provinces');
-
-Route::get(
-    '/regions/{region_id}/provinces/{province_id}/communes',
-    [LocationController::class, 'communes']
-)
-    ->name('communes');
-
-//set team location
-
-Route::post(
-    '/setTeamLocation',
-    [LocationController::class, 'setTeamLocation']
-)
-    ->name('setlocation');
-Route::get(
-    '/location',
-    [LocationController::class, 'getTeamLocation']
-);
-
-
-
-Route::get('/countmembers', [TeamController::class, 'countMembers']);
-
-
-
-Route::resource('anquites', AnquiteController::class);
-
-
-
-Route::get('e/{format}', [AnquiteController::class, 'exportData']);
-
-
-Route::get('/question-statistics/{question_id}', [AnquiteController::class, 'questionStatistics'])
-    ->name('questionstatistics');
-
-
-Route::get('insert', function () {
-
-    $anq = new Anquite();
-    $anq->user_id = Auth::id();
-    $anq->commune_id = Team::find(Auth::user()->current_team_id)->commune_id;
-    $anq->save();
-});
+// Route::get('/anquiteteam', [AnquiteController::class, 'AnquiteTeam']);
 
 
 
 
-Route::get(
-    '/personneUnderOver18/{selectedregion}/{selectedprovince}/{selectedcommune}',
-    [AnquiteController::class, 'personneUnderOver18']
-)->name('personneunderover18');
+
+
+// ///LOCATION ////
+
+// Route::get(
+//     '/regions',
+//     [LocationController::class, 'regions']
+// )
+//     ->name('regions');
+
+// Route::get(
+//     '/regions/{region_id}/provinces',
+//     [LocationController::class, 'provinces']
+// )
+//     ->name('provinces');
+
+// Route::get(
+//     '/regions/{region_id}/provinces/{province_id}/communes',
+//     [LocationController::class, 'communes']
+// )
+//     ->name('communes');
+
+// //set team location
+
+// Route::post(
+//     '/setTeamLocation',
+//     [LocationController::class, 'setTeamLocation']
+// )
+//     ->name('setlocation');
+// Route::get(
+//     '/location',
+//     [LocationController::class, 'getTeamLocation']
+// );
 
 
 
-Route::get(
-    '/datatable/{selectedregion}/{selectedprovince}/{selectedcommune}',
-    [AnquiteController::class, 'data']
-)->name('datacollection');
+// Route::get('/countmembers', [TeamController::class, 'countMembers']);
 
 
 
-Route::get(
-    'questions/{question_id}/questions',
-    [QuestionController::class, 'options']
-)
-    ->name('options');
+// Route::resource('anquites', AnquiteController::class);
 
 
 
+// Route::get('e/{format}', [AnquiteController::class, 'exportData']);
 
-Route::get(
-    'datas/{selectedregion}/{selectedprovince}/{selectedcommune}',
-    function ($selectedregion, $selectedprovince, $selectedcommune) {
-        return
-            Inertia::render('DataCollection', [
-                "selectedcommune" => $selectedcommune,
-                'selectedprovince' => $selectedprovince,
-                'selectedregion' => $selectedregion,
-            ]);
-    }
-)->name('actualiser');
+
+// Route::get('/question-statistics/{question_id}', [AnquiteController::class, 'questionStatistics'])
+//     ->name('questionstatistics');
+
+
+// Route::get('insert', function () {
+
+//     $anq = new Anquite();
+//     $anq->user_id = Auth::id();
+//     $anq->commune_id = Team::find(Auth::user()->current_team_id)->commune_id;
+//     $anq->save();
+// });
 
 
 
 
+// Route::get(
+//     '/personneUnderOver18/{selectedregion}/{selectedprovince}/{selectedcommune}',
+//     [AnquiteController::class, 'personneUnderOver18']
+// )->name('personneunderover18');
+
+
+
+// Route::get(
+//     '/datatable/{selectedregion}/{selectedprovince}/{selectedcommune}',
+//     [AnquiteController::class, 'data']
+// )->name('datacollection');
+
+
+
+// Route::get(
+//     'questions/{question_id}/questions',
+//     [QuestionController::class, 'options']
+// )
+//     ->name('options');
+
+
+
+
+// Route::get(
+//     'datas/{selectedregion}/{selectedprovince}/{selectedcommune}',
+//     function ($selectedregion, $selectedprovince, $selectedcommune) {
+//         return
+//             Inertia::render('DataCollection', [
+//                 "selectedcommune" => $selectedcommune,
+//                 'selectedprovince' => $selectedprovince,
+//                 'selectedregion' => $selectedregion,
+//             ]);
+//     }
+// )->name('actualiser');
 
 
 
@@ -179,7 +323,11 @@ Route::get(
 
 
 
-Route::get(
-    '/q/{question_id}/{selectedregion}/{selectedprovince}/{selectedcommune}',
-    [AnquiteController::class, 'questionStatisticsSp']
-)->name('spesq');
+
+
+
+
+// Route::get(
+//     '/q/{question_id}/{selectedregion}/{selectedprovince}/{selectedcommune}',
+//     [AnquiteController::class, 'questionStatisticsSp']
+// )->name('spesq');

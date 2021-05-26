@@ -10,7 +10,7 @@
             </p>
         </div>
 
-        <div class=" mr-2 m-auto">
+        <div class=" mr-2 m-auto flex-none">
             <jet-danger-button @click="confirmTeamDeletion">
                     Delete Team
                 </jet-danger-button>

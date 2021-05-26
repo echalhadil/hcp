@@ -24,6 +24,8 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        $invitation = TeamInvitation::where('email', $input['email'])->first();
+        if($invitation)
         Validator::make($input, [
             'fname' => ['required', 'string', 'max:255'],
             'lname' => ['required', 'string', 'max:255'],
@@ -34,6 +36,18 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
+        else{
+            Validator::make($input, [
+                'fname' => ['required', 'string', 'max:255'],
+                'lname' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users','ends_with:hcp.ma'],
+                // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'cin' => ['required', 'alpha_num', 'min:7', 'unique:users'],
+                'tele' => ['required', 'digits:10', 'starts_with:06,07', 'unique:users'],
+                'password' => $this->passwordRules(),
+                'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
+            ])->validate();
+        }
 
         return DB::transaction(function () use ($input) {
             return tap(
@@ -61,6 +75,7 @@ class CreateNewUser implements CreatesNewUsers
     protected function createTeam(User $user)
     {
         $invitation = TeamInvitation::where('email', $user->email)->first();
+
         $membership = new Membership();
         $membership->user_id = $user->id;
 

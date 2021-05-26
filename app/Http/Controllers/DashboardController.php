@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class DashboardController extends Controller
-{
-    //
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+class DashboardController extends Controller 
+{
+    // use Notifiable;
 
     public function index()
     {
