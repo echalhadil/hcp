@@ -42,7 +42,7 @@
             <div
                 class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg"
             >
-                <div class="grid grid-cols-1 md:grid-cols-2">
+                <div class="grid grid-cols-2 md:grid-cols-2">
                     <div
                         class="p-6 border-t border-gray-200 dark:border-gray-700"
                     >
@@ -70,7 +70,7 @@
                                 src="https://www.logopik.com/wp-content/uploads/edd/2018/09/Royaume-du-maroc-Kingdom-of-morocco-Vector-Logo.png"
                             />
                             <div
-                                class="ml-4 text-lg leading-7 font-semibold text-gray-900 dark:text-white"
+                                class="ml-4  leading-7 font-semibold text-gray-900 dark:text-white"
                             >
                                 الــمــمـلــكــة الــمــغــربــيـة
                             </div>
@@ -79,7 +79,7 @@
                     <div class="p-6">
                         <div class="ml-12"></div>
                         <div
-                            class="mt-2 text-gray-600 dark:text-gray-400 text-2xl"
+                            class="mt-2 text-gray-600 dark:text-gray-400 text-lg md:text-2xl "
                         >
                             Recensement Général de la Population et de l'Habitat
                         </div>
@@ -90,7 +90,7 @@
                     >
                         <div class="ml-12">
                             <div
-                                class="mt-2 text-gray-600 dark:text-gray-400 text-2xl text-right"
+                                class="mt-2 text-lg md:text-2xl text-gray-600 dark:text-gray-400  text-right"
                             >
                                 الإحــــصــــاء الــــعــــام
                                 لـلـــــســـــكــــان والـــــســــكـــــنــــى

@@ -1,5 +1,7 @@
 <template>
-    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+
+<second-app-layout />
+    <div class="hidden fixed top-0 right-0 ms:px-6 sm:py-4 sm:block">
         <div>
             <inertia-link
                 :href="route('login')"
@@ -94,6 +96,10 @@ import JetCheckbox from "@/Jetstream/Checkbox";
 import JetLabel from "@/Jetstream/Label";
 import JetValidationErrors from "@/Jetstream/ValidationErrors";
 
+
+import SecondAppLayout from "@/Layouts/SecondAppLayout";
+
+
 export default {
     components: {
         JetAuthenticationCard,
@@ -103,6 +109,7 @@ export default {
         JetCheckbox,
         JetLabel,
         JetValidationErrors,
+        SecondAppLayout
     },
 
     props: {

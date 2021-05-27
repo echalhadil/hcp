@@ -1,4 +1,23 @@
 <template>
+    <second-app-layout />
+
+    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+        <div>
+            <inertia-link
+                :href="route('login')"
+                class="text-sm capitalize m-1 border-pink-700 border font-semibold py-2 px-3 rounded text-pink-700 dark:text-gray-400 dark:border-gray-300"
+            >
+                connexion
+            </inertia-link>
+
+            <inertia-link
+                :href="route('register')"
+                class="text-sm m-1 border-pink-700 text-gray-100 border font-semibold py-2 px-3 rounded bg-pink-700 dark:border-gray-200 dark:bg-gray-200 dark:text-gray-700"
+            >
+                S'inscrire
+            </inertia-link>
+        </div>
+    </div>
     <jet-authentication-card>
         <template #logo>
             <jet-authentication-card-logo />
@@ -49,6 +68,7 @@ import JetButton from "@/Jetstream/Button";
 import JetInput from "@/Jetstream/Input";
 import JetLabel from "@/Jetstream/Label";
 import JetValidationErrors from "@/Jetstream/ValidationErrors";
+import SecondAppLayout from "@/Layouts/SecondAppLayout";
 
 export default {
     components: {
@@ -58,6 +78,7 @@ export default {
         JetInput,
         JetLabel,
         JetValidationErrors,
+        SecondAppLayout,
     },
 
     props: {

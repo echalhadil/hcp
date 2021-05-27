@@ -1,4 +1,6 @@
 <template>
+    <second-app-layout />
+
     <div
         class="hidden invisible md:visible fixed top-0 right-0 px-6 py-4 sm:block"
     >
@@ -26,8 +28,8 @@
         <jet-validation-errors class="mb-4" />
 
         <form @submit.prevent="submit">
-            <div class="flex">
-                <div class="pr-1">
+            <div class="flex w-full">
+                <div class="pr-1 w-1/2">
                     <jet-label for="fname" value="Nom" />
                     <jet-input
                         id="fname"
@@ -39,7 +41,7 @@
                         autocomplete="fname"
                     />
                 </div>
-                <div class="pl-1">
+                <div class="pl-1 w-1/2">
                     <jet-label for="lname" value="Prenom" />
                     <jet-input
                         id="lname"
@@ -53,7 +55,7 @@
                 </div>
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4 w-full">
                 <jet-label for="email" value="E-mail" />
                 <jet-input
                     id="email"
@@ -64,8 +66,8 @@
                 />
             </div>
 
-            <div class="mt-4 flex">
-                <div class="pr-1">
+            <div class="mt-4 flex w-full">
+                <div class="pr-1 w-1/2">
                     <jet-label for="cin" value="CIN" />
                     <jet-input
                         id="cin"
@@ -76,7 +78,7 @@
                         required
                     />
                 </div>
-                <div class="pl-1">
+                <div class="pl-1 w-1/2">
                     <jet-label for="tele" value="Téléphone" />
                     <jet-input
                         id="tele"
@@ -84,6 +86,7 @@
                         class="mt-1 block w-full"
                         v-model="form.tele"
                         required
+                        
                     />
                 </div>
             </div>
@@ -174,6 +177,7 @@ import JetInput from "@/Jetstream/Input";
 import JetCheckbox from "@/Jetstream/Checkbox";
 import JetLabel from "@/Jetstream/Label";
 import JetValidationErrors from "@/Jetstream/ValidationErrors";
+import SecondAppLayout from "@/Layouts/SecondAppLayout";
 
 export default {
     components: {
@@ -184,6 +188,7 @@ export default {
         JetCheckbox,
         JetLabel,
         JetValidationErrors,
+        SecondAppLayout,
     },
 
     data() {
