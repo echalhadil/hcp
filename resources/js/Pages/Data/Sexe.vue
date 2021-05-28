@@ -23,7 +23,7 @@ export default {
             axios
                 // .get(this.route("sexestatistics"))
                 // .get(this.route("questionstatistics",7))
-                 .get(
+                .get(
                     this.route("spesq", [
                         7,
                         this.$page.props.selectedregion,
@@ -44,7 +44,6 @@ export default {
                         percent: rest,
                     });
 
-                    console.log(rest);
                     const ctx = document.getElementById(this.id);
                     new Chart(ctx, {
                         type: this.chartType,

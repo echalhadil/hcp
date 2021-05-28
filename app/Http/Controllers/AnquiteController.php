@@ -229,6 +229,22 @@ class AnquiteController extends Controller
     }
 
 
+
+
+
+    public function destroy(Anquite $anquite)
+    {
+
+        $reponses  = Reponse::where('anquite_id', $anquite->id)->get();
+
+        foreach ($reponses as $reponse) {
+            $reponse->delete();
+        }
+
+        return $anquite->delete();
+    }
+
+
     public function totalAnquite()
     {
         $members = Auth::user()->currentTeam->memberships;
@@ -415,8 +431,7 @@ class AnquiteController extends Controller
                 ->sum('value');
 
             $nombre2 = Reponse::where('question_id', 13)
-            ->sum('value');
-
+                ->sum('value');
         }
 
 

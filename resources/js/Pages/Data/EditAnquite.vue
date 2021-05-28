@@ -60,9 +60,15 @@
                             <!-- else-->
                             <jet-input
                                 v-else
-                                type="text"
+                                :type="question.type"
                                 class="mt-1 block w-full"
                                 required
+                                :value="
+                                    question.type == 'date'
+                                        ? formateDate(question.reponse)
+                                        : question.reponse
+                                "
+                                min="0"
                                 v-model="question.reponse"
                             />
                         </div>
@@ -120,6 +126,8 @@ import JetDangerButton from "@/Jetstream/DangerButton";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton";
 import JetActionMessage from "@/Jetstream/ActionMessage";
 
+// import moment from "moment";
+
 export default {
     components: {
         JetModal,
@@ -172,6 +180,12 @@ export default {
                 .catch((err) => {
                     console.log(err);
                 });
+        },
+        formateDate(date) {
+          
+            return moment(date, "ll", true).isValid()
+                ? moment(date, "ll").format("YYYY-MM-DD")
+                : date;
         },
     },
     watch: {

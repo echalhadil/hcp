@@ -33,7 +33,6 @@ export default {
              sexe.age  = sexe.age.replace(' years','')
              let min = 0 ;
              let max = 5 ;
-           console.log(sexe)
          })
          })
         })

@@ -22,26 +22,26 @@ class Questionseeder extends Seeder
 
 
         DB::table('questions')->insert([
-            ['libelle' => "nom", 'has_option' => 0], //1
-            ['libelle' => "prenom", 'has_option' => 0], //2
-            ['libelle' => "cin", 'has_option' => 0], //3
-            ['libelle' => "Situation de résidence", 'has_option' => 1], //4
-            ['libelle' => "Lien de parenté avec le chef de ménage", 'has_option' => 0], //5
-            ['libelle' => "Pays de nationalité", 'has_option' => 1], //6
-            ['libelle' => "Sexe", 'has_option' => 1], //7
-            ['libelle' => "Date de naissance", 'has_option' => 0], //8
-            ['libelle' => "Lieu de naissance", 'has_option' => 0], //9
-            ['libelle' => "Lieu de résidence avant la résidence actuelle", 'has_option' => 0], //10
-            ['libelle' => "Nombre de personne", 'has_option' => 0], //11
-            ['libelle' => "La personne plus que 18ans", 'has_option' => 0], //12
-            ['libelle' => "La personne moins que 18ans", 'has_option' => 0], //13
-            ['libelle' => "Durée de résidence actuelle", 'has_option' => 0], //14
-            ['libelle' => "Etat matrimonial", 'has_option' => 1], //15
-            ['libelle' => "Niveau d’étude", 'has_option' => 0], //16
-            ['libelle' => "Etablissement", 'has_option' => 1], //17
-            ['libelle' => "État Fonctionnel", 'has_option' => 1], //18
-            ['libelle' => "Moyen de transport", 'has_option' => 0], //19
-            ['libelle' => "Assurance medicale", 'has_option' => 1], //20
+            ['libelle' => "nom", 'type' => 'text', 'has_option' => 0], //1
+            ['libelle' => "prenom", 'type' => 'text', 'has_option' => 0], //2
+            ['libelle' => "cin", 'type' => 'text', 'has_option' => 0], //3
+            ['libelle' => "Situation de résidence", 'type' => null, 'has_option' => 1], //4
+            ['libelle' => "Lien de parenté avec le chef de ménage", 'type' => 'text', 'has_option' => 0], //5
+            ['libelle' => "Pays de nationalité", 'type' => null, 'has_option' => 1], //6
+            ['libelle' => "Sexe", 'type' => null, 'has_option' => 1], //7
+            ['libelle' => "Date de naissance", 'type' => 'date', 'has_option' => 0], //8
+            ['libelle' => "Lieu de naissance", 'type' => 'text', 'has_option' => 0], //9
+            ['libelle' => "Lieu de résidence avant la résidence actuelle", 'type' => 'text', 'has_option' => 0], //10
+            ['libelle' => "Nombre de personne", 'type' => 'number', 'has_option' => 0], //11
+            ['libelle' => "La personne plus que 18ans", 'type' => 'number', 'has_option' => 0], //12
+            ['libelle' => "La personne moins que 18ans", 'type' => 'number', 'has_option' => 0], //13
+            ['libelle' => "Durée de résidence actuelle", 'type' => 'number', 'has_option' => 0], //14
+            ['libelle' => "Etat matrimonial", 'type' => null, 'has_option' => 1], //15
+            ['libelle' => "Niveau d’étude", 'type' => 'text', 'has_option' => 0], //16
+            ['libelle' => "Etablissement", 'type' => null, 'has_option' => 1], //17
+            ['libelle' => "État Fonctionnel", 'type' => null, 'has_option' => 1], //18
+            ['libelle' => "Moyen de transport", 'type' => 'text', 'has_option' => 0], //19
+            ['libelle' => "Assurance medicale", 'type' => null, 'has_option' => 1], //20
 
         ]);
 

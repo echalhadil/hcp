@@ -15,7 +15,7 @@
                 >
                     <i class="fal fa-home mx-auto md:m-0 w-10 p-3"></i>
                     <p
-                        class="w-0 hidden md:grid md:w-auto flex-none md:my-auto"
+                        class="w-0 hidden md:grid md:w-auto md:my-auto"
                     >
                         <!-- Dashboard -->
                         Tableau de bord

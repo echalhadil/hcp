@@ -1,13 +1,28 @@
 <template>
     <div v-if="finish" class="p-5 bg-white w-full mt-4 rounded shadow">
-        <div class="flex w-full" >
-            <div class="my-auto ml-auto" v-if="questionAndAnswer.length > 0">
+     
+        <div class="flex w-full">
+            <div
+                class="my-auto text-sm text-gray-500 dark:text-gray-100 capitalize"
+            >
+                <p
+                    class="text-gray-800 dark:text-gray-200 font-semibold text-lg pb-1"
+                >
+                    liste de données
+                </p>
+                <p>
+                    ces données que vous insérez sont prêtes à être exportées au
+                    format csv ou xslx.
+                </p>
+            </div>
+
+            <div class="my-auto ml-2" v-if="questionandanswerEdited.length > 0">
                 <edit-anquite :selectedAnquite="selectedAnquite" />
             </div>
 
             <div
                 class="my-auto ml-2"
-                v-if="canDelete && questionAndAnswer.length > 0"
+                v-if="canDelete && questionandanswerEdited.length > 0"
             >
                 <button
                     class="text-red-600 px-2 py-1 border border-red-600 rounded disabled:opacity-50"
@@ -17,8 +32,27 @@
                     <i class="fal fa-trash" aria-hidden="true"></i>
                 </button>
             </div>
-            <div class="flex ml-2 my-auto" v-if="questionAndAnswer.length > 0">
+            <div
+                class="flex ml-2 my-auto"
+                v-if="questionandanswerEdited.length > 0"
+            >
                 <download-data-list />
+            </div>
+            <div
+                class="my-auto ml-2 select-none cursor-pointer flex px-2 py-2 border rounded"
+                v-if="questionAndAnswer.length > 0"
+                @click="selectMyAnquite = !selectMyAnquite"
+            >
+                <input
+                    class="border-gray-300 shadow-sm focus:border-pink-500 focus:ring-0 focus:ring-pink-500 focus:ring-opacity-50 my-auto rounded text-pink-500 mr-1"
+                    type="checkbox"
+                    v-model="selectMyAnquite"
+                />
+                <p
+                    class="my-auto capitalize text-xs flex-none pr-2 text-gray-400"
+                >
+                    mes enregistrements
+                </p>
             </div>
         </div>
     </div>
@@ -80,7 +114,10 @@
                             class="text-gray-600 text-sm font-light overflow-y-auto"
                         >
                             <tr
-                                v-if="questionAndAnswer.length === 0 && finish"
+                                v-if="
+                                    questionandanswerEdited.length === 0 &&
+                                    finish
+                                "
                                 class="border-b text-lg border-gray-200"
                             >
                                 <td
@@ -105,8 +142,9 @@
                                 </td>
                             </tr>
                             <tr
-                                v-if="questionAndAnswer.length > 0"
-                                v-for="(anquite, index) in questionAndAnswer"
+                                v-if="questionandanswerEdited.length > 0"
+                                v-for="(anquite,
+                                index) in questionandanswerEdited"
                                 :key="index"
                                 @click="selectAnquite(anquite)"
                                 class="border-b w-full bg-white select-none text-xs hover:bg-gray-50 capitalize border-gray-200"
@@ -164,7 +202,11 @@
                                         }"
                                     >
                                         <!--      {{ reponse.value ||reponse.reponse || "NaN" }} -->
-                                        {{ question.reponse || "NaN" }}
+                                        {{
+                                            question.type == "date"
+                                                ? formateDate(question.reponse)
+                                                : question.reponse || "NaN"
+                                        }}
                                     </span>
                                 </td>
                             </tr>
@@ -191,8 +233,10 @@ export default {
         return {
             questions: [],
             questionAndAnswer: [],
+            questionandanswerEdited: [],
             finish: false,
             selectedAnquite: null,
+            selectMyAnquite: false,
         };
     },
     methods: {
@@ -222,6 +266,8 @@ export default {
                             });
                         });
                     });
+
+                    this.questionandanswerEdited = this.questionAndAnswer;
                 })
                 .catch((err) => {
                     console.log(err);
@@ -246,19 +292,42 @@ export default {
                 confirmButtonText: "Supprimer",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    this.questionAndAnswer = _.without(
-                        this.questionAndAnswer,
-                        this.selectedAnquite
-                    );
+                    axios
+                        .delete(
+                            this.route(
+                                "anquites.destroy",
+                                this.selectedAnquite.id
+                            )
+                        )
+                        .then((response) => {
+                            this.questionAndAnswer = _.without(
+                                this.questionAndAnswer,
+                                this.selectedAnquite
+                            );
 
-                    this.selectedAnquite = null;
-                    Swal.fire(
-                        "Supprimé!",
-                        "Votre enquête a été supprimé.",
-                        "success"
-                    );
+                            this.selectedAnquite = null;
+                            Swal.fire(
+                                "Supprimé!",
+                                "Votre Questionnaires a été supprimé.",
+                                "success"
+                            );
+                        })
+                        .catch((err) => {
+                            Swal.fire(
+                                "Erreur!",
+                                "imposible de supprimé cet Questionnaires.",
+                                "error"
+                            );
+                            console.log(err);
+                        });
                 }
             });
+        },
+
+        formateDate(date) {
+            return moment(date, "ll", true).isValid()
+                ? moment(date, "ll").format("YYYY-MM-DD")
+                : date;
         },
     },
     mounted() {
@@ -271,6 +340,25 @@ export default {
             }).membership.role == "admin"
                 ? true
                 : false;
+        },
+    },
+    watch: {
+        selectMyAnquite() {
+            if (this.selectMyAnquite) {
+                this.questionandanswerEdited = this.questionAndAnswer.filter(
+                    (anquite) => {
+                        return anquite.user_id == this.$page.props.user.id;
+                    }
+                );
+
+                if (
+                    this.selectedAnquite != null &&
+                    this.selectedAnquite.user_id == this.$page.props.user.id
+                )
+                    this.selectedAnquite = null;
+            } else {
+                this.questionandanswerEdited = this.questionAndAnswer;
+            }
         },
     },
 };

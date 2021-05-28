@@ -150,11 +150,8 @@ export default {
                         commune_id: this.selectedcommune,
                     })
                     .then((response) => {
-                        
-                            (this.message.text = "Succès");
+                        this.message.text = "Succès";
                         this.message.visible = true;
-                        // this.canchange = false;
-                        console.log(this.message);
                         setTimeout(() => {
                             this.message.visible = false;
                         }, 500);
