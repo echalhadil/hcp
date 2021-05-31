@@ -45,7 +45,7 @@
                 <div class="grid grid-cols-2 md:grid-cols-2">
                     <div
                         class="p-6 border-t border-gray-200 dark:border-gray-700"
-                    >
+                      >
                         <div class="flex items-center">
                             <img
                                 class="h-8 filter grayscale opacity-60 object-cover"
@@ -61,7 +61,7 @@
 
                     <div
                         class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-l"
-                    >
+                      >
                         <div
                             class="flex flex-row-reverse text-right items-center"
                         >
@@ -86,8 +86,8 @@
                     </div>
 
                     <div
-                        class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0 md:border-l"
-                    >
+                        class="p-6 border-t border-gray-200 dark:border-gray-700 md:border-t-0"
+                       >
                         <div class="ml-12">
                             <div
                                 class="mt-2 text-lg md:text-2xl text-gray-600 dark:text-gray-400  text-right"
@@ -96,6 +96,10 @@
                                 لـلـــــســـــكــــان والـــــســــكـــــنــــى
                             </div>
                         </div>
+                    </div>
+
+                    <div class=" col-span-2   ">
+                    <img class=" mb-4 w-5/6 mx-auto " src="/img/rgph.png" />
                     </div>
                 </div>
             </div>

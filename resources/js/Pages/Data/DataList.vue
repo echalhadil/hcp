@@ -16,7 +16,7 @@
                 </p>
             </div>
 
-            <div class="my-auto ml-2" v-if="questionandanswerEdited.length > 0">
+            <div class="my-auto ml-auto" v-if="questionandanswerEdited.length > 0">
                 <edit-anquite :selectedAnquite="selectedAnquite" />
             </div>
 
