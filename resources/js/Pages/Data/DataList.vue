@@ -1,6 +1,5 @@
 <template>
     <div v-if="finish" class="p-5 bg-white w-full mt-4 rounded shadow">
-     
         <div class="flex w-full">
             <div
                 class="my-auto text-sm text-gray-500 dark:text-gray-100 capitalize"
@@ -16,7 +15,10 @@
                 </p>
             </div>
 
-            <div class="my-auto ml-auto" v-if="questionandanswerEdited.length > 0">
+            <div
+                class="my-auto ml-auto"
+                v-if="questionandanswerEdited.length > 0"
+            >
                 <edit-anquite :selectedAnquite="selectedAnquite" />
             </div>
 
@@ -304,6 +306,11 @@ export default {
                                 this.questionAndAnswer,
                                 this.selectedAnquite
                             );
+            this.questionandanswerEdited= _.without(
+                                this.questionandanswerEdited,
+                                this.selectedAnquite
+                            );
+
 
                             this.selectedAnquite = null;
                             Swal.fire(

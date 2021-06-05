@@ -16,7 +16,7 @@ class CreateAnquitesTable extends Migration
         Schema::create('anquites', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users');
-            $table->foreignId('commune_id')->nullable()->unsigned();
+            // $table->foreignId('commune_id')->nullable()->unsigned();
             $table->timestamps();
         });
     }
